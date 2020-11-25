@@ -107,17 +107,17 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     }
 
     /**
-     * @param string $value
+     * @param string $content
      * @param string $path
      * @param string $id
      * @param int|null $order
      * @param bool $active
      * @return Item
      */
-    public function addItem(string $value, string $path, string $id, ?int $order = null, bool $active = false): Item
+    public function addItem(string $content, string $path, string $id, ?int $order = null, bool $active = false): Item
     {
         $item = new Item();
-        $item->setContent($value);
+        $item->setContent($content);
         $item->setPath($path);
         $item->setActive($active);
         $item->setId($id);

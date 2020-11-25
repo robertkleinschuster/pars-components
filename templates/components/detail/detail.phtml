@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @var $component \Pars\Component\Components\Detail\Detail
+ * @var $templateFolder string
+ */
+$fieldList = $component->getFieldList();
+$count = count($fieldList);
+?>
+<?php foreach ($component->getBeanList() as $bean): ?>
+    <div class="row row-cols-1 row-cols-sm-<?= $component->getCols() ?> mb-4">
+        <?php foreach ($fieldList as $key => $field): ?>
+            <?php if (!$field->isAppendToPrevious()): ?>
+                <div class="col">
+            <?php endif ?>
+            <?php if ($field->isShow($bean)): ?>
+                <div class="row p-1">
+                    <?php if ($field->hasTitle()): ?>
+                        <div class="col-sm-2 text-center text-sm-left font-weight-bolder">
+                            <?= $field->getTitle() ?>:
+                        </div>
+                    <?php endif; ?>
+                    <div class="col-sm-10 text-center text-sm-left">
+                        <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
+                    </div>
+                </div>
+                <?php if ($key != $count - 1): ?>
+                    <hr>
+                <?php endif ?>
+            <?php endif; ?>
+            <?php if ($key === $count - 1 || !$fieldList[$key + 1]->isAppendToPrevious()): ?>
+                </div>
+            <?php endif ?>
+        <?php endforeach ?>
+    </div>
+<?php endforeach ?>

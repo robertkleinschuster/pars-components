@@ -1,0 +1,57 @@
+<?php
+/**
+ * @var $field \Pars\Component\Components\Base\Fields\AbstractWysiwyg
+ * @var $bean \Niceshops\Bean\Type\Base\BeanInterface
+ * @var $errors array
+ */
+?>
+
+<div class="form-group">
+    <?php if ($field->hasTitle()): ?>
+        <label for="<?= $field->getKey() ?>"><?= $field->getTitle() ?></label>
+    <?php endif; ?>
+    <textarea class="form-control <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
+              id="<?= $field->getKey() ?>"
+              name="<?= $field->getKey() ?>"
+        <?= $field->isRequired() ? ' required' : '' ?>
+        <?= $field->hasRows() ? " rows=\"{$field->getRows()}\" " : '' ?>><?= $field->getValue($bean) ?></textarea>
+    <div class="form-control" id="edit-<?= $field->getKey() ?>">
+        <?= $field->getValue($bean) ?>
+    </div>
+    <?php if (is_array($errors)): ?>
+        <?php foreach ($errors as $error): ?>
+            <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
+                <?= $error ?>
+            </div>
+        <?php endforeach ?>
+    <?php endif ?>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var textarea = document.getElementById('<?= $field->getKey() ?>');
+        var x = textarea.getAttribute('class')
+        document.getElementById('<?= $field->getKey() ?>').setAttribute('class', x + ' d-none');
+        var toolbarOptions = [
+            [{ 'font': [] }],
+            [{ 'size': ['small', false, 'large', 'huge'] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],
+            [{ 'indent': '-1'}, { 'indent': '+1' }],
+            [{ 'align': [] }],
+            [{ 'color': [] }, { 'background': [] }],
+            ['blockquote', 'code-block'],
+            ['link', 'image'],
+            ['clean']
+        ];
+        var quill = new Quill('#edit-<?= $field->getKey() ?>', {
+            modules: {
+               <?= $field->getType() == $field::TYPE_TOOLBAR ? "toolbar: toolbarOptions" : ""?>
+            },
+            theme: '<?= $field->getType() == $field::TYPE_TOOLBAR ? "snow" : "bubble"?>'
+        });
+        quill.on('text-change', function(delta, oldDelta, source) {
+            document.getElementById('<?= $field->getKey() ?>').innerText = quill.root.innerHTML;
+        });
+    });
+</script>

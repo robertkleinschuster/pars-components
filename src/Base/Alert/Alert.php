@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Pars\Component\Base\Alert;
 
 
+use Pars\Component\Base\BorderAwareInterface;
 use Pars\Component\Base\Field\Paragraph;
 use Pars\Component\Base\StyleAwareInterface;
 use Pars\Component\Base\StyleAwareTrait;
@@ -47,11 +48,12 @@ class Alert extends AbstractComponent implements StyleAwareInterface
         } else {
             $this->addOption('alert-' . self::STYLE_DANGER);
         }
+        $this->addOption(BorderAwareInterface::ROUNDED_NONE);
         $this->setRole('alert');
         if ($this->hasHeading()) {
             $heading = new HtmlElement('h4');
             $heading->setContent($this->getHeading());
-            $this->getElementList()->push($heading);
+            $this->getElementList()->unshift($heading);
         }
     }
 
@@ -64,7 +66,7 @@ class Alert extends AbstractComponent implements StyleAwareInterface
     {
         $paragraph = new Paragraph();
         $paragraph->setContent($value);
-        $this->getMainFieldList()->push($paragraph);
+        $this->getElementList()->push($paragraph);
         return $paragraph;
     }
 

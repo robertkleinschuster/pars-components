@@ -42,6 +42,9 @@ class FormGroup extends AbstractField
                     }
                 }
             }
+            if ($this->getInput()->hasType() && $this->getInput()->getType() === Input::TYPE_HIDDEN) {
+                $this->addOption('d-none');
+            }
             if ($this->hasValue() && !$this->getInput()->hasValue()) {
                 $this->getInput()->setValue($this->getValue());
             }

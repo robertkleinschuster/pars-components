@@ -14,6 +14,7 @@ class Link extends AbstractField
     protected function initialize()
     {
         $this->addOption('nav-link');
+        $this->addOption(self::OPTION_DECORATION_NONE);
         if ($this->isActive()) {
             $this->addOption('active');
             $span = new HtmlElement('span.sr-only');

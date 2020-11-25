@@ -25,15 +25,14 @@ class DashboardLayout extends BaseLayout
     /**
      * @param HtmlElement $body
      */
-    protected function main(HtmlElement $body)
+    protected function main(HtmlElement $main)
     {
-        parent::main($body);
+        parent::main($main);
+        $main->addInlineStyle('min-height', 'calc(100% - 130px)');
         $this->getSubNavigation()->setBackground(Navigation::BACKGROUND_LIGHT);
         $this->getSubNavigation()->setBreakpoint(Navigation::BREAKPOINT_LARGE);
         $this->getContainer()->push($this->getSubNavigation());
-        $main = new HtmlElement('main');
         $main->push($this->getContainer());
-        $body->push($main);
     }
 
     protected function components(HtmlElement $components)

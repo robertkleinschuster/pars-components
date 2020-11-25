@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var $field \Pars\Component\Components\Base\Fields\AbstractLink
+ * @var $bean \Niceshops\Bean\Type\Base\BeanInterface
+ */
+?>
+<a <?= $field->hasLink() ? " href=\"{$field->getLink($bean)}\"" : '' ?> <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>
+class="<?=$field->getClass()?>">
+    <?php if($field->hasIcon()): ?>
+        <span data-feather="<?=$field->getIcon()?>"></span>
+    <?php endif;?>
+    <?= $field->getValue($bean) ?>
+</a>

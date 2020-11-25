@@ -4,6 +4,7 @@
 namespace Pars\Component\Base\Field;
 
 
+use Pars\Component\Base\BorderAwareInterface;
 use Pars\Component\Base\StyleAwareInterface;
 use Pars\Component\Base\StyleAwareTrait;
 use Pars\Mvc\View\AbstractField;
@@ -14,10 +15,11 @@ class Button extends AbstractField implements StyleAwareInterface
 
     public bool $outline = false;
 
-    public function __construct(?string $content = null, ?string $style = null)
+    public function __construct(?string $content = null, ?string $style = null, ?string $path = null)
     {
         parent::__construct($content);
         $this->style = $style;
+        $this->path = $path;
     }
 
 
@@ -26,6 +28,7 @@ class Button extends AbstractField implements StyleAwareInterface
         $this->setTag('button');
         $this->addOption('btn');
         $this->addOption('mr-1');
+        $this->addOption(BorderAwareInterface::ROUNDED_NONE);
         if ($this->hasStyle()) {
             if ($this->isOutline()) {
                 $this->addOption('btn-outline-' . $this->getStyle());

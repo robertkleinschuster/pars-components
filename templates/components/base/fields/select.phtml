@@ -1,0 +1,30 @@
+<?php
+/**
+ * @var $field \Pars\Component\Components\Base\Fields\AbstractSelect
+ * @var $bean \Niceshops\Bean\Type\Base\BeanInterface
+ * @var $errors array
+ */
+?>
+<div class="form-group">
+    <?php if ($field->hasTitle()): ?>
+        <label for="<?= $field->getKey() ?>"><?= $field->getTitle() ?></label>
+    <?php endif; ?>
+    <select class="form-control <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
+            id="<?= $field->getKey() ?>"
+            name="<?= $field->getKey() ?>"
+            size="<?= $field->getSize() ?>"
+        <?= $field->isRequired() ? ' required' : '' ?>
+        <?= $field->isMultiple() ? ' multiple' : '' ?>>
+        <?php foreach ($field->getSelectOptions() as $value => $name): ?>
+            <option
+                <?= $field->getValue($bean) == $value ? ' selected ' : '' ?>value="<?= $value ?>"><?= $name ?></option>
+        <?php endforeach; ?>
+    </select>
+    <?php if (is_array($errors)): ?>
+        <?php foreach ($errors as $error): ?>
+            <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
+                <?= $error ?>
+            </div>
+        <?php endforeach ?>
+    <?php endif ?>
+</div>

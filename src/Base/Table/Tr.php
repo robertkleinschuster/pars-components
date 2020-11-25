@@ -32,6 +32,9 @@ class Tr extends AbstractComponent implements BeanAwareInterface
                 }
 
                 if ($this->hasBean()) {
+                    if ($this->hasBeanConverter() && !$field->hasBeanConverter()) {
+                        $field->setBeanConverter($this->getBeanConverter());
+                    }
                     $td->setContent($field->render($this->getBean()));
                 } else {
                     $td->setContent($field->render());

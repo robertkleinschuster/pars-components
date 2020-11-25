@@ -23,7 +23,6 @@ class Badge extends AbstractField implements StyleAwareInterface
     {
         $this->setTag('span');
         $this->addOption('badge');
-        $this->addOption('badge-pill');
         if ($this->hasStyle()) {
             $this->addOption('badge-' . $this->getStyle());
         } else {

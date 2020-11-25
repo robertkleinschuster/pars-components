@@ -1,0 +1,34 @@
+<?php
+/**
+ * @var $view \Pars\Component\View
+ * @var $component \Pars\Component\Components\Edit\Edit
+ * @var $templateFolder string
+ */
+$fieldList = $component->getFieldList();
+$count = count($fieldList);
+?>
+<form method="post" enctype="multipart/form-data">
+    <div class="row row-cols-1 row-cols-sm-<?= $component->getCols() ?>">
+        <?php $prevChapter = null ?>
+        <?php foreach ($fieldList as $key => $field): ?>
+            <?php if ($key == 0 || !$field->isAppendToPrevious()): ?>
+                <div class="col">
+            <?php endif ?>
+            <?php if ($field->isShow($component->getBean())): ?>
+                <?= $field->getChapter() != $prevChapter ? "<h4>{$field->getChapter()}</h4>" : '' ?>
+                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), [
+                    'field' => $field,
+                    'bean' => $component->getBean(),
+                    'errors' => $component->getValidationHelper()->getErrorList($field->getKey()),
+                ]) ?>
+            <?php endif; ?>
+            <?php if ($key === $count - 1 || !$fieldList[$key + 1]->isAppendToPrevious()): ?>
+                </div>
+            <?php endif ?>
+            <?php $prevChapter = $field->getChapter() ?>
+        <?php endforeach ?>
+    </div>
+    <?php if ($view->hasData('token')): ?>
+        <input type="hidden" name="token" value="<?= $view->getData('token') ?>">
+    <?php endif;?>
+</form>

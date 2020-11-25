@@ -297,6 +297,8 @@ class Icon extends AbstractField
 
 
     public ?string $name = null;
+    public ?string $width = null;
+    public ?string $height = null;
 
     /**
      * Icon constructor.
@@ -311,7 +313,20 @@ class Icon extends AbstractField
 
     protected function initialize()
     {
-       $this->setContent(file_get_contents(__DIR__ . '/feather/' . $this->getName() . '.svg'));
+        $svg = file_get_contents(__DIR__ . '/icons/' . $this->getName() . '.svg');
+        if ($this->hasWidth()) {
+            $this->addInlineStyle('width', $this->getWidth());
+        }
+        if ($this->hasHeight()) {
+            $this->addInlineStyle('height', $this->getHeight());
+        }
+        if (!$this->hasHeight() && !$this->hasWidth()) {
+            #$this->addInlineStyle('height', '24px');
+            #$this->addInlineStyle('width', '24px');
+        } else {
+            $svg = str_replace('width="24" height="24"', '', $svg);
+        }
+        $this->setContent($svg);
     }
 
     /**
@@ -339,6 +354,59 @@ class Icon extends AbstractField
     public function hasName(): bool
     {
         return $this->name !== null;
+    }
+
+    /**
+    * @return string
+    */
+    public function getWidth(): string
+    {
+        return $this->width;
+    }
+
+    /**
+    * @param string $width
+    *
+    * @return $this
+    */
+    public function setWidth(string $width): self
+    {
+        $this->width = $width;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasWidth(): bool
+    {
+        return isset($this->width);
+    }
+    /**
+    * @return string
+    */
+    public function getHeight(): string
+    {
+        return $this->height;
+    }
+
+    /**
+    * @param string $height
+    *
+    * @return $this
+    */
+    public function setHeight(string $height): self
+    {
+        $this->height = $height;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasHeight(): bool
+    {
+        return isset($this->height);
     }
 
 

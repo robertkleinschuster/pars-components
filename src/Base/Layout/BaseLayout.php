@@ -12,6 +12,7 @@ class BaseLayout extends AbstractLayout
     protected function initialize()
     {
         $this->setTag('html');
+        $this->addOption('h-100');
         $this->setAttribute('lang', '{language}');
         $head = new HtmlElement('head');
         $this->meta($head);
@@ -20,11 +21,12 @@ class BaseLayout extends AbstractLayout
         $head->push($title);
         $link = new HtmlElement('link');
         $link->setAttribute('rel', 'shortcut icon');
-        $link->setAttribute('href', '{favicon}}');
+        $link->setAttribute('href', '{favicon}');
         $head->push($link);
         $this->stylesheets($head);
         $this->push($head);
         $body = new HtmlElement('body');
+        $body->addOption('h-100');
         $header = new HtmlElement('header');
         $this->header($header);
         $body->push($header);

@@ -11,9 +11,10 @@ class Submit extends Input implements StyleAwareInterface
 {
     use StyleAwareTrait;
 
-    public function __construct(?string $style = null)
+    public function __construct(string $content, ?string $style = null)
     {
         parent::__construct();
+        $this->setContent($content);
         if (null !== $style) {
             $this->setStyle($style);
         }
@@ -24,6 +25,7 @@ class Submit extends Input implements StyleAwareInterface
     {
         $this->setType(self::TYPE_SUBMIT);
         parent::initialize();
+        $this->setTag('button');
         $this->addOption('btn');
         if ($this->hasStyle()) {
             $this->addOption('btn-' . $this->getStyle());

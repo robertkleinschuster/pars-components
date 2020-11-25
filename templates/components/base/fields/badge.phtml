@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @var $field \Pars\Component\Components\Base\Fields\AbstractBadge
+ * @var $bean \Niceshops\Bean\Type\Base\BeanInterface
+ */
+?>
+<?php $value = $field->getValue($bean)?>
+<?php if ($field->hasAction()): ?>
+    <a href="<?= $field->getAction($bean) ?>"
+       class="badge<?= $field->hasStyle() ? ' badge-' . $field->getStyle() : '' ?><?= $field->hasType() ? ' badge-' . $field->getType() : '' ?>"><?= $value ?></a>
+<?php else: ?>
+    <span class="badge<?= $field->hasStyle() ? ' badge-' . $field->getStyle() : '' ?><?= $field->hasType() ? ' badge-' . $field->getType() : '' ?>"><?= $value ?></span>
+<?php endif; ?>

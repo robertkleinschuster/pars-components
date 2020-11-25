@@ -1,0 +1,11 @@
+<?php
+/**
+ * @var $field \Pars\Component\Components\Base\Fields\AbstractSpinner
+ * @var $bean \Niceshops\Bean\Type\Base\BeanInterface
+ */
+?>
+<div <?= $field->hasAlign() ? "class=\"text-{$field->getAlign()}\"" : '' ?>>
+    <div class="<?= $field->hasType() ? ' spinner-' . $field->getType() : '' ?><?= $field->hasStyle() ? ' text-' . $field->getStyle() : '' ?>" role="status">
+        <span class="sr-only"><?= $this->getValue($bean) ?>></span>
+    </div>
+<div>
