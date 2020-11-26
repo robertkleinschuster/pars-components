@@ -35,6 +35,11 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      */
     private array $columnMap = [];
 
+    /**
+     * @var array
+     */
+    private array $formGroupList = [];
+
     public ?string $action = null;
 
     public ?string $method = null;
@@ -116,6 +121,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     {
         return $this->addInput(new Input(Input::TYPE_HIDDEN), $name, $value, $label, $row, $column);
     }
+
     /**
      * @param string $name
      * @param string|null $value
@@ -312,7 +318,8 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         string $label = null,
         int $row = 1,
         int $column = 1
-    ) {
+    )
+    {
         $formGroup = new FormGroup($name);
         if (null !== $value) {
             $formGroup->setValue($value);
@@ -325,7 +332,8 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         return $formGroup;
     }
 
-    public function addElement(HtmlInterface $html, int $row, int $column) {
+    public function addElement(HtmlInterface $html, int $row, int $column)
+    {
         $formCol = $this->getColumn($row, $column);
         $formCol->push($html);
         $formCol->setBreakpoint(FormColumn::BREAKPOINT_MEDIUM);
@@ -338,18 +346,30 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      */
     protected function addFormGroup(FormGroup $formGroup, int $row = 1, int $column = 1)
     {
-       $this->addElement($formGroup, $row, $column);
-       return $this;
+        $this->formGroupList[] = $formGroup;
+        $this->addElement($formGroup, $row, $column);
+        return $this;
     }
 
-    protected function getRow(int $row) {
+    /**
+     * @return array
+     */
+    public function getFormGroupList(): array
+    {
+        return $this->formGroupList;
+    }
+
+
+    protected function getRow(int $row)
+    {
         if (!isset($this->rowMap[$row])) {
             $this->rowMap[$row] = new FormRow();
         }
         return $this->rowMap[$row];
     }
 
-    protected function getColumn(int $row, int $column) {
+    protected function getColumn(int $row, int $column)
+    {
         if (!isset($this->columnMap[$row][$column])) {
             $this->columnMap[$row][$column] = new FormColumn();
         }
@@ -358,18 +378,18 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
 
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getAction(): string
     {
         return $this->action;
     }
 
     /**
-    * @param string $action
-    *
-    * @return $this
-    */
+     * @param string $action
+     *
+     * @return $this
+     */
     public function setAction(string $action): self
     {
         $this->action = $action;
@@ -377,26 +397,26 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasAction(): bool
     {
         return isset($this->action);
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getMethod(): string
     {
         return $this->method;
     }
 
     /**
-    * @param string $method
-    *
-    * @return $this
-    */
+     * @param string $method
+     *
+     * @return $this
+     */
     public function setMethod(string $method): self
     {
         $this->method = $method;
@@ -404,8 +424,8 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasMethod(): bool
     {
         return isset($this->method);

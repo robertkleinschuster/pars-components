@@ -26,6 +26,7 @@ class Button extends AbstractField implements StyleAwareInterface
     protected function initialize()
     {
         $this->setTag('button');
+        $this->setAttribute('type', 'button');
         $this->addOption('btn');
         $this->addOption('mr-1');
         $this->addOption(BorderAwareInterface::ROUNDED_NONE);
