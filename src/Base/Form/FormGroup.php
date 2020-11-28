@@ -177,7 +177,7 @@ class FormGroup extends AbstractField
     /**
      * @return Input|null
      */
-    protected function getInput()
+    public function getInput()
     {
         return $this->input;
     }

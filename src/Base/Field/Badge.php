@@ -4,6 +4,7 @@
 namespace Pars\Component\Base\Field;
 
 
+use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Component\Base\StyleAwareTrait;
 use Pars\Component\Base\StyleAwareInterface;
 use Pars\Mvc\View\AbstractField;
@@ -22,6 +23,12 @@ class Badge extends AbstractField implements StyleAwareInterface
     protected function initialize()
     {
         $this->setTag('span');
+    }
+
+    protected function beforeRender(BeanInterface $bean = null)
+    {
+        parent::beforeRender($bean);
+        $this->clearOptions();
         $this->addOption('badge');
         if ($this->hasStyle()) {
             $this->addOption('badge-' . $this->getStyle());
@@ -29,5 +36,6 @@ class Badge extends AbstractField implements StyleAwareInterface
             $this->addOption('badge-' . self::STYLE_INFO);
         }
     }
+
 
 }

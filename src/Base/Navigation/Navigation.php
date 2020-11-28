@@ -44,50 +44,54 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
      */
     protected function initialize()
     {
-        $this->setTag('div');
-        $this->addOption('navbar');
-        $this->addOption('mb-3');
-        if ($this->hasBackground()) {
-            $this->addOption($this->getBackground());
-            $this->addOption(str_replace('bg', 'navbar', $this->getBackground()));
-        }
-        if ($this->hasRounded()) {
-            $this->addOption($this->getRounded());
-        }
-        if ($this->hasBorder()) {
-            $this->addOption($this->getBorder());
-        }
-        if ($this->hasBorderPosition()) {
-            $this->addOption($this->getBorderPosition());
-        }
-        if ($this->hasBreakpoint()) {
-            $this->addOption('navbar-expand-' . $this->getBreakpoint());
-            $toggle = new HtmlElement('button.navbar-toggler');
-            $toggle->setAttribute('type', 'button');
-            $id = $this->getCollapse()->generateId();
-            $toggle->setData('target', '#' . $id);
-            $toggle->setData('toggle', 'collapse');
-            $toggle->setAria('controls', $id);
-            $toggle->setAria('expanded', 'false');
-            $toggle->setAria('label', 'Toggle navigation');
-            $toggle->push(new HtmlElement('span.navbar-toggler-icon'));
-            $this->push($toggle);
-        } else {
-            $this->addOption('navbar-expand');
-        }
-        $this->push($this->getCollapse());
-        if ($this->hasSearch()) {
-            $form = new Form();
-            $form->addOption('order-3');
-            $this->getSearch()->setRounded(Input::ROUNDED_NONE);
+        if (!$this->isEmpty()) {
+            $this->setTag('nav');
+            $this->addOption('navbar');
+            $this->addOption('mb-4');
+            $this->addOption('shadow-sm');
             if ($this->hasBackground()) {
-                $this->getSearch()->setBackground($this->getBackground());
-                $this->getSearch()->setColor($this->getContrast()->getColor($this->getBackground()));
+                $this->addOption($this->getBackground());
+                $this->addOption(str_replace('bg', 'navbar', $this->getBackground()));
             }
-            $this->getSearch()->setBorder(Input::BORDER_SECONDARY);
-            $form->push($this->getSearch());
-            $this->getCollapse()->push($form);
+            if ($this->hasRounded()) {
+                $this->addOption($this->getRounded());
+            }
+            if ($this->hasBorder()) {
+                $this->addOption($this->getBorder());
+            }
+            if ($this->hasBorderPosition()) {
+                $this->addOption($this->getBorderPosition());
+            }
+            if ($this->hasBreakpoint()) {
+                $this->addOption('navbar-expand-' . $this->getBreakpoint());
+                $toggle = new HtmlElement('button.navbar-toggler.rounded-0');
+                $toggle->setAttribute('type', 'button');
+                $id = $this->getCollapse()->generateId();
+                $toggle->setData('target', '#' . $id);
+                $toggle->setData('toggle', 'collapse');
+                $toggle->setAria('controls', $id);
+                $toggle->setAria('expanded', 'false');
+                $toggle->setAria('label', 'Toggle navigation');
+                $toggle->push(new HtmlElement('span.navbar-toggler-icon'));
+                $this->push($toggle);
+            } else {
+                $this->addOption('navbar-expand');
+            }
+            $this->push($this->getCollapse());
+            if ($this->hasSearch()) {
+                $form = new Form();
+                $form->addOption('order-3');
+                $this->getSearch()->setRounded(Input::ROUNDED_NONE);
+                if ($this->hasBackground()) {
+                    $this->getSearch()->setBackground($this->getBackground());
+                    $this->getSearch()->setColor($this->getContrast()->getColor($this->getBackground()));
+                }
+                $this->getSearch()->setBorder(Input::BORDER_SECONDARY);
+                $form->push($this->getSearch());
+                $this->getCollapse()->push($form);
+            }
         }
+
     }
 
 
@@ -126,6 +130,54 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
         }
         $this->getCollapse()->addItem($item);
         return $item;
+    }
+
+    /**
+     * @param string $content
+     * @param string $path
+     * @param string $id
+     * @param int|null $order
+     * @param bool $active
+     * @return Item
+     */
+    public function addItemRight(string $content, string $path, string $id, ?int $order = null, bool $active = false): Item
+    {
+        $item = new Item();
+        $item->setContent($content);
+        $item->setPath($path);
+        $item->setActive($active);
+        $item->setId($id);
+        if (null !== $order) {
+            $item->addOption('order-' . $order);
+        }
+        $this->getCollapse()->addItemRight($item);
+        return $item;
+    }
+
+    /**
+     * @param string $content
+     * @param string $path
+     * @param string $id
+     * @param int|null $order
+     * @param bool $active
+     * @return Item
+     */
+    public function addDropdownRight(string $content, string $id, ?int $order = null, bool $active = false): Dropdown
+    {
+        $dropdown = new Dropdown();
+        $dropdown->setContent($content);
+        $dropdown->setActive($active);
+        $dropdown->setId($id);
+        if (null !== $order) {
+            $dropdown->addOption('order-' . $order);
+        }
+        $this->getCollapse()->addItemRight($dropdown);
+        return $dropdown;
+    }
+
+    public function isEmpty(): bool
+    {
+        return $this->getCollapse()->isEmpty() && !$this->hasSearch();
     }
 
     public function setActive(string $id): self

@@ -68,6 +68,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         if ($this->hasAction()) {
             $this->setAttribute('action', $this->getAction());
         }
+        $this->setAttribute('enctype', 'multipart/form-data');
         ksort($this->columnMap);
         foreach ($this->columnMap as $row => $columns) {
             ksort($columns);
@@ -197,6 +198,19 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
 
     /**
      * @param string $name
+     * @param string|null $value
+     * @param string|null $label
+     * @param int $row
+     * @param int $column
+     */
+    public function addFile(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    {
+        return $this->addInput(new File(), $name, $value, $label, $row, $column);
+    }
+
+
+    /**
+     * @param string $name
      * @param \DateTime|null $value
      * @param string|null $label
      * @param int $row
@@ -298,7 +312,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         $button->setContent($label);
         $button->setPath($path);
         $button->addOption('form-control');
-        $this->addElement($button, $row, $column);
+        $formGroup = new FormGroup('cancel');
+        $formGroup->push($button);
+        $this->addElement($formGroup, $row, $column);
     }
 
 

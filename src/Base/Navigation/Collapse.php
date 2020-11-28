@@ -10,6 +10,7 @@ use Pars\Mvc\View\HtmlElementList;
 class Collapse extends AbstractComponent
 {
     protected ?HtmlElementList $itemList = null;
+    protected ?HtmlElementList $itemListRight = null;
 
     public ?string $active = null;
 
@@ -25,6 +26,13 @@ class Collapse extends AbstractComponent
                 }
             }
         }
+        if (!$this->getItemListRight()->isEmpty()) {
+            $groupRight = new Group();
+            $groupRight->setRight(true);
+            $groupRight->addOption('order-4');
+            $groupRight->setElementList($this->getItemListRight());
+            $this->getElementList()->unshift($groupRight);
+        }
         $group = new Group();
         $group->addOption('order-2');
         $group->setElementList($this->getItemList());
@@ -39,6 +47,10 @@ class Collapse extends AbstractComponent
         $this->getItemList()->push($item);
     }
 
+    public function addItemRight(Item $item) {
+        $this->getItemListRight()->push($item);
+    }
+
     /**
      * @return HtmlElementList|null
      */
@@ -48,6 +60,14 @@ class Collapse extends AbstractComponent
             $this->itemList = new HtmlElementList();
         }
         return $this->itemList;
+    }
+
+    protected function getItemListRight()
+    {
+        if (null === $this->itemListRight) {
+            $this->itemListRight = new HtmlElementList();
+        }
+        return $this->itemListRight;
     }
 
     /**
@@ -75,6 +95,11 @@ class Collapse extends AbstractComponent
     public function hasActive(): bool
     {
         return isset($this->active);
+    }
+
+    public function isEmpty(): bool
+    {
+        return $this->getItemList()->isEmpty() && $this->getItemListRight()->isEmpty();
     }
 
 }

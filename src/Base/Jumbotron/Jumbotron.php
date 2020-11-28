@@ -22,13 +22,18 @@ class Jumbotron extends AbstractComponent
     {
         $this->setTag('div');
         $this->addOption('jumbotron');
-        $this->getElementList()->unshift(new HtmlElement('hr.my-4'));
+        $this->addOption('rounded-0');
+        $this->addOption('py-3');
+        $this->addOption('mb-4');
+        $this->addOption('bg-light');
+        $this->addOption('shadow-sm');
         if ($this->hasLead()) {
             $p = new Paragraph($this->getLead());
             $this->addOption('lead');
             $this->getElementList()->unshift($p);
         }
         if ($this->hasHeadline()) {
+            $this->getElementList()->unshift(new HtmlElement('hr.my-4'));
             $h1 = new HtmlElement('h1');
             $h1->setContent($this->getHeadline());
             $h1->addOption('display-5');
@@ -38,19 +43,21 @@ class Jumbotron extends AbstractComponent
         foreach ($this->getFieldList() as $field) {
             $row = new Row();
             $row->addOption('mb-2');
-            $col = new Column();
-            $col->addOption('pl-0');
-            $col->setBreakpoint(Column::BREAKPOINT_SMALL);
             if ($field->hasLabel()) {
+
+                $col = new Column();
+                $col->addOption('pl-0');
+                $col->setBreakpoint(Column::BREAKPOINT_SMALL);
                 $span = new Span($field->getLabel());
                 $col->push($span);
+
+                $row->push($col);
             }
-            $row->push($col);
             $col = new Column();
             $col->setBreakpoint(Column::BREAKPOINT_SMALL);
-            $col->setBackground(Column::BACKGROUND_LIGHT);
+            $col->setBackground(Column::BACKGROUND_WHITE);
             $col->setBorder(Column::BORDER_SECONDARY);
-            $col->setRounded(Column::ROUNDED_DEFAULT);
+            $col->setRounded(Column::ROUNDED_NONE);
             $col->push($field);
             $row->push($col);
             $container->push($row);
@@ -59,18 +66,18 @@ class Jumbotron extends AbstractComponent
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getLead(): string
     {
         return $this->lead;
     }
 
     /**
-    * @param string $lead
-    *
-    * @return $this
-    */
+     * @param string $lead
+     *
+     * @return $this
+     */
     public function setLead(string $lead): self
     {
         $this->lead = $lead;
@@ -78,8 +85,8 @@ class Jumbotron extends AbstractComponent
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasLead(): bool
     {
         return isset($this->lead);
@@ -87,18 +94,18 @@ class Jumbotron extends AbstractComponent
 
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getHeadline(): string
     {
         return $this->headline;
     }
 
     /**
-    * @param string $headline
-    *
-    * @return $this
-    */
+     * @param string $headline
+     *
+     * @return $this
+     */
     public function setHeadline(string $headline): self
     {
         $this->headline = $headline;
@@ -106,8 +113,8 @@ class Jumbotron extends AbstractComponent
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasHeadline(): bool
     {
         return isset($this->headline);

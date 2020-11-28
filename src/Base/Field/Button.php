@@ -40,12 +40,11 @@ class Button extends AbstractField implements StyleAwareInterface
     }
 
     /**
-     * @param string $icon
+     * @param string $name
      */
-    public function addIcon(string $icon)
+    public function addIcon(string $name)
     {
-        $icon = new Icon();
-        $icon->setName($icon);
+        $icon = new Icon($name);
         $this->push($icon);
     }
 

@@ -4,6 +4,7 @@
 namespace Pars\Component\Base\Form;
 
 
+use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Mvc\View\HtmlElement;
 
 class Select extends Input
@@ -35,6 +36,23 @@ class Select extends Input
             }
         }
     }
+
+    protected $replaedValue = null;
+
+    protected function beforeRenderElement(HtmlElement $element, BeanInterface $bean = null)
+    {
+        parent::beforeRenderElement($element, $bean);
+        if ($element->hasAttribute('value') && $bean !== null) {
+            if (null == $this->replaedValue) {
+                $this->replaedValue =  $this->replacePlaceholder($this->getValue(), $bean);
+            }
+            if ($element->getAttribute('value') == $this->replaedValue) {
+                $element->setAttribute('selected', 'selected');
+                $element->setAttribute('checked', 'checked');
+            }
+        }
+    }
+
 
     /**
     * @return array

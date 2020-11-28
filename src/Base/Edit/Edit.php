@@ -4,12 +4,12 @@
 namespace Pars\Component\Base\Edit;
 
 
+use Niceshops\Bean\Type\Base\BeanAwareInterface;
 use Niceshops\Bean\Type\Base\BeanAwareTrait;
-use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Component\Base\Form\Form;
 use Pars\Mvc\View\AbstractComponent;
 
-class Edit extends AbstractComponent
+class Edit extends AbstractComponent implements BeanAwareInterface
 {
     use BeanAwareTrait;
 
@@ -18,15 +18,6 @@ class Edit extends AbstractComponent
     protected function initialize()
     {
         $this->push($this->getForm());
-    }
-
-
-    public function render(BeanInterface $bean = null): string
-    {
-        if ($this->hasBean()) {
-            $bean = $this->getBean();
-        }
-        return parent::render($bean);
     }
 
     /**

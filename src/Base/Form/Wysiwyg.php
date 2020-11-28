@@ -13,6 +13,11 @@ class Wysiwyg extends Textarea
         $id = $this->generateId();
         $input = new Textarea();
         $input->fromArray($this->toArray());
+        if ($this->hasValue()) {
+            $input->setContent($this->getValue());
+        }
+        $input->setValue('');
+        $this->setValue('');
         $this->push($input);
         $this->setName('wysiwyg-' . $id);
         parent::initialize();
@@ -29,8 +34,8 @@ class Wysiwyg extends Textarea
             $editor = new HtmlElement('div');
             $editor->setId('edit-' . $input->getName());
             $editor->addOption('d-none');
-            if ($this->hasContent()) {
-                $editor->setContent($this->getContent());
+            if ($input->hasContent()) {
+                $editor->setContent($input->getContent());
             }
             $this->push($editor);
         }

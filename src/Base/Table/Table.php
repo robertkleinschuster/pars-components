@@ -22,6 +22,7 @@ class Table extends AbstractComponent implements BeanListAwareInterface
         $this->addOption('table-hover');
         $this->addOption('table-bordered');
         $this->addOption('table-sm');
+        $this->addOption('mb-0');
         $thead = new Thead();
         $thead->setFieldList($this->getFieldList());
         $this->push($thead);

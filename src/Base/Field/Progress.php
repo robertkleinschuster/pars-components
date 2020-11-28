@@ -33,7 +33,7 @@ class Progress extends AbstractField implements StyleAwareInterface
         $bar = new HtmlElement('div');
         $bar->setRole('progressbar');
         if ($this->hasValue()) {
-            $bar->setAttribute('style', "width: {$this->getValue()}%;");
+            $bar->addInlineStyle('width', "{$this->getValue()}%");
             $bar->setAria('valuenow', $this->getValue());
         }
         $bar->setAria('valuemin', '0');
@@ -43,8 +43,9 @@ class Progress extends AbstractField implements StyleAwareInterface
         if ($this->hasStyle()) {
             $bar->addOption('bg-' . $this->getStyle());
         } else {
-            $this->addOption('bg-' . self::STYLE_INFO);
+            $bar->addOption('bg-' . self::STYLE_INFO);
         }
+        $this->push($bar);
     }
 
     /**

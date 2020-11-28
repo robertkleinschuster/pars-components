@@ -16,6 +16,7 @@ class Delete extends AbstractComponent implements TextAwareInterface
     {
         if ($this->hasHeading()) {
             $alert = new Alert($this->getHeading());
+            $alert->setStyle(Alert::STYLE_DANGER);
             if ($this->hasText()) {
                 $alert->addParagraph($this->getText());
             }

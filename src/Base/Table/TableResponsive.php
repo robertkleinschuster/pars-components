@@ -17,7 +17,9 @@ class TableResponsive extends AbstractComponent implements BeanListAwareInterfac
     protected function initialize()
     {
         $this->setTag('div');
+        $this->addOption('shadow-sm');
         $this->addOption('table-responsive');
+        $this->addOption('mb-4');
         if ($this->hasBeanList()) {
             $this->getTable()->setBeanList($this->getBeanList());
         }

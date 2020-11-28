@@ -4,6 +4,9 @@
 namespace Pars\Component\Base\Form;
 
 
+use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Mvc\View\HtmlElement;
+
 class Checkbox extends Input
 {
     protected function initialize()
@@ -14,6 +17,7 @@ class Checkbox extends Input
         $input->fromArray($this->toArray());
         $input->setType(Input::TYPE_HIDDEN);
         $input->setValue('false');
+        $input->setId($this->getName() . '__default');
         $this->push($input);
         $input = new Input();
         $input->fromArray($this->toArray());
@@ -34,5 +38,19 @@ class Checkbox extends Input
             $this->push($label);
         }
     }
+
+    protected function beforeRenderElement(HtmlElement $element, BeanInterface $bean = null)
+    {
+        parent::beforeRenderElement($element, $bean);
+        if (null !== $bean) {
+            $value = $this->replacePlaceholder($this->getValue(), $bean);
+            if ($element instanceof Input) {
+                if ($value === 'true') {
+                    $element->setAttribute('checked', 'checked');
+                }
+            }
+        }
+    }
+
 
 }
