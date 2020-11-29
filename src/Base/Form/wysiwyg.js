@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         [{'align': []}],
         [{'color': []}, {'background': []}],
         ['blockquote', 'code-block'],
-        ['link'],
+        ['link', 'image'],
         ['clean']
     ];
     let q = new Quill('#edit-{name}', {
