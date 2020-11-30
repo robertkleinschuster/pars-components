@@ -11,7 +11,9 @@ class Codeblock extends AbstractField
     {
         $this->setTag('pre');
         $code = new HtmlElement('code');
-        $code->setContent($this->getContent());
+        if ($this->hasContent()) {
+            $code->setContent($this->getContent());
+        }
         $this->setContent('');
         $this->push($code);
     }

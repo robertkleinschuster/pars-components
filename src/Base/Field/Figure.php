@@ -30,7 +30,9 @@ class Figure extends AbstractField
         $this->push($image);
         $figcaption = new HtmlElement('figcaption');
         $figcaption->addOption('figure-caption');
-        $figcaption->setContent($this->getContent());
+        if ($this->hasContent()) {
+            $figcaption->setContent($this->getContent());
+        }
         $this->push($figcaption);
         $this->setContent('');
     }
