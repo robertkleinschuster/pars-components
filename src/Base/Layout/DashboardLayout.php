@@ -43,8 +43,8 @@ class DashboardLayout extends BaseLayout
     }
 
     /**
-    * @return Container
-    */
+     * @return Container
+     */
     public function getContainer(): Container
     {
         if (!$this->hasContainer()) {
@@ -54,10 +54,10 @@ class DashboardLayout extends BaseLayout
     }
 
     /**
-    * @param Container $container
-    *
-    * @return $this
-    */
+     * @param Container $container
+     *
+     * @return $this
+     */
     public function setContainer(Container $container): self
     {
         $this->container = $container;
@@ -65,8 +65,8 @@ class DashboardLayout extends BaseLayout
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasContainer(): bool
     {
         return $this->container !== null;
@@ -74,8 +74,8 @@ class DashboardLayout extends BaseLayout
 
 
     /**
-    * @return Navigation
-    */
+     * @return Navigation
+     */
     public function getNavigation(): Navigation
     {
         if (!$this->hasNavigation()) {
@@ -85,10 +85,10 @@ class DashboardLayout extends BaseLayout
     }
 
     /**
-    * @param Navigation $navigation
-    *
-    * @return $this
-    */
+     * @param Navigation $navigation
+     *
+     * @return $this
+     */
     public function setNavigation(Navigation $navigation): self
     {
         $this->navigation = $navigation;
@@ -96,16 +96,16 @@ class DashboardLayout extends BaseLayout
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasNavigation(): bool
     {
         return $this->navigation !== null;
     }
 
     /**
-    * @return Navigation
-    */
+     * @return Navigation
+     */
     public function getSubNavigation(): Navigation
     {
         if (!$this->hasSubNavigation()) {
@@ -115,10 +115,10 @@ class DashboardLayout extends BaseLayout
     }
 
     /**
-    * @param Navigation $navigation
-    *
-    * @return $this
-    */
+     * @param Navigation $navigation
+     *
+     * @return $this
+     */
     public function setSubNavigation(Navigation $navigation): self
     {
         $this->subNavigation = $navigation;
@@ -126,8 +126,8 @@ class DashboardLayout extends BaseLayout
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasSubNavigation(): bool
     {
         return $this->subNavigation !== null;
