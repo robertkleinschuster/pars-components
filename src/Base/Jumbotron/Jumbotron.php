@@ -43,23 +43,21 @@ class Jumbotron extends AbstractComponent
         foreach ($this->getFieldList() as $field) {
             $row = new Row();
             $row->addOption('mb-2');
+            $col2 = new Column();
+            $col2->setBreakpoint(Column::BREAKPOINT_SMALL);
             if ($field->hasLabel()) {
-
                 $col = new Column();
                 $col->addOption('pl-0');
                 $col->setBreakpoint(Column::BREAKPOINT_SMALL);
                 $span = new Span($field->getLabel());
                 $col->push($span);
-
                 $row->push($col);
+                $col2->setBackground(Column::BACKGROUND_WHITE);
+                $col2->setBorder(Column::BORDER_SECONDARY);
+                $col2->setRounded(Column::ROUNDED_NONE);
             }
-            $col = new Column();
-            $col->setBreakpoint(Column::BREAKPOINT_SMALL);
-            $col->setBackground(Column::BACKGROUND_WHITE);
-            $col->setBorder(Column::BORDER_SECONDARY);
-            $col->setRounded(Column::ROUNDED_NONE);
-            $col->push($field);
-            $row->push($col);
+            $col2->push($field);
+            $row->push($col2);
             $container->push($row);
         }
         $this->push($container);
