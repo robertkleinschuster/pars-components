@@ -4,6 +4,7 @@
 namespace Pars\Component\Base\Table;
 
 
+use Pars\Component\Base\Overview\BulkCheckbox;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldListAwareTrait;
 
@@ -20,6 +21,12 @@ class Thead extends AbstractComponent
             $td = new Td();
             if ($field->hasLabel()) {
                 $td->setContent($field->getLabel());
+            }
+            if ($field instanceof BulkCheckbox) {
+                $selectAll = new BulkCheckbox();
+                $selectAll->addOption('select-all');
+                $selectAll->setData('name', $field->getName());
+                $td->push($selectAll);
             }
             $tr->push($td);
         }

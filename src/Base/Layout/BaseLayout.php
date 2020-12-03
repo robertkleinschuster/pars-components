@@ -3,6 +3,7 @@
 namespace Pars\Component\Base\Layout;
 
 use Pars\Component\Base\Grid\Container;
+use Pars\Component\Base\Modal\ConfirmModal;
 use Pars\Mvc\View\AbstractLayout;
 use Pars\Mvc\View\HtmlElement;
 
@@ -40,6 +41,7 @@ class BaseLayout extends AbstractLayout
         $this->footer($footer);
         $body->push($footer);
         $this->scripts($body);
+        $body->push(new ConfirmModal());
         $this->push($body);
     }
 
@@ -141,6 +143,14 @@ class BaseLayout extends AbstractLayout
         $script->setAttribute('src', 'https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js');
         $script->setAttribute('integrity', 'sha256-xnX1c4jTWYY3xOD5/hVL1h37HCCGJx+USguyubBZsHQ=');
         $script->setAttribute('crossorigin', 'anonymous');
+        $body->push($script);
+        $script = new HtmlElement('script');
+        $js = file_get_contents(__DIR__ . '/confirm-modal.js');
+        $script->setContent($js);
+        $body->push($script);
+        $script = new HtmlElement('script');
+        $js = file_get_contents(__DIR__ . '/select-all.js');
+        $script->setContent($js);
         $body->push($script);
     }
 }

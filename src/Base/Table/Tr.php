@@ -8,6 +8,7 @@ use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Component\Base\Field\Badge;
 use Pars\Component\Base\Field\Button;
 use Pars\Component\Base\Field\Icon;
+use Pars\Component\Base\Form\Input;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldListAwareTrait;
 
@@ -25,6 +26,7 @@ class Tr extends AbstractComponent implements BeanAwareInterface
                 $field instanceof Icon
                 || $field instanceof Button
                 || $field instanceof Badge
+                || $field instanceof Input
             ) {
                 $td->setAttribute('style', 'width: 1%;');
             }

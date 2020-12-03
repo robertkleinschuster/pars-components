@@ -17,6 +17,8 @@ class Button extends AbstractField implements StyleAwareInterface
     public string $type = 'button';
     public ?string $name = null;
     public ?string $value = null;
+    public ?string $confirmTitle = null;
+    public ?string $confirmCancel = null;
 
     public function __construct(?string $content = null, ?string $style = null, ?string $path = null)
     {
@@ -35,6 +37,13 @@ class Button extends AbstractField implements StyleAwareInterface
         }
         if ($this->hasValue()) {
             $this->setAttribute('value', $this->getValue());
+        }
+        if ($this->hasConfirm()) {
+            $this->addOption('confirm-modal');
+            $this->setData('confirm-title', $this->getConfirmTitle());
+            $this->setData('confirm-cancel', $this->getConfirmCancel());
+            $this->setData('toggle', 'modal');
+            $this->setData('target', '#confirm-modal');
         }
         $this->addOption('btn');
         $this->addOption('mr-1');
@@ -147,4 +156,50 @@ class Button extends AbstractField implements StyleAwareInterface
         $this->outline = $outline;
         return $this;
     }
+
+    /**
+    * @return string
+    */
+    public function getConfirmTitle(): string
+    {
+        return $this->confirmTitle;
+    }
+
+    /**
+    * @param string $confirmTitle
+    *
+    * @return $this
+    */
+    public function setConfirmTitle(string $confirmTitle): self
+    {
+        $this->confirmTitle = $confirmTitle;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasConfirm(): bool
+    {
+        return isset($this->confirmTitle) && isset($this->confirmCancel);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getConfirmCancel(): ?string
+    {
+        return $this->confirmCancel;
+    }
+
+    /**
+     * @param string|null $confirmCancel
+     */
+    public function setConfirmCancel(?string $confirmCancel): void
+    {
+        $this->confirmCancel = $confirmCancel;
+    }
+
+
+
 }

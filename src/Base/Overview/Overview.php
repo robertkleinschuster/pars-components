@@ -18,6 +18,8 @@ class Overview extends AbstractComponent
     public ?string $deletePath = null;
     public ?string $moveDownPath = null;
     public ?string $moveUpPath = null;
+    public ?string $bulkFieldName = null;
+    public ?string $bulkFieldValue = null;
 
     public array $fields = [];
 
@@ -44,6 +46,12 @@ class Overview extends AbstractComponent
         if ($this->hasDetailPath()) {
             $this->prepend(new DetailButton($this->getDetailPath()));
         }
+        if ($this->hasBulkField()) {
+            $check = new BulkCheckbox();
+            $check->setName($this->getBulkFieldName());
+            $check->setValue($this->getBulkFieldValue());
+            $this->prepend($check);
+        }
         foreach ($this->fields as $name => $label) {
             $span = new Span("{{$name}}", $label);
             if ($this->hasDetailPath()) {
@@ -53,6 +61,51 @@ class Overview extends AbstractComponent
             $this->append($span);
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getBulkFieldName(): string
+    {
+        return $this->bulkFieldName;
+    }
+
+    /**
+     * @param string $bulkFieldName
+     *
+     * @return $this
+     */
+    public function setBulkFieldName(string $bulkFieldName): self
+    {
+        $this->bulkFieldName = $bulkFieldName;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasBulkField(): bool
+    {
+        return isset($this->bulkFieldName) && isset($this->bulkFieldValue);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBulkFieldValue(): ?string
+    {
+        return $this->bulkFieldValue;
+    }
+
+    /**
+     * @param string|null $bulkFieldValue
+     */
+    public function setBulkFieldValue(?string $bulkFieldValue): void
+    {
+        $this->bulkFieldValue = $bulkFieldValue;
+    }
+
+
 
     /**
      * @return Table|null
