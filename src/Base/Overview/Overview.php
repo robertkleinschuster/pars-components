@@ -6,6 +6,7 @@ use Niceshops\Bean\Type\Base\BeanListAwareTrait;
 use Pars\Component\Base\Field\Span;
 use Pars\Component\Base\Table\Table;
 use Pars\Component\Base\Table\TableResponsive;
+use Pars\Component\Base\Toolbar\Toolbar;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldInterface;
 
@@ -24,11 +25,15 @@ class Overview extends AbstractComponent
     public array $fields = [];
 
     private ?TableResponsive $table = null;
+    private ?Toolbar $toolbar = null;
 
     protected function initialize()
     {
         if ($this->hasBeanList()) {
             $this->getTableResponsive()->setBeanList($this->getBeanList());
+        }
+        if ($this->hasToolbar()) {
+            $this->push($this->getToolbar());
         }
         $this->push($this->getTableResponsive());
         if ($this->hasMoveUpPath()) {
@@ -116,6 +121,19 @@ class Overview extends AbstractComponent
             $this->table = new TableResponsive();
         }
         return $this->table;
+    }
+
+    public function getToolbar(): Toolbar
+    {
+        if (null === $this->toolbar) {
+            $this->toolbar = new Toolbar();
+        }
+        return $this->toolbar;
+    }
+
+    public function hasToolbar(): bool
+    {
+        return isset($this->toolbar);
     }
 
     public function getTable(): Table

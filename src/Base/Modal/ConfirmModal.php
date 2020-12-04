@@ -5,6 +5,7 @@ namespace Pars\Component\Base\Modal;
 
 
 use Pars\Component\Base\Field\Button;
+use Pars\Component\Base\Field\Icon;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\HtmlElement;
 
@@ -40,6 +41,7 @@ class ConfirmModal extends AbstractComponent
         $cancelButton->setData('dismiss', 'modal');
         $cancelButton->setId('confirm-modal-cancel');
         $cancelButton->setStyle(Button::STYLE_SECONDARY);
+        $cancelButton->push(new Icon(Icon::ICON_X));
         $modalFooter->push($cancelButton);
         $confirmButton = new Button();
         $confirmButton->setId('confirm-modal-submit');
