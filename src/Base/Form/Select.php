@@ -46,7 +46,7 @@ class Select extends Input
             if (null == $this->replaedValue) {
                 $this->replaedValue =  $this->replacePlaceholder($this->getValue(), $bean);
             }
-            if ($element->getAttribute('value') == $this->replaedValue) {
+            if ($element->getAttribute('value') === $this->replaedValue) {
                 $element->setAttribute('selected', 'selected');
                 $element->setAttribute('checked', 'checked');
             }
