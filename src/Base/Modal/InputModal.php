@@ -7,8 +7,6 @@ namespace Pars\Component\Base\Modal;
 use Pars\Component\Base\Field\Button;
 use Pars\Component\Base\Field\Icon;
 use Pars\Component\Base\Form\Form;
-use Pars\Component\Base\Form\FormGroup;
-use Pars\Component\Base\Form\Input;
 use Pars\Component\Base\Grid\Container;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\HtmlElement;

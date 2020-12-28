@@ -5,7 +5,6 @@
         template = template.replaceAll('{name}', this.getAttribute('data-dynamic-field-name'));
         let element = document.createRange().createContextualFragment(template);
         document.getElementById(this.getAttribute('data-dynamic-field-container')).appendChild(element);
-        console.log(template);
     });
 });
 
