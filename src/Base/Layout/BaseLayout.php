@@ -2,8 +2,11 @@
 
 namespace Pars\Component\Base\Layout;
 
+use Pars\Component\Base\Form\FormGroup;
+use Pars\Component\Base\Form\Input;
 use Pars\Component\Base\Grid\Container;
 use Pars\Component\Base\Modal\ConfirmModal;
+use Pars\Component\Base\Modal\InputModal;
 use Pars\Mvc\View\AbstractLayout;
 use Pars\Mvc\View\HtmlElement;
 
@@ -43,6 +46,16 @@ class BaseLayout extends AbstractLayout
         $this->scripts($body);
         $body->push(new ConfirmModal());
         $this->push($body);
+        $body->push(new InputModal());
+        $inputTemplate = new HtmlElement('div');
+        $inputTemplate->setId('dynamic-field-template');
+        $inputTemplate->addOption('d-none');
+        $formGroup = new FormGroup('{name}');
+        $formGroup->setLabel('{label}');
+        $input = new Input(Input::TYPE_TEXT);
+        $formGroup->setInput($input);
+        $inputTemplate->getElementList()->push($formGroup);
+        $body->push($inputTemplate);
     }
 
     protected function header(HtmlElement $header) {
@@ -146,6 +159,10 @@ class BaseLayout extends AbstractLayout
         $body->push($script);
         $script = new HtmlElement('script');
         $js = file_get_contents(__DIR__ . '/confirm-modal.js');
+        $script->setContent($js);
+        $body->push($script);
+        $script = new HtmlElement('script');
+        $js = file_get_contents(__DIR__ . '/dynamic-field.js');
         $script->setContent($js);
         $body->push($script);
         $script = new HtmlElement('script');

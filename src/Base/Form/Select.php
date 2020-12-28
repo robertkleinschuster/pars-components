@@ -37,16 +37,16 @@ class Select extends Input
         }
     }
 
-    protected $replaedValue = null;
+    protected $replacedValue = null;
 
     protected function beforeRenderElement(HtmlElement $element, BeanInterface $bean = null)
     {
         parent::beforeRenderElement($element, $bean);
         if ($element->hasAttribute('value') && $bean !== null) {
-            if (null == $this->replaedValue) {
-                $this->replaedValue =  $this->replacePlaceholder($this->getValue(), $bean);
+            if (null === $this->replacedValue) {
+                $this->replacedValue = $this->replacePlaceholder($this->getValue(), $bean);
             }
-            if ($element->getAttribute('value') === $this->replaedValue) {
+            if ($element->getAttribute('value') == $this->replacedValue && !empty($this->replacedValue)) {
                 $element->setAttribute('selected', 'selected');
                 $element->setAttribute('checked', 'checked');
             }
