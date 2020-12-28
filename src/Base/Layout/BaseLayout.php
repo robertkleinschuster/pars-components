@@ -102,21 +102,7 @@ class BaseLayout extends AbstractLayout
     {
         $link = new HtmlElement('link');
         $link->setAttribute('rel', 'stylesheet');
-        $link->setAttribute('href', 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css');
-        $link->setAttribute('integrity', 'sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2');
-        $link->setAttribute('crossorigin', 'anonymous');
-        $head->push($link);
-        $link = new HtmlElement('link');
-        $link->setAttribute('rel', 'stylesheet');
-        $link->setAttribute('href', 'https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css');
-        $link->setAttribute('integrity', 'sha256-jyIuRMWD+rz7LdpWfybO8U6DA65JCVkjgrt31FFsnAE=');
-        $link->setAttribute('crossorigin', 'anonymous');
-        $head->push($link);
-        $link = new HtmlElement('link');
-        $link->setAttribute('rel', 'stylesheet');
-        $link->setAttribute('href', 'https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.bubble.css');
-        $link->setAttribute('integrity', 'sha256-2hxHujXw890GumwDHPWrwJCtdZZdrJanlGsrOTSfXnc=');
-        $link->setAttribute('crossorigin', 'anonymous');
+        $link->setAttribute('href', '/bundles/css');
         $head->push($link);
     }
 
@@ -126,46 +112,7 @@ class BaseLayout extends AbstractLayout
     protected function scripts(HtmlElement $body)
     {
         $script = new HtmlElement('script');
-        $script->setAttribute('src', 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js');
-        $script->setAttribute('integrity', 'sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=');
-        $script->setAttribute('crossorigin', 'anonymous');
-        $body->push($script);
-        $script = new HtmlElement('script');
-        $script->setAttribute('src', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js');
-        $script->setAttribute('integrity', 'sha256-H4Qt7pVBp547bdul9EtvPU/m+XQ9EQTsYH7zFe5W9Gw=');
-        $script->setAttribute('crossorigin', 'anonymous');
-        $body->push($script);
-        $script = new HtmlElement('script');
-        $script->setAttribute('src', 'https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js');
-        $script->setAttribute('integrity', 'sha256-XfzdiC+S1keia+s9l07y7ye5a874sBq67zK4u7LTjvk=');
-        $script->setAttribute('crossorigin', 'anonymous');
-        $body->push($script);
-        $script = new HtmlElement('script');
-        $script->setAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js');
-        $script->setAttribute('integrity', 'sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s');
-        $script->setAttribute('crossorigin', 'anonymous');
-        $body->push($script);
-        $script = new HtmlElement('script');
-        $script->setAttribute('src', 'https://cdn.jsdelivr.net/npm/bs-custom-file-input@1.3.4/dist/bs-custom-file-input.min.js');
-        $script->setAttribute('integrity', 'sha256-e0DUqNhsFAzOlhrWXnMOQwRoqrCRlofpWgyhnrIIaPo=');
-        $script->setAttribute('crossorigin', 'anonymous');
-        $body->push($script);
-        $script = new HtmlElement('script');
-        $script->setAttribute('src', 'https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js');
-        $script->setAttribute('integrity', 'sha256-xnX1c4jTWYY3xOD5/hVL1h37HCCGJx+USguyubBZsHQ=');
-        $script->setAttribute('crossorigin', 'anonymous');
-        $body->push($script);
-        $script = new HtmlElement('script');
-        $js = file_get_contents(__DIR__ . '/confirm-modal.js');
-        $script->setContent($js);
-        $body->push($script);
-        $script = new HtmlElement('script');
-        $js = file_get_contents(__DIR__ . '/dynamic-field.js');
-        $script->setContent($js);
-        $body->push($script);
-        $script = new HtmlElement('script');
-        $js = file_get_contents(__DIR__ . '/select-all.js');
-        $script->setContent($js);
+        $script->setAttribute('src', '/bundles/js');
         $body->push($script);
     }
 }
