@@ -125,7 +125,7 @@ class Input extends AbstractField implements BackgroundAwareInterface, ColorAwar
         }
         if ($this->hasName()) {
             $this->setAttribute('name', $this->getName());
-            if (!$this->hasId()) {
+            if (!$this->hasId() && (!$this->hasType() || $this->getType() !== self::TYPE_HIDDEN)) {
                 $this->setId($this->getName());
             }
         }

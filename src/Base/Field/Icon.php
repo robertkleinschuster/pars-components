@@ -313,20 +313,22 @@ class Icon extends AbstractField
 
     protected function initialize()
     {
-        $svg = file_get_contents(__DIR__ . '/icons/' . $this->getName() . '.svg');
-        if ($this->hasWidth()) {
-            $this->addInlineStyle('width', $this->getWidth());
+        if ($this->hasName()) {
+            $svg = file_get_contents(__DIR__ . '/icons/' . $this->getName() . '.svg');
+            if ($this->hasWidth()) {
+                $this->addInlineStyle('width', $this->getWidth());
+            }
+            if ($this->hasHeight()) {
+                $this->addInlineStyle('height', $this->getHeight());
+            }
+            if (!$this->hasHeight() && !$this->hasWidth()) {
+                #$this->addInlineStyle('height', '24px');
+                #$this->addInlineStyle('width', '24px');
+            } else {
+                $svg = str_replace('width="24" height="24"', '', $svg);
+            }
+            $this->setContent($svg);
         }
-        if ($this->hasHeight()) {
-            $this->addInlineStyle('height', $this->getHeight());
-        }
-        if (!$this->hasHeight() && !$this->hasWidth()) {
-            #$this->addInlineStyle('height', '24px');
-            #$this->addInlineStyle('width', '24px');
-        } else {
-            $svg = str_replace('width="24" height="24"', '', $svg);
-        }
-        $this->setContent($svg);
     }
 
     /**
