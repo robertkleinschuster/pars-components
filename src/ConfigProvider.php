@@ -16,7 +16,7 @@ class ConfigProvider
             'bundles' => [
                 [
                     'type' => 'js',
-                    'output' => 'bundle.js',
+                    'output' => 'component-bundle.js',
                     'sources' => [
                         __DIR__ . '/../bundles/js/01-jquery.min.js',
                         __DIR__ . '/../bundles/js/02-bootstrap.min.js',
@@ -29,7 +29,7 @@ class ConfigProvider
                 ],
                 [
                     'type' => 'css',
-                    'output' => 'bundle.css',
+                    'output' => 'component-bundle.css',
                     'sources' => [
                         __DIR__ . '/../bundles/css/bootstrap.min.css',
                         __DIR__ . '/../bundles/css/quill.bubble.css',

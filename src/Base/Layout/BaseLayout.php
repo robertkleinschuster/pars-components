@@ -102,7 +102,7 @@ class BaseLayout extends AbstractLayout
     {
         $link = new HtmlElement('link');
         $link->setAttribute('rel', 'stylesheet');
-        $link->setAttribute('href', '/bundle.css');
+        $link->setAttribute('href', '/component-bundle.css');
         $head->push($link);
     }
 
@@ -112,7 +112,7 @@ class BaseLayout extends AbstractLayout
     protected function scripts(HtmlElement $body)
     {
         $script = new HtmlElement('script');
-        $script->setAttribute('src', '/bundle.js');
+        $script->setAttribute('src', '/component-bundle.js');
         $body->push($script);
     }
 }
