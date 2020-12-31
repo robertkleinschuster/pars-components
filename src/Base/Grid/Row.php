@@ -11,6 +11,7 @@ use Pars\Mvc\View\AbstractComponent;
 class Row extends AbstractComponent implements BorderAwareInterface
 {
     use BorderAwareTrait;
+
     public const OPTION_NO_GUTTERS = 'no-gutters';
 
     protected function initialize()

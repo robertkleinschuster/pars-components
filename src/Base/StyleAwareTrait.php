@@ -9,18 +9,18 @@ trait StyleAwareTrait
     private ?string $style = null;
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getStyle(): string
     {
         return $this->style;
     }
 
     /**
-    * @param string $style
-    *
-    * @return $this
-    */
+     * @param string $style
+     *
+     * @return $this
+     */
     public function setStyle(string $style)
     {
         $this->style = $style;
@@ -28,8 +28,8 @@ trait StyleAwareTrait
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasStyle(): bool
     {
         return isset($this->style);

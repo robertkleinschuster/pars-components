@@ -15,7 +15,7 @@ class Figure extends AbstractField
      * Figure constructor.
      * @param string|null $source
      */
-    public function __construct(?string $source= null, ?string $content = null)
+    public function __construct(?string $source = null, ?string $content = null)
     {
         parent::__construct($content);
         $this->source = $source;
@@ -38,18 +38,18 @@ class Figure extends AbstractField
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getSource(): string
     {
         return $this->source;
     }
 
     /**
-    * @param string $source
-    *
-    * @return $this
-    */
+     * @param string $source
+     *
+     * @return $this
+     */
     public function setSource(string $source): self
     {
         $this->source = $source;
@@ -57,8 +57,8 @@ class Figure extends AbstractField
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasSource(): bool
     {
         return $this->source !== null;

@@ -22,6 +22,7 @@ interface BreakpointAwareInterface
      * @return $this
      */
     public function setBreakpoint(string $breakpoint);
+
     /**
      * @return bool
      */

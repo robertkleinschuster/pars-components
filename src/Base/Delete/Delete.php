@@ -1,4 +1,5 @@
 <?php
+
 namespace Pars\Component\Base\Delete;
 
 use Pars\Component\Base\Alert\Alert;
@@ -25,18 +26,18 @@ class Delete extends AbstractComponent implements TextAwareInterface
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getHeading(): string
     {
         return $this->heading;
     }
 
     /**
-    * @param string $heading
-    *
-    * @return $this
-    */
+     * @param string $heading
+     *
+     * @return $this
+     */
     public function setHeading(string $heading): self
     {
         $this->heading = $heading;
@@ -44,8 +45,8 @@ class Delete extends AbstractComponent implements TextAwareInterface
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasHeading(): bool
     {
         return isset($this->heading);

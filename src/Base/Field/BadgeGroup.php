@@ -19,12 +19,14 @@ class BadgeGroup extends AbstractField
         }
     }
 
-    public function append(Badge $badge) {
+    public function append(Badge $badge)
+    {
         $this->getFieldList()->push($badge);
         return $this;
     }
 
-    public function prepend(Badge $badge) {
+    public function prepend(Badge $badge)
+    {
         $this->getFieldList()->unshift($badge);
         return $this;
     }

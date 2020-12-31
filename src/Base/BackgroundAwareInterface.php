@@ -28,6 +28,7 @@ interface BackgroundAwareInterface
      * @return $this
      */
     public function setBackground(string $background);
+
     /**
      * @return bool
      */

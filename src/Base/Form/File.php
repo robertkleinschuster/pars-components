@@ -4,7 +4,6 @@
 namespace Pars\Component\Base\Form;
 
 
-
 use Pars\Mvc\View\HtmlElement;
 
 class File extends Input
@@ -78,18 +77,18 @@ class File extends Input
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getCustomLabel(): string
     {
         return $this->customLabel;
     }
 
     /**
-    * @param string $customLabel
-    *
-    * @return $this
-    */
+     * @param string $customLabel
+     *
+     * @return $this
+     */
     public function setCustomLabel(string $customLabel): self
     {
         $this->customLabel = $customLabel;
@@ -97,8 +96,8 @@ class File extends Input
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasCustomLabel(): bool
     {
         return isset($this->customLabel);
@@ -116,18 +115,18 @@ class File extends Input
     }
 
     /**
-    * @return array
-    */
+     * @return array
+     */
     public function getAcceptTypes(): array
     {
         return $this->acceptTypes;
     }
 
     /**
-    * @param array $acceptTypes
-    *
-    * @return $this
-    */
+     * @param array $acceptTypes
+     *
+     * @return $this
+     */
     public function setAcceptTypes(array $acceptTypes): self
     {
         $this->acceptTypes = $acceptTypes;
@@ -135,8 +134,8 @@ class File extends Input
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasAcceptTypes(): bool
     {
         return isset($this->acceptTypes);
@@ -144,18 +143,18 @@ class File extends Input
 
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getCapture(): string
     {
         return $this->capture;
     }
 
     /**
-    * @param string $capture
-    *
-    * @return $this
-    */
+     * @param string $capture
+     *
+     * @return $this
+     */
     public function setCapture(string $capture): self
     {
         $this->capture = $capture;
@@ -163,8 +162,8 @@ class File extends Input
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasCapture(): bool
     {
         return isset($this->capture);
@@ -187,8 +186,6 @@ class File extends Input
         $this->multiple = $multiple;
         return $this;
     }
-
-
 
 
 }

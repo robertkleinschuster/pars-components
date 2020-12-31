@@ -4,7 +4,6 @@
 namespace Pars\Component\Base;
 
 
-
 interface StyleAwareInterface
 {
     public const STYLE_PRIMARY = 'primary';
@@ -17,6 +16,7 @@ interface StyleAwareInterface
     public const STYLE_DARK = 'dark';
 
     public function getStyle(): string;
+
     /**
      * @param string $style
      *

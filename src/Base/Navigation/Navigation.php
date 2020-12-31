@@ -27,6 +27,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     use BackgroundAwareTrait;
     use BorderAwareTrait;
     use ContrastTrait;
+
     /**
      * @var Collapse|null
      */
@@ -198,8 +199,8 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     }
 
     /**
-    * @return Input
-    */
+     * @return Input
+     */
     public function getSearch(): Input
     {
         return $this->search;
@@ -219,8 +220,8 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasSearch(): bool
     {
         return $this->search !== null;

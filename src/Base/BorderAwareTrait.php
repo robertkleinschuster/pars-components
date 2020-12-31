@@ -11,18 +11,18 @@ trait BorderAwareTrait
     public ?string $rounded = null;
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getBorder(): string
     {
         return $this->border;
     }
 
     /**
-    * @param string $border
-    *
-    * @return $this
-    */
+     * @param string $border
+     *
+     * @return $this
+     */
     public function setBorder(string $border)
     {
         $this->border = $border;
@@ -30,25 +30,26 @@ trait BorderAwareTrait
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasBorder(): bool
     {
         return $this->border !== null;
     }
+
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getBorderPosition(): string
     {
         return $this->borderPosition;
     }
 
     /**
-    * @param string $borderPosition
-    *
-    * @return $this
-    */
+     * @param string $borderPosition
+     *
+     * @return $this
+     */
     public function setBorderPosition(string $borderPosition)
     {
         $this->borderPosition = $borderPosition;
@@ -56,25 +57,26 @@ trait BorderAwareTrait
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasBorderPosition(): bool
     {
         return $this->borderPosition !== null;
     }
+
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getRounded(): string
     {
         return $this->rounded;
     }
 
     /**
-    * @param string $rounded
-    *
-    * @return $this
-    */
+     * @param string $rounded
+     *
+     * @return $this
+     */
     public function setRounded(string $rounded)
     {
         $this->rounded = $rounded;
@@ -82,8 +84,8 @@ trait BorderAwareTrait
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasRounded(): bool
     {
         return $this->rounded !== null;

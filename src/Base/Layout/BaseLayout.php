@@ -56,19 +56,25 @@ class BaseLayout extends AbstractLayout
         $body->push($inputTemplate);
     }
 
-    protected function header(HtmlElement $header) {
+    protected function header(HtmlElement $header)
+    {
 
     }
-    protected function main(HtmlElement $main) {
+
+    protected function main(HtmlElement $main)
+    {
 
     }
-    protected function components(HtmlElement $components) {
+
+    protected function components(HtmlElement $components)
+    {
         foreach ($this->getComponentList() as $component) {
             $components->push($component);
         }
     }
 
-    protected function footer(HtmlElement $footer) {
+    protected function footer(HtmlElement $footer)
+    {
         $copyright = new HtmlElement('span.text-muted');
         $year = date('Y');
         $copyright->setContent("&copy; {$year}  <a href=\"https://kleinschuster.de\">Robert Kleinschuster</a>");

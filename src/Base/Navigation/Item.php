@@ -58,7 +58,6 @@ class Item extends AbstractField
     }
 
 
-
     /**
      * @return string
      */

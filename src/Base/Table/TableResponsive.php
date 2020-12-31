@@ -48,5 +48,4 @@ class TableResponsive extends AbstractComponent implements BeanListAwareInterfac
     }
 
 
-
 }

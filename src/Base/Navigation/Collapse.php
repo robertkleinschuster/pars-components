@@ -47,7 +47,8 @@ class Collapse extends AbstractComponent
         $this->getItemList()->push($item);
     }
 
-    public function addItemRight(Item $item) {
+    public function addItemRight(Item $item)
+    {
         $this->getItemListRight()->push($item);
     }
 

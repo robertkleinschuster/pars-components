@@ -60,18 +60,18 @@ class Button extends AbstractField implements StyleAwareInterface
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
     /**
-    * @param string $name
-    *
-    * @return $this
-    */
+     * @param string $name
+     *
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -79,8 +79,8 @@ class Button extends AbstractField implements StyleAwareInterface
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasName(): bool
     {
         return isset($this->name);
@@ -105,18 +105,18 @@ class Button extends AbstractField implements StyleAwareInterface
 
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getValue(): string
     {
         return $this->value;
     }
 
     /**
-    * @param string $value
-    *
-    * @return $this
-    */
+     * @param string $value
+     *
+     * @return $this
+     */
     public function setValue(string $value): self
     {
         $this->value = $value;
@@ -124,8 +124,8 @@ class Button extends AbstractField implements StyleAwareInterface
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasValue(): bool
     {
         return isset($this->value);
@@ -160,18 +160,18 @@ class Button extends AbstractField implements StyleAwareInterface
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getConfirmTitle(): string
     {
         return $this->confirmTitle;
     }
 
     /**
-    * @param string $confirmTitle
-    *
-    * @return $this
-    */
+     * @param string $confirmTitle
+     *
+     * @return $this
+     */
     public function setConfirm(string $confirmTitle): self
     {
         $this->confirmTitle = $confirmTitle;
@@ -179,8 +179,8 @@ class Button extends AbstractField implements StyleAwareInterface
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasConfirm(): bool
     {
         return isset($this->confirmTitle);

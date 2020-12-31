@@ -17,7 +17,7 @@ class ConfirmModal extends AbstractComponent
         $this->addOption('modal');
         $this->addOption('fade');
         $this->setAttribute('tabindes', '-1');
-        $this->setRole( 'dialog');
+        $this->setRole('dialog');
         $this->setAria('labelledby', 'confirm-modal-title');
         $this->setAria('hidden', 'true');
 

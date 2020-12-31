@@ -12,11 +12,11 @@ class Group extends AbstractComponent
 
     protected function initialize()
     {
-       $this->setTag('ul');
-       $this->addOption('navbar-nav');
-       if (!$this->isRight()) {
-           $this->addOption('mr-auto');
-       }
+        $this->setTag('ul');
+        $this->addOption('navbar-nav');
+        if (!$this->isRight()) {
+            $this->addOption('mr-auto');
+        }
     }
 
     /**

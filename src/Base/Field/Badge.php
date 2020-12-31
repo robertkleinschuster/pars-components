@@ -5,8 +5,8 @@ namespace Pars\Component\Base\Field;
 
 
 use Niceshops\Bean\Type\Base\BeanInterface;
-use Pars\Component\Base\StyleAwareTrait;
 use Pars\Component\Base\StyleAwareInterface;
+use Pars\Component\Base\StyleAwareTrait;
 use Pars\Mvc\View\AbstractField;
 
 class Badge extends AbstractField implements StyleAwareInterface

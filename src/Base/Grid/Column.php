@@ -53,18 +53,18 @@ class Column extends AbstractComponent implements BreakpointAwareInterface, Back
     }
 
     /**
-    * @return int
-    */
+     * @return int
+     */
     public function getSize(): int
     {
         return $this->size;
     }
 
     /**
-    * @param int $size
-    *
-    * @return $this
-    */
+     * @param int $size
+     *
+     * @return $this
+     */
     public function setSize(int $size): self
     {
         $this->size = $size;
@@ -72,26 +72,26 @@ class Column extends AbstractComponent implements BreakpointAwareInterface, Back
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasSize(): bool
     {
         return $this->size !== null;
     }
 
     /**
-    * @return int
-    */
+     * @return int
+     */
     public function getOrder(): int
     {
         return $this->order;
     }
 
     /**
-    * @param int $order
-    *
-    * @return $this
-    */
+     * @param int $order
+     *
+     * @return $this
+     */
     public function setOrder(int $order): self
     {
         $this->order = $order;
@@ -99,8 +99,8 @@ class Column extends AbstractComponent implements BreakpointAwareInterface, Back
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasOrder(): bool
     {
         return $this->order !== null;

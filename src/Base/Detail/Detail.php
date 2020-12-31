@@ -1,10 +1,9 @@
 <?php
+
 namespace Pars\Component\Base\Detail;
 
 use Niceshops\Bean\Type\Base\BeanAwareInterface;
 use Niceshops\Bean\Type\Base\BeanAwareTrait;
-use Niceshops\Bean\Type\Base\BeanInterface;
-use Pars\Admin\Base\BaseDetail;
 use Pars\Component\Base\Field\Span;
 use Pars\Component\Base\Jumbotron\Jumbotron;
 use Pars\Mvc\View\AbstractComponent;
@@ -61,16 +60,19 @@ class Detail extends AbstractComponent implements BeanAwareInterface
     }
 
 
-    public function setHeadline(string $headline) {
+    public function setHeadline(string $headline)
+    {
         $this->getJumbotron()->setHeadline($headline);
     }
 
-    public function append(FieldInterface $field) {
+    public function append(FieldInterface $field)
+    {
         $this->getJumbotron()->getFieldList()->push($field);
         return $this;
     }
 
-    public function prepend(FieldInterface $field) {
+    public function prepend(FieldInterface $field)
+    {
         $this->getJumbotron()->getFieldList()->push($field);
         return $this;
     }

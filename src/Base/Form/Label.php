@@ -20,18 +20,18 @@ class Label extends AbstractField
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getFor(): string
     {
         return $this->for;
     }
 
     /**
-    * @param string $for
-    *
-    * @return $this
-    */
+     * @param string $for
+     *
+     * @return $this
+     */
     public function setFor(string $for): self
     {
         $this->for = $for;
@@ -39,8 +39,8 @@ class Label extends AbstractField
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasFor(): bool
     {
         return $this->for !== null;

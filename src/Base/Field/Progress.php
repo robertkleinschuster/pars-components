@@ -4,8 +4,8 @@
 namespace Pars\Component\Base\Field;
 
 
-use Pars\Component\Base\StyleAwareTrait;
 use Pars\Component\Base\StyleAwareInterface;
+use Pars\Component\Base\StyleAwareTrait;
 use Pars\Mvc\View\AbstractField;
 use Pars\Mvc\View\HtmlElement;
 
@@ -49,18 +49,18 @@ class Progress extends AbstractField implements StyleAwareInterface
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getValue(): string
     {
         return $this->value;
     }
 
     /**
-    * @param string $value
-    *
-    * @return $this
-    */
+     * @param string $value
+     *
+     * @return $this
+     */
     public function setValue(string $value): self
     {
         $this->value = $value;
@@ -68,8 +68,8 @@ class Progress extends AbstractField implements StyleAwareInterface
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasValue(): bool
     {
         return isset($this->value);

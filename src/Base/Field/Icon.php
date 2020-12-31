@@ -6,7 +6,6 @@ namespace Pars\Component\Base\Field;
 
 use Pars\Component\Base\IconAwareTrait;
 use Pars\Mvc\View\AbstractField;
-use Pars\Mvc\View\HtmlElement;
 
 class Icon extends AbstractField
 {
@@ -359,18 +358,18 @@ class Icon extends AbstractField
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getWidth(): string
     {
         return $this->width;
     }
 
     /**
-    * @param string $width
-    *
-    * @return $this
-    */
+     * @param string $width
+     *
+     * @return $this
+     */
     public function setWidth(string $width): self
     {
         $this->width = $width;
@@ -378,25 +377,26 @@ class Icon extends AbstractField
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasWidth(): bool
     {
         return isset($this->width);
     }
+
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getHeight(): string
     {
         return $this->height;
     }
 
     /**
-    * @param string $height
-    *
-    * @return $this
-    */
+     * @param string $height
+     *
+     * @return $this
+     */
     public function setHeight(string $height): self
     {
         $this->height = $height;
@@ -404,13 +404,12 @@ class Icon extends AbstractField
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasHeight(): bool
     {
         return isset($this->height);
     }
-
 
 
 }

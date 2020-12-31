@@ -111,7 +111,6 @@ class Overview extends AbstractComponent
     }
 
 
-
     /**
      * @return Table|null
      */

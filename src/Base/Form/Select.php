@@ -55,18 +55,18 @@ class Select extends Input
 
 
     /**
-    * @return array
-    */
+     * @return array
+     */
     public function getOptions(): array
     {
         return $this->options;
     }
 
     /**
-    * @param array $options
-    *
-    * @return $this
-    */
+     * @param array $options
+     *
+     * @return $this
+     */
     public function setOptions(array $options): self
     {
         $this->options = $options;
@@ -74,8 +74,8 @@ class Select extends Input
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasOptions(): bool
     {
         return $this->options !== null;

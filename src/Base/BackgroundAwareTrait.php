@@ -10,18 +10,18 @@ trait BackgroundAwareTrait
     public ?string $background = null;
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getBackground(): string
     {
         return $this->background;
     }
 
     /**
-    * @param string $background
-    *
-    * @return $this
-    */
+     * @param string $background
+     *
+     * @return $this
+     */
     public function setBackground(string $background)
     {
         $this->background = $background;
@@ -29,8 +29,8 @@ trait BackgroundAwareTrait
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasBackground(): bool
     {
         return $this->background !== null;

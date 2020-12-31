@@ -23,6 +23,7 @@ interface ShadowAwareInterface
      * @return $this
      */
     public function setShadow(string $shadow);
+
     /**
      * @return bool
      */

@@ -48,6 +48,7 @@ interface BorderAwareInterface
      * @return bool
      */
     public function hasBorder(): bool;
+
     /**
      * @return string
      */
