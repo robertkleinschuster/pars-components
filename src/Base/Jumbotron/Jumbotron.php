@@ -40,6 +40,9 @@ class Jumbotron extends AbstractComponent
             $this->getElementList()->unshift($h1);
         }
         $container = new Container();
+        $container->setMode(Container::MODE_FLUID);
+        $i = 0;
+        $r = new Row();
         foreach ($this->getFieldList() as $field) {
             $row = new Row();
             $row->addOption('mb-2');
@@ -58,7 +61,22 @@ class Jumbotron extends AbstractComponent
             }
             $col2->push($field);
             $row->push($col2);
-            $container->push($row);
+
+            $c = new Column();
+            $c->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
+            $c->push($row);
+            $r->push($c);
+            if ($i%2) {
+                $container->push($r);
+                $r = new Row();
+            } else {
+                $c->addOption('mr-3');
+            }
+            $i++;
+        }
+        if ($i == 1) {
+            $container->push($r);
+            $r = new Row();
         }
         $this->push($container);
     }

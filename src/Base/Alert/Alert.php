@@ -67,6 +67,7 @@ class Alert extends AbstractComponent implements StyleAwareInterface
     public function addParagraph(string $value): Paragraph
     {
         $paragraph = new Paragraph();
+        $paragraph->addOption('mb-0');
         $paragraph->setContent($value);
         $this->getElementList()->push($paragraph);
         return $paragraph;

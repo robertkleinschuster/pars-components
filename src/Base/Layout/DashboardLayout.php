@@ -28,7 +28,7 @@ class DashboardLayout extends BaseLayout
     protected function main(HtmlElement $main)
     {
         parent::main($main);
-        $main->addInlineStyle('min-height', 'calc(100% - 130px)');
+        $main->addInlineStyle('min-height', 'calc(100% - 140px)');
         $this->getSubNavigation()->setBackground(Navigation::BACKGROUND_LIGHT);
         $this->getSubNavigation()->setBreakpoint(Navigation::BREAKPOINT_LARGE);
         $this->getContainer()->push($this->getSubNavigation());
