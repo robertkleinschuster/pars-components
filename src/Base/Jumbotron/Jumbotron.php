@@ -74,9 +74,13 @@ class Jumbotron extends AbstractComponent
             }
             $i++;
         }
-        if ($i == 1) {
+        if ($i%2) {
+            if ($i > 1) {
+                $c = new Column();
+                $c->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
+                $r->push($c);
+            }
             $container->push($r);
-            $r = new Row();
         }
         $this->push($container);
     }
