@@ -70,7 +70,7 @@ class Jumbotron extends AbstractComponent
                 $container->push($r);
                 $r = new Row();
             } else {
-                $c->addOption('mr-3');
+                $c->addOption('mr-xl-3');
             }
             $i++;
         }
