@@ -24,7 +24,7 @@ class Wysiwyg extends Textarea
         $this->removeOption('form-control');
         $this->setTag('div');
         if ($input->hasName()) {
-            $js = file_get_contents(__DIR__ . '/wysiwyg.js');
+            $js = file_get_contents(__DIR__ . '/wysiwyg');
             if (is_string($js)) {
                 $js = str_replace("{name}", $input->getName(), $js);
                 $script = new HtmlElement('script');

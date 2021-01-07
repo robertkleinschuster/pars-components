@@ -1,6 +1,5 @@
-let modals = document.getElementsByClassName('confirm-modal');
-[].forEach.call(modals, function (el) {
-    el.addEventListener('click', handleConfirmModal);
+$(document).ready(function () {
+    $('body').on('click.confirmModal', '.confirm-modal', handleConfirmModal);
 });
 
 function handleConfirmModal(event) {
@@ -14,7 +13,7 @@ function handleConfirmModal(event) {
     document.getElementById('confirm-modal-submit').classList.remove('confirm-modal', 'mr-1');
     let that = this;
     document.getElementById('confirm-modal-submit').addEventListener('click', function (event) {
-        that.removeEventListener('click', handleConfirmModal);
+        $('body').off('click.confirmModal');
         that.click();
     });
 }

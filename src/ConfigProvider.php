@@ -22,6 +22,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/js/05-quill.min.js',
                             __DIR__ . '/../bundles/js/select-all.js',
                             __DIR__ . '/../bundles/js/confirm-modal.js',
+                            __DIR__ . '/../bundles/js/ajax-helper.js',
                         ]
                     ],
                     [
@@ -31,6 +32,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/css/bootstrap.min.css',
                             __DIR__ . '/../bundles/css/quill.bubble.css',
                             __DIR__ . '/../bundles/css/quill.snow.css',
+                            __DIR__ . '/../bundles/css/pars.css',
                         ]
                     ]
                 ]
