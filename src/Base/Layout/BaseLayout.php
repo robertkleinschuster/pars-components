@@ -37,7 +37,7 @@ class BaseLayout extends AbstractLayout
         $main = new HtmlElement('main');
         $main->setId('main');
         $this->main($main);
-        $components = new HtmlElement('div.components');
+        $components = new Container('div.components');
         $components->setId('components');
         $this->components($components);
         $main->push($components);

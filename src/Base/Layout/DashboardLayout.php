@@ -35,13 +35,6 @@ class DashboardLayout extends BaseLayout
         $main->push($this->getContainer());
     }
 
-    protected function components(HtmlElement $components)
-    {
-        foreach ($this->getComponentList() as $com) {
-            $this->getContainer()->push($com);
-        }
-    }
-
     /**
      * @return Container
      */
