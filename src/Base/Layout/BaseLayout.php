@@ -109,10 +109,14 @@ class BaseLayout extends AbstractLayout
 
     protected function stylesheets(HtmlElement $head)
     {
-        $link = new HtmlElement('link');
-        $link->setAttribute('rel', 'stylesheet');
-        $link->setAttribute('href', '/component-bundle.css');
-        $head->push($link);
+        foreach ($this->getStaticFiles() as $bundle) {
+            if ($bundle['type'] == 'css') {
+                $link = new HtmlElement('link');
+                $link->setAttribute('rel', 'stylesheet');
+                $link->setAttribute('href', '/' . $bundle['output']);
+                $head->push($link);
+            }
+        }
     }
 
     /**
@@ -120,8 +124,12 @@ class BaseLayout extends AbstractLayout
      */
     protected function scripts(HtmlElement $body)
     {
-        $script = new HtmlElement('script');
-        $script->setAttribute('src', '/component-bundle.js');
-        $body->push($script);
+        foreach ($this->getStaticFiles() as $bundle) {
+            if ($bundle['type'] == 'js') {
+                $script = new HtmlElement('script');
+                $script->setAttribute('src', '/' . $bundle['output']);
+                $body->push($script);
+            }
+        }
     }
 }

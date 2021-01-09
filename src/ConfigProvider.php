@@ -6,14 +6,25 @@ namespace Pars\Component;
 
 class ConfigProvider
 {
+
+    protected static $hash = '';
+
+    public static function hash() {
+        if (self::$hash == '') {
+            self::$hash = md5(random_bytes(5));
+        }
+        return self::$hash;
+    }
+
     public function __invoke()
     {
+        $hash = self::hash();
         return [
             'bundles' => [
                 'list' => [
                     [
                         'type' => 'js',
-                        'output' => 'component-bundle.js',
+                        'output' => "component-bundle_$hash.js",
                         'sources' => [
                             __DIR__ . '/../bundles/js/01-jquery.min.js',
                             __DIR__ . '/../bundles/js/02-bootstrap.min.js',
@@ -32,7 +43,7 @@ class ConfigProvider
                     ],
                     [
                         'type' => 'css',
-                        'output' => 'component-bundle.css',
+                        'output' => "component-bundle_$hash.css",
                         'sources' => [
                             __DIR__ . '/../bundles/css/bootstrap.min.css',
                             __DIR__ . '/../bundles/css/quill.bubble.css',
