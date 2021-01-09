@@ -23,22 +23,7 @@
         return this;
     };
 
-    window.addEventListener('popstate', (event) => {
-        $('#' + event.state.attributes.component).replaceWith(event.state.html);
-    });
-
-    function formatdata(html ,component)
-    {
-        return {
-            html: html,
-            attributes: {
-                component: component
-            }
-        };
-    }
-
-    function load(href, id, component, history, remote)
-    {
+    function load(href, id, component, history, remote) {
         var hrefcomponent = '';
         if (href.includes('?')) {
             hrefcomponent = href + '&component=' + component + '&componentonly=1';
@@ -46,7 +31,7 @@
             hrefcomponent = href + '?component=' + component + '&componentonly=1';
         }
         $.ajaxSetup({
-            error: function(xhr, status, err) {
+            error: function (xhr, status, err) {
                 if (xhr.responseJSON.html) {
                     inject(xhr.responseJSON, href, id, component, remote, history);
                 } else {
@@ -71,8 +56,7 @@
         var $destination = $('#' + id);
         if ($destination) {
             if (history) {
-                window.history.replaceState(formatdata($destination.clone().wrap('<div/>').parent().html(), id), '', window.location.href);
-                window.history.pushState(data, '', href);
+                $.fn.history(data, id, href);
             }
             var $source = $(data.html);
             $source.attr('id', id);

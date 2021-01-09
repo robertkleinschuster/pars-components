@@ -311,6 +311,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         $button->setStyle(Button::STYLE_SECONDARY);
         $button->setContent($label);
         $button->setPath($path);
+        $button->addOption('history-back');
         $button->addOption('form-control');
         $formGroup = new FormGroup('cancel');
         $formGroup->push($button);

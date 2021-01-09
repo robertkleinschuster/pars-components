@@ -25,24 +25,10 @@
         return this;
     };
 
-    window.addEventListener('popstate', (event) => {
-        $('#' + event.state.attributes.component).replaceWith(event.state.html);
-    });
-
     var clickedButton = null;
     $('body').on('click', '[type="submit"]', function (event) {
         clickedButton = this;
     })
-
-    function formatdata(html, component)
-    {
-        return {
-            html: html,
-            attributes: {
-                component: component
-            }
-        };
-    }
 
     function submit(form, href, id, component, history, remote)
     {
@@ -80,7 +66,8 @@
 
     }
 
-    function inject(data, href, id, component, remote, history) {
+    function inject(data, href, id, component, remote, history)
+    {
         if (data && data.attributes && data.attributes.redirect_url) {
             load(data.attributes.redirect_url, id, component, history, remote);
         } else if (data && data.html) {
@@ -90,8 +77,7 @@
             var $destination = $('#' + id);
             if ($destination) {
                 if (history) {
-                    window.history.replaceState(formatdata($destination.clone().wrap('<div/>').parent().html(), id), '', window.location.href);
-                    window.history.pushState(data, '', href);
+                    $.fn.history(data, id, href);
                 }
                 var $source = $(data.html);
                 $source.attr('id', id);
@@ -121,8 +107,7 @@
                 var $destination = $('#' + id);
                 if ($destination) {
                     if (history) {
-                        window.history.replaceState(formatdata($destination.clone().wrap('<div/>').parent().html(), id), '', window.location.href);
-                        window.history.pushState(data, '', href);
+                        $.fn.history(data, id, href);
                     }
                     var $source = $(data.html);
                     $source.attr('id', id);

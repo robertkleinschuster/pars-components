@@ -21,6 +21,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/js/04-popper.min.js',
                             __DIR__ . '/../bundles/js/05-quill.min.js',
                             __DIR__ . '/../bundles/js/overlay.js',
+                            __DIR__ . '/../bundles/js/history.js',
                             __DIR__ . '/../bundles/js/bulk.js',
                             __DIR__ . '/../bundles/js/confirm.js',
                             __DIR__ . '/../bundles/js/injector.js',

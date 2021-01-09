@@ -23,6 +23,7 @@ class BackButton extends Button
         $this->setStyle(self::STYLE_SECONDARY);
         $icon = new Icon(Icon::ICON_ARROW_LEFT_CIRCLE);
         $this->push($icon);
+        $this->addOption('history-back');
         parent::initialize();
     }
 }
