@@ -1,39 +1,40 @@
 (function ($) {
-    $.fn.submit = function (href = null, history = false, id = null, component = null, remote = false) {
-        this.each(function () {
-            if (!href) {
-                href = window.location.href;
-            }
-            if (id == null) {
-                id = $(this).attr('id');
-            }
-            if (component == null) {
-                component = $(this).data('component');
-            }
-            if (!remote) {
-                remote = $(this).hasClass('remote');
-            }
-            if (!history) {
-                history = $(this).hasClass('history');
-            }
-            if (href && id && component) {
-                $(this).find('form').each(function () {
-                    submit(this, href, id, component, history, remote);
-                });
-            }
-        })
+    $.fn.submit = function (form, href = null, history = false, id = null, component = null, remote = false) {
+        if (!href) {
+            href = $(form).attr('action');
+        }
+        if (!href) {
+            href = window.location.href;
+        }
+        var $ajax = $(this);
+        if (id == null) {
+            id = $ajax.attr('id');
+        }
+        if (component == null) {
+            component = $ajax.data('component');
+        }
+        if (!remote) {
+            remote = $ajax.hasClass('remote');
+        }
+        if (!history) {
+            history = $ajax.hasClass('history');
+        }
+        if (href && id && component) {
+            submit(form, href, id, component, history, remote);
+        }
         return this;
     };
 
     window.addEventListener('popstate', (event) => {
         $('#' + event.state.attributes.component).replaceWith(event.state.html);
     });
+
     var clickedButton = null;
     $('body').on('click', '[type="submit"]', function (event) {
         clickedButton = this;
     })
 
-    function formatdata(html ,component)
+    function formatdata(html, component)
     {
         return {
             html: html,
@@ -62,7 +63,7 @@
                 data: fd,
                 contentType: false,
                 processData: false,
-                success: function(data) {
+                success: function (data) {
                     if (data && data.attributes && data.attributes.redirect_url) {
                         load(data.attributes.redirect_url, id, component, history, remote);
                     } else if (data && data.html) {

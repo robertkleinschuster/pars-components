@@ -24,7 +24,7 @@ class Thead extends AbstractComponent
             }
             if ($field instanceof BulkCheckbox) {
                 $selectAll = new BulkCheckbox();
-                $selectAll->addOption('bulk');
+                $selectAll->addOption('bulk-all');
                 $selectAll->setData('name', $field->getName());
                 $td->push($selectAll);
             }

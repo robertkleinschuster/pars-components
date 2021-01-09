@@ -13,6 +13,7 @@ class BulkCheckbox extends Input
         $this->setType(self::TYPE_CHECKBOX);
         parent::initialize();
         $this->unsetAttribute(self::ATTRIBUTE_ID);
+        $this->addOption('bulk');
     }
 
 }

@@ -7,11 +7,11 @@
                 $(this).parents('.ajax').load($(event.currentTarget).attr('href'));
             }
         });
-        $('.ajax.onload').load();
         $body.on('submit', '.ajax form', function (event) {
             event.preventDefault();
-            $(this).parents('.ajax').submit($(event.currentTarget).attr('action'));
+            $(this).parents('.ajax').submit(this);
         });
+        $('.ajax.onload').load();
     });
 }(jQuery));
 

@@ -24,7 +24,8 @@
         open.apply(this, arguments);
     };
 
-    function inject(data) {
+    function inject(data)
+    {
         if (data && data.inject) {
             if (data.inject.html) {
                 data.inject.html.forEach(function (html) {

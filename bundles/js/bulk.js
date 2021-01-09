@@ -1,7 +1,15 @@
-(function( $ ) {
+(function ( $ ) {
     $(document).ready(function () {
-        $('body').on('click', '.bulk', function () {
+        var $body = $('body');
+        $body.on('click', '.bulk-all', function () {
             $('input[name="' + $(this).data('name') + '"]').prop('checked', $(this).prop('checked'));
+        });
+        $body.on('click', '.bulk', function () {
+            if ($(this).parents('form').find('.bulk:checked').length) {
+                $(this).parents('form').find('[type="submit"]').removeClass('d-none');
+            } else {
+                $(this).parents('form').find('[type="submit"]').addClass('d-none');
+            }
         });
     });
 }( jQuery ));
