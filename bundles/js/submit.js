@@ -57,6 +57,15 @@
         if (!$clickedButton.hasClass('confirm-modal') || $clickedButton.hasClass('confirmed')) {
             $clickedButton.removeClass('confirmed')
             fd.append(clickedButton.name, clickedButton.value)
+            $.ajaxSetup({
+                error: function(xhr, status, err) {
+                    if (xhr.responseJSON.html) {
+                        inject(xhr.responseJSON, href, id, component, remote, history);
+                    } else {
+                        console.error('ajax error: ' + err);
+                    }
+                }
+            });
             $.ajax({
                 url: hrefcomponent,
                 type: 'post',
@@ -64,31 +73,34 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    if (data && data.attributes && data.attributes.redirect_url) {
-                        load(data.attributes.redirect_url, id, component, history, remote);
-                    } else if (data && data.html) {
-                        if (remote) {
-                            id = component;
-                        }
-                        var $destination = $('#' + id);
-                        if ($destination) {
-                            if (history) {
-                                window.history.replaceState(formatdata($destination.clone().wrap('<div/>').parent().html(), id), '', window.location.href);
-                                window.history.pushState(data, '', href);
-                            }
-                            var $source = $(data.html);
-                            $source.attr('id', id);
-                            $source.attr('class', $destination.attr('class'));
-                            $source.attr('data-component', component);
-                            $source.attr('data-href', href);
-                            $destination.replaceWith($source);
-                        }
-                    }
-
-                },
+                    inject(data, href, id, component, remote, history);
+                }
             });
         }
 
+    }
+
+    function inject(data, href, id, component, remote, history) {
+        if (data && data.attributes && data.attributes.redirect_url) {
+            load(data.attributes.redirect_url, id, component, history, remote);
+        } else if (data && data.html) {
+            if (remote) {
+                id = component;
+            }
+            var $destination = $('#' + id);
+            if ($destination) {
+                if (history) {
+                    window.history.replaceState(formatdata($destination.clone().wrap('<div/>').parent().html(), id), '', window.location.href);
+                    window.history.pushState(data, '', href);
+                }
+                var $source = $(data.html);
+                $source.attr('id', id);
+                $source.attr('class', $destination.attr('class'));
+                $source.attr('data-component', component);
+                $source.attr('data-href', href);
+                $destination.replaceWith($source);
+            }
+        }
     }
 
     function load(href, id, component, history, remote)

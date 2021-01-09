@@ -7,8 +7,11 @@
                         '  <span class="sr-only">Loading...</span>\n' +
                         '</div></div>');
                 }
+                if(!$(this).find('.ajax-overlay').hasClass('show')) {
+                    $(this).find('.ajax-overlay').addClass('show');
+                }
             } else {
-                $(this).find('.ajax-overlay').remove();
+                $(this).find('.ajax-overlay').removeClass('show');
             }
         });
         return this;
