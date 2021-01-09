@@ -1,6 +1,6 @@
 (function ($) {
-    var cache = [];
-    $.fn.load = function (href = null, history = false, id = null, component = null, remote = false) {
+    var datacache = [];
+    $.fn.load = function (href = null, cache = false, history = false, id = null, component = null, remote = false) {
         this.each(function () {
             if (href == null) {
                 href = $(this).data('href');
@@ -18,13 +18,14 @@
                 history = $(this).hasClass('history');
             }
             if (href && id && component) {
-                load(href, id, component, history, remote);
+                load(href, id, component, history, remote, cache);
             }
         })
         return this;
     };
 
-    function load(href, id, component, history, remote) {
+    function load(href, id, component, history, remote, cache)
+    {
         var hrefcomponent = '';
         if (href.includes('?')) {
             hrefcomponent = href + '&component=' + component + '&componentonly=1';
@@ -40,7 +41,7 @@
                 }
             }
         });
-        $.get(hrefcomponent, function (data) {
+        cacheget(hrefcomponent, (cache && !$('html').hasClass('reload')), function (data) {
             if (data && data.attributes && data.attributes.redirect_url) {
                 load(data.attributes.redirect_url, id, component, false, remote);
                 $('html').addClass('reload');
@@ -50,8 +51,23 @@
         });
     }
 
-    function inject(data, href, id, component, remote, history)
+
+    function cacheget(hrefcomponent, cache, callback)
     {
+        if (datacache[hrefcomponent] && cache) {
+            callback(datacache[hrefcomponent]);
+        } else {
+            if (!cache) {
+                datacache = [];
+            }
+            $.get(hrefcomponent, function (data) {
+                datacache[hrefcomponent] = data;
+                callback(data);
+            });
+        }
+    }
+
+    function inject(data, href, id, component, remote, history) {
         if (remote) {
             id = component;
         }

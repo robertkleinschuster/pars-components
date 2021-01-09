@@ -30,6 +30,7 @@ class DetailButton extends Button
         parent::initialize();
         $this->removeOption('mr-1');
         $this->addOption('btn-sm');
+        $this->addOption('cache');
     }
 
 }

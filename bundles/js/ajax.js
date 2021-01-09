@@ -13,7 +13,7 @@
                     if ($(event.currentTarget).find('button').hasClass('history-back')) {
                         window.history.back();
                     } else {
-                        $(this).parents('.ajax').load($(event.currentTarget).attr('href'));
+                        $(this).parents('.ajax').load($(event.currentTarget).attr('href'), ($(event.currentTarget).find('.cache').length > 0));
                     }
                 }
             }

@@ -61,9 +61,23 @@ class File extends Input
             $this->getInput()->setAttribute('multiple', 'multiple');
         }
         $script = new HtmlElement('script');
-        $script->setContent("document.getElementById('{$this->getInput()->getName()}').addEventListener('change',function(e){
-    e.target.nextElementSibling.innerText = document.getElementById('{$this->getInput()->getName()}').files[0].name;
-    })");
+        $script->setContent("
+document.getElementById('{$this->getInput()->getName()}').addEventListener('change', function(e) {
+    var file = document.getElementById('{$this->getInput()->getName()}').files[0];
+    e.target.nextElementSibling.innerText = file.name;
+    if (file.type == 'image/png' && document.getElementById('FileType_Code')) {
+        document.getElementById('FileType_Code').value = 'png';
+    }
+    if (file.type == 'image/jpeg' && document.getElementById('FileType_Code')) {
+        document.getElementById('FileType_Code').value = 'jpg';
+    }
+    if (document.getElementById('File_Name')) {
+        document.getElementById('File_Name').value = file.name;
+    }
+    if (document.getElementById('File_Code')) {
+        document.getElementById('File_Code').value = file.name;
+    }
+});");
 
         $this->push($this->getInput());
         $label = new Label();
