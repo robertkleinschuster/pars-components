@@ -4,10 +4,17 @@
         $body.on('click', '.ajax a', function (event) {
             if (!event.currentTarget.hasAttribute('target')) {
                 event.preventDefault();
-                if ($(event.currentTarget).find('button').hasClass('history-back')) {
-                    window.history.back();
-                } else {
+                if ($('html').hasClass('reload')) {
+                    if (!$(event.currentTarget).find('button').hasClass('history-back')) {
+                        $('html').removeClass('reload')
+                    }
                     $(this).parents('.ajax').load($(event.currentTarget).attr('href'));
+                } else {
+                    if ($(event.currentTarget).find('button').hasClass('history-back')) {
+                        window.history.back();
+                    } else {
+                        $(this).parents('.ajax').load($(event.currentTarget).attr('href'));
+                    }
                 }
             }
         });

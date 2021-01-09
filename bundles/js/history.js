@@ -1,26 +1,35 @@
 (function ($) {
-    $.fn.history = function (data, id, href) {
+    $.fn.history = function (data, id, href, replace = false) {
         if (data.html && data.attributes && data.attributes.component) {
             var $destination = $('#' + id);
             if ($destination.length) {
-                window.history.replaceState(formatdata($destination.clone().wrap('<div/>').parent().html(), id), '', window.location.href);
-                window.history.pushState(data, '', href);
+                if (replace) {
+                    window.history.replaceState(data, '', href);
+                } else {
+                    window.history.replaceState(formatdata($destination.clone().wrap('<div/>').parent().html(), id, href), '', window.location.href);
+                    window.history.pushState(data, '', href);
+                }
             }
         }
         return this;
     };
 
     window.addEventListener('popstate', (event) => {
-        $('#' + event.state.attributes.component).replaceWith(event.state.html);
+        if ($('html').hasClass('reload')) {
+            $('#' + event.state.attributes.component).load(event.target.location.href);
+        } else {
+            $('#' + event.state.attributes.component).replaceWith(event.state.html);
+        }
     });
 
-    function formatdata(html, component)
+    function formatdata(html, component, href)
     {
         return {
             html: html,
             attributes: {
                 component: component
-            }
+            },
+            href: href
         };
     }
 }(jQuery));

@@ -70,6 +70,7 @@
     {
         if (data && data.attributes && data.attributes.redirect_url) {
             load(data.attributes.redirect_url, id, component, history, remote);
+            $('html').addClass('reload');
         } else if (data && data.html) {
             if (remote) {
                 id = component;
@@ -77,7 +78,7 @@
             var $destination = $('#' + id);
             if ($destination) {
                 if (history) {
-                    $.fn.history(data, id, href);
+                    $.fn.history(data, id, href, true);
                 }
                 var $source = $(data.html);
                 $source.attr('id', id);
@@ -107,7 +108,7 @@
                 var $destination = $('#' + id);
                 if ($destination) {
                     if (history) {
-                        $.fn.history(data, id, href);
+                        $.fn.history(data, id, href, true);
                     }
                     var $source = $(data.html);
                     $source.attr('id', id);

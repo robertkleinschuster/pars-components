@@ -1,4 +1,5 @@
 (function ($) {
+    var cache = [];
     $.fn.load = function (href = null, history = false, id = null, component = null, remote = false) {
         this.each(function () {
             if (href == null) {
@@ -33,7 +34,7 @@
         $.ajaxSetup({
             error: function (xhr, status, err) {
                 if (xhr.responseJSON.html) {
-                    inject(xhr.responseJSON, href, id, component, remote, history);
+                    inject(xhr.responseJSON, href, id, component, remote, false);
                 } else {
                     console.error('ajax error: ' + err);
                 }
@@ -41,7 +42,8 @@
         });
         $.get(hrefcomponent, function (data) {
             if (data && data.attributes && data.attributes.redirect_url) {
-                load(data.attributes.redirect_url, id, component, history, remote);
+                load(data.attributes.redirect_url, id, component, false, remote);
+                $('html').addClass('reload');
             } else if (data && data.html) {
                 inject(data, href, id, component, remote, history);
             }
@@ -57,6 +59,8 @@
         if ($destination) {
             if (history) {
                 $.fn.history(data, id, href);
+            } else {
+                $.fn.history(data, id, href, true);
             }
             var $source = $(data.html);
             $source.attr('id', id);
