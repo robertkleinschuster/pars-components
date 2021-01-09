@@ -20,9 +20,13 @@ class ConfigProvider
                             __DIR__ . '/../bundles/js/03-bs-custom-file-input.min.js',
                             __DIR__ . '/../bundles/js/04-popper.min.js',
                             __DIR__ . '/../bundles/js/05-quill.min.js',
-                            __DIR__ . '/../bundles/js/select-all.js',
-                            __DIR__ . '/../bundles/js/confirm-modal.js',
-                            __DIR__ . '/../bundles/js/ajax-helper.js',
+                            __DIR__ . '/../bundles/js/overlay.js',
+                            __DIR__ . '/../bundles/js/bulk.js',
+                            __DIR__ . '/../bundles/js/confirm.js',
+                            __DIR__ . '/../bundles/js/injector.js',
+                            __DIR__ . '/../bundles/js/load.js',
+                            __DIR__ . '/../bundles/js/submit.js',
+                            __DIR__ . '/../bundles/js/ajax.js',
                         ]
                     ],
                     [

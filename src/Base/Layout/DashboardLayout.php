@@ -22,6 +22,16 @@ class DashboardLayout extends BaseLayout
         $body->push($this->getNavigation());
     }
 
+    protected function components(HtmlElement $components)
+    {
+        $components->addOption('ajax');
+        $components->addOption('history');
+        $components->setData('component', 'components');
+        $components->setId('components');
+        parent::components($components);
+    }
+
+
     /**
      * @param HtmlElement $body
      */
