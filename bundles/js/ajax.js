@@ -2,7 +2,7 @@
     $(document).ready(function () {
         var $body = $('body');
         $body.on('click', '.ajax a', function (event) {
-            if (!event.currentTarget.hasAttribute('target') && !$(event.currentTarget).hasClass('.ql-action')) {
+            if (!event.currentTarget.hasAttribute('target') && !$(event.currentTarget).hasClass('ql-action')) {
                 event.preventDefault();
                 if ($('html').hasClass('reload')) {
                     if (!$(event.currentTarget).find('button').hasClass('history-back')) {
