@@ -4,11 +4,14 @@ namespace Pars\Component\Base\Overview;
 
 use Niceshops\Bean\Type\Base\BeanListAwareTrait;
 use Pars\Component\Base\Field\Span;
+use Pars\Component\Base\Grid\Row;
+use Pars\Component\Base\Jumbotron\Jumbotron;
 use Pars\Component\Base\Table\Table;
 use Pars\Component\Base\Table\TableResponsive;
 use Pars\Component\Base\Toolbar\Toolbar;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldInterface;
+use Pars\Mvc\View\HtmlElement;
 
 class Overview extends AbstractComponent
 {
@@ -26,12 +29,15 @@ class Overview extends AbstractComponent
 
     private ?TableResponsive $table = null;
     private ?Toolbar $toolbar = null;
+    private ?HtmlElement $before = null;
+    private ?HtmlElement $after = null;
 
     protected function initialize()
     {
         if ($this->hasBeanList()) {
             $this->getTableResponsive()->setBeanList($this->getBeanList());
         }
+        $this->push($this->getBefore());
         if ($this->hasToolbar()) {
             $this->push($this->getToolbar());
         }
@@ -65,6 +71,7 @@ class Overview extends AbstractComponent
             }
             $this->append($span);
         }
+        $this->push($this->getAfter());
     }
 
     /**
@@ -128,6 +135,22 @@ class Overview extends AbstractComponent
             $this->toolbar = new Toolbar();
         }
         return $this->toolbar;
+    }
+
+    public function getBefore(): HtmlElement
+    {
+        if (null === $this->before) {
+            $this->before = new HtmlElement();
+        }
+        return $this->before;
+    }
+
+    public function getAfter(): HtmlElement
+    {
+        if (null === $this->after) {
+            $this->after = new HtmlElement();
+        }
+        return $this->after;
     }
 
     public function hasToolbar(): bool
