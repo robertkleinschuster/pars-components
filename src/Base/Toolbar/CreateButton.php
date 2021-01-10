@@ -7,7 +7,7 @@ namespace Pars\Component\Base\Toolbar;
 use Pars\Component\Base\Field\Button;
 use Pars\Component\Base\Field\Icon;
 
-class CreateButton extends Button
+class CreateButton extends ToolbarButton
 {
     /**
      * DeleteButton constructor.

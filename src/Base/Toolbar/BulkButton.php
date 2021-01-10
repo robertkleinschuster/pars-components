@@ -4,9 +4,7 @@
 namespace Pars\Component\Base\Toolbar;
 
 
-use Pars\Component\Base\Field\Button;
-
-class BulkButton extends Button
+class BulkButton extends ToolbarButton
 {
     public function __construct(string $name, string $value)
     {

@@ -17,7 +17,6 @@ class Toolbar extends AbstractComponent
             $this->getElementList()->unshift(new CreateButton($this->getCreatePath()));
         }
         $this->addOption('btn-toolbar');
-        $this->addOption('mb-4');
         parent::initialize();
     }
 

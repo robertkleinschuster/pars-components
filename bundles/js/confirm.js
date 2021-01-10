@@ -13,6 +13,7 @@
             $submit.attr('class', $(this).attr('class'));
             $submit.removeClass('confirm-modal');
             $submit.removeClass('mr-1');
+            $submit.removeClass('mb-4');
             let that = this;
             $submit.one('click.confirm', function (event) {
                 $(that).addClass('confirmed');
