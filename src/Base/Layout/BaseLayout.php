@@ -16,6 +16,7 @@ class BaseLayout extends AbstractLayout
     {
         $this->setTag('html');
         $this->addOption('h-100');
+        $this->addOption('reload');
         $this->setAttribute('lang', '{language}');
         $head = new HtmlElement('head');
         $this->meta($head);
