@@ -1,4 +1,5 @@
 (function ($) {
+    var showCount = 0;
     $.fn.overlay = function (show = true) {
         this.each(function () {
             if (show) {
@@ -10,8 +11,12 @@
                 if(!$(this).find('.ajax-overlay').hasClass('show')) {
                     $(this).find('.ajax-overlay').addClass('show');
                 }
+                showCount++;
             } else {
-                $(this).find('.ajax-overlay').removeClass('show');
+                showCount--;
+                if (showCount === 0) {
+                    $(this).find('.ajax-overlay').removeClass('show');
+                }
             }
         });
         return this;
