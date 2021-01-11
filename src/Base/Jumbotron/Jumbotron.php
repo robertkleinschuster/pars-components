@@ -4,16 +4,30 @@ namespace Pars\Component\Base\Jumbotron;
 
 use Pars\Component\Base\Field\Paragraph;
 use Pars\Component\Base\Field\Span;
+use Pars\Component\Base\Form\FormColumn;
+use Pars\Component\Base\Form\FormRow;
 use Pars\Component\Base\Grid\Column;
 use Pars\Component\Base\Grid\Container;
 use Pars\Component\Base\Grid\Row;
 use Pars\Mvc\View\AbstractComponent;
+use Pars\Mvc\View\FieldInterface;
 use Pars\Mvc\View\FieldListAwareTrait;
 use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\HtmlInterface;
 
 class Jumbotron extends AbstractComponent
 {
     use FieldListAwareTrait;
+
+    /**
+     * @var Row[]
+     */
+    private array $rowMap = [];
+    /**
+     * @var Column[]
+     */
+    private array $columnMap = [];
+
 
     public ?string $headline = null;
     public ?string $lead = null;
@@ -41,48 +55,63 @@ class Jumbotron extends AbstractComponent
         }
         $container = new Container();
         $container->setMode(Container::MODE_FLUID);
-        $i = 0;
-        $r = new Row();
-        foreach ($this->getFieldList() as $field) {
-            $row = new Row();
-            $row->addOption('mb-2');
-            $col2 = new Column();
-            $col2->setBreakpoint(Column::BREAKPOINT_SMALL);
-            if ($field->hasLabel()) {
-                $col = new Column();
-                $col->addOption('pl-0');
-                $col->setBreakpoint(Column::BREAKPOINT_SMALL);
-                $span = new Span($field->getLabel());
-                $col->push($span);
-                $row->push($col);
-                $col2->setBackground(Column::BACKGROUND_WHITE);
-                $col2->setBorder(Column::BORDER_SECONDARY);
-                $col2->setRounded(Column::ROUNDED_NONE);
-            }
-            $col2->push($field);
-            $row->push($col2);
 
-            $c = new Column();
-            $c->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
-            $c->push($row);
-            $r->push($c);
-            if ($i%2) {
-                $container->push($r);
-                $r = new Row();
-            } else {
-                $c->addOption('mr-xl-3');
+        ksort($this->columnMap);
+        $prevCount = null;
+        foreach ($this->columnMap as $row => $columns) {
+            ksort($columns);
+            $formRow = $this->getRow($row);
+            $count = count($columns);
+            $values = array_values($columns);
+            foreach ($values as $index => $column) {
+                if ($index + 1 < $count) {
+                    $column->addOption('mr-xl-3');
+                }
+                $column->push($this->createFieldRow($column->getElementList()->pop()));
+                $formRow->push($column);
             }
-            $i++;
-        }
-        if ($i%2) {
-            if ($i > 1) {
-                $c = new Column();
-                $c->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
-                $r->push($c);
+            if ($prevCount != null && $prevCount != $count) {
+                $formRow->addOption('mt-xl-3');
             }
-            $container->push($r);
+            $container->push($formRow);
+            $prevCount = $count;
         }
+
+        foreach ($this->getFieldList() as $field) {
+            $container->push($this->createFieldRow($field));
+        }
+
+
         $this->push($container);
+    }
+
+    /**
+     * @param FieldInterface $field
+     * @return Row
+     * @throws \Niceshops\Bean\Type\Base\BeanException
+     */
+    protected function createFieldRow(FieldInterface $field): Row
+    {
+        $row = new Row();
+        $row->addOption('mb-2');
+        $value = new Column();
+        $value->setBreakpoint(Column::BREAKPOINT_MEDIUM);
+        if ($field->hasLabel()) {
+            $label = new Column();
+            $label->addOption('pl-0');
+            $label->setSize(3);
+            $label->setBreakpoint(Column::BREAKPOINT_MEDIUM);
+            $span = new Span($field->getLabel());
+            $label->push($span);
+            $row->push($label);
+            $value->setSize(9);
+            $value->setBackground(Column::BACKGROUND_WHITE);
+            $value->setBorder(Column::BORDER_SECONDARY);
+            $value->setRounded(Column::ROUNDED_NONE);
+        }
+        $value->push($field);
+        $row->push($value);
+        return $row;
     }
 
     /**
@@ -140,5 +169,47 @@ class Jumbotron extends AbstractComponent
         return isset($this->headline);
     }
 
+    /**
+     * @param FieldInterface $field
+     * @param int $row
+     * @param int $column
+     */
+    public function append(FieldInterface $field, ?int $row = null, ?int $column = null): self
+    {
+        if ($row !== null || $column !== null) {
+            $col = $this->getColumn($row ?? 1, $column ?? 1);
+            $col->push($field);
+            $col->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
+        } else {
+            $this->getFieldList()->push($field);
+        }
+        return $this;
+    }
+
+
+    /**
+     * @param int $row
+     * @return mixed|Row
+     */
+    protected function getRow(int $row)
+    {
+        if (!isset($this->rowMap[$row])) {
+            $this->rowMap[$row] = new Row();
+        }
+        return $this->rowMap[$row];
+    }
+
+    /**
+     * @param int $row
+     * @param int $column
+     * @return mixed
+     */
+    protected function getColumn(int $row, int $column)
+    {
+        if (!isset($this->columnMap[$row][$column])) {
+            $this->columnMap[$row][$column] = new Column();
+        }
+        return $this->columnMap[$row][$column];
+    }
 
 }

@@ -42,6 +42,7 @@ class DashboardLayout extends BaseLayout
         $this->getSubNavigation()->setBackground(Navigation::BACKGROUND_LIGHT);
         $this->getSubNavigation()->setBreakpoint(Navigation::BREAKPOINT_LARGE);
         $this->getContainer()->push($this->getSubNavigation());
+        $this->getContainer()->setBreakpoint(Container::BREAKPOINT_LARGE);
         $main->push($this->getContainer());
     }
 

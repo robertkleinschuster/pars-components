@@ -26,9 +26,7 @@ class Detail extends AbstractComponent implements BeanAwareInterface
         if ($this->getToolbar()->getElementList()->count()) {
             $this->push($this->getToolbar());
         }
-        if ($this->getJumbotron()->getFieldList()->count() || $this->getJumbotron()->getElementList()->count()) {
-            $this->push($this->getJumbotron());
-        }
+        $this->push($this->getJumbotron());
     }
 
     /**
@@ -55,31 +53,45 @@ class Detail extends AbstractComponent implements BeanAwareInterface
     /**
      * @param string $name
      * @param string $label
+     * @param int|null $row
+     * @param int|null $col
      * @return Span
      * @throws \Niceshops\Bean\Type\Base\BeanException
      */
-    public function addField(string $name, string $label)
+    public function addField(string $name, string $label, int $row = null, int $col = null)
     {
         $span = new Span("{{$name}}", $label);
-        $this->getJumbotron()->getFieldList()->push($span);
+        $this->getJumbotron()->append($span, $row, $col);
         return $span;
     }
 
-
+    /**
+     * @param string $headline
+     */
     public function setHeadline(string $headline)
     {
         $this->getJumbotron()->setHeadline($headline);
     }
 
-    public function append(FieldInterface $field)
+    /**
+     * @param FieldInterface $field
+     * @param int|null $row
+     * @param int|null $column
+     * @return $this
+     */
+    public function append(FieldInterface $field, int $row = null, int $column = null)
     {
-        $this->getJumbotron()->getFieldList()->push($field);
+        $this->getJumbotron()->append($field, $row, $column);
         return $this;
     }
 
+    /**
+     * @param FieldInterface $field
+     * @return $this
+     */
     public function prepend(FieldInterface $field)
     {
-        $this->getJumbotron()->getFieldList()->push($field);
+        $this->getJumbotron()->getFieldList()->unshift($field);
         return $this;
     }
 
