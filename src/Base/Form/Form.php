@@ -211,38 +211,38 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
 
     /**
      * @param string $name
-     * @param \DateTime|null $value
+     * @param string|null $value
      * @param string|null $label
      * @param int $row
      * @param int $column
      */
-    public function addDate(string $name, \DateTime $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addDate(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
     {
-        return $this->addInput(new Date($value), $name, null, $label, $row, $column);
+        return $this->addInput(new Date(), $name, $value, $label, $row, $column);
     }
 
     /**
      * @param string $name
-     * @param \DateTime|null $value
+     * @param string|null $value
      * @param string|null $label
      * @param int $row
      * @param int $column
      */
-    public function addTime(string $name, \DateTime $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addTime(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
     {
-        return $this->addInput(new Time($value), $name, null, $label, $row, $column);
+        return $this->addInput(new Time(), $name, $value, $label, $row, $column);
     }
 
     /**
      * @param string $name
-     * @param \DateTime|null $value
+     * @param string|null $value
      * @param string|null $label
      * @param int $row
      * @param int $column
      */
-    public function addDateTime(string $name, \DateTime $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addDateTime(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
     {
-        return $this->addInput(new DateTimeLocal($value), $name, null, $label, $row, $column);
+        return $this->addInput(new DateTimeLocal(), $name, $value, $label, $row, $column);
     }
 
     /**

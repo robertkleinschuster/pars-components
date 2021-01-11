@@ -20,6 +20,10 @@ class ConfigProvider
     {
         $hash = self::hash();
         return [
+            'assets' => [
+                'list' => [
+                ]
+            ],
             'bundles' => [
                 'list' => [
                     [
