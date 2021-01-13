@@ -23,6 +23,9 @@
         }, false);
         open.apply(this, arguments);
     };
+    $.fn.injector = function (data) {
+        inject(data);
+    };
 
     function inject(data)
     {

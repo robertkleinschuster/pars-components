@@ -17,6 +17,9 @@
             if (!history) {
                 history = $(this).hasClass('history');
             }
+            if (href === '#') {
+                href = null;
+            }
             if (href && id && component) {
                 load(href, id, component, history, remote, cache);
             }
@@ -24,8 +27,7 @@
         return this;
     };
 
-    function load(href, id, component, history, remote, cache)
-    {
+    function load(href, id, component, history, remote, cache) {
         var hrefcomponent = '';
         if (href.includes('?')) {
             hrefcomponent = href + '&component=' + component + '&componentonly=1';
@@ -52,10 +54,10 @@
     }
 
 
-    function cacheget(hrefcomponent, cache, callback)
-    {
+    function cacheget(hrefcomponent, cache, callback) {
         if (datacache[hrefcomponent] && cache) {
             callback(datacache[hrefcomponent]);
+            $.fn.injector(datacache[hrefcomponent]);
         } else {
             if (!cache) {
                 datacache = [];

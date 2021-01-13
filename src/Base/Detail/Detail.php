@@ -20,9 +20,6 @@ class Detail extends AbstractComponent implements BeanAwareInterface
 
     protected function initialize()
     {
-        if ($this->hasSection()) {
-            $this->getElementList()->unshift(new HtmlElement('h3.mb-3', $this->getSection()));
-        }
         if ($this->getToolbar()->getElementList()->count()) {
             $this->push($this->getToolbar());
         }
@@ -95,14 +92,12 @@ class Detail extends AbstractComponent implements BeanAwareInterface
         return $this;
     }
 
-    public ?string $section = null;
-
     /**
      * @return string
      */
     public function getSection(): string
     {
-        return $this->section;
+        return $this->getName();
     }
 
     /**
@@ -112,8 +107,7 @@ class Detail extends AbstractComponent implements BeanAwareInterface
      */
     public function setSection(string $section): self
     {
-        $this->section = $section;
-        return $this;
+        return $this->setName($section);
     }
 
     /**
@@ -121,7 +115,7 @@ class Detail extends AbstractComponent implements BeanAwareInterface
      */
     public function hasSection(): bool
     {
-        return isset($this->section);
+        return $this->hasName();
     }
 
 

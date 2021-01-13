@@ -33,6 +33,9 @@ class Item extends AbstractField
             $this->getLink()->setPath($this->getPath());
             $this->set('path', null);
         }
+        if ($this->hasOption('cache')) {
+            $this->getLink()->addOption('cache');
+        }
         $this->push($this->getLink());
     }
 

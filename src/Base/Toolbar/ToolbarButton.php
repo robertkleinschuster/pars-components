@@ -10,7 +10,7 @@ class ToolbarButton extends Button
 {
     protected function initialize()
     {
-        $this->addOption('mb-4');
+        $this->addOption('my-2');
         parent::initialize();
     }
 
