@@ -4,6 +4,7 @@ namespace Pars\Component\Base\Layout;
 
 use Pars\Component\Base\Grid\Container;
 use Pars\Component\Base\Navigation\Navigation;
+use Pars\Component\Base\Tabs\Tabs;
 use Pars\Mvc\View\HtmlElement;
 
 class DashboardLayout extends BaseLayout
@@ -24,11 +25,29 @@ class DashboardLayout extends BaseLayout
 
     protected function components(HtmlElement $components)
     {
+        if ($this->exists('actionIdBefore')) {
+            $tabs = new Tabs();
+            $tabs->setId($this->get('actionIdBefore'));
+            $tabs->setActive($this->get('actionActiveBefore'));
+            foreach ($this->getComponentListBefore() as $component) {
+                $tabs->append($component);
+            }
+            $components->push($tabs);
+        }
         $components->addOption('ajax');
         $components->addOption('history');
         $components->setData('component', 'components');
         $components->setId('components');
         parent::components($components);
+        if ($this->exists('actionIdAfter')) {
+            $tabs = new Tabs();
+            $tabs->setId($this->get('actionIdAfter'));
+            $tabs->setActive($this->get('actionActiveAfter'));
+            foreach ($this->getComponentListAfter() as $component) {
+                $tabs->append($component);
+            }
+            $components->push($tabs);
+        }
     }
 
 
