@@ -30,7 +30,7 @@
                     var id = component.substr(1);
                     var href = document.location.pathname + '?'  + search;
                     $(component).load(href, true, false, id, id);
-                    $('html').removeClass('reload')
+                    $('html').removeClass('reload');
                 }
             }
         });
