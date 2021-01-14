@@ -67,7 +67,7 @@ class Jumbotron extends AbstractComponent
                 if ($index + 1 < $count) {
                     $column->addOption('mr-xl-3');
                 }
-                $column->push($this->createFieldRow($column->getElementList()->pop()));
+                $column->push($this->createFieldRow($column->getElementList()->pop(), $count));
                 $formRow->push($column);
             }
             if ($prevCount != null && $prevCount != $count) {
@@ -87,10 +87,11 @@ class Jumbotron extends AbstractComponent
 
     /**
      * @param FieldInterface $field
+     * @param int $count
      * @return Row
      * @throws \Niceshops\Bean\Type\Base\BeanException
      */
-    protected function createFieldRow(FieldInterface $field): Row
+    protected function createFieldRow(FieldInterface $field, $count = 1): Row
     {
         $row = new Row();
         $row->addOption('mb-2');
@@ -99,7 +100,6 @@ class Jumbotron extends AbstractComponent
         if ($field->hasLabel()) {
             $label = new Column();
             $label->addOption('pl-0');
-            $label->setSize(3);
             $label->setBreakpoint(Column::BREAKPOINT_MEDIUM);
             $span = new Span($field->getLabel());
             $label->push($span);

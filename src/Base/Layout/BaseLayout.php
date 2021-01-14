@@ -39,7 +39,8 @@ class BaseLayout extends AbstractLayout
         $main->setId('main');
         $this->main($main);
         $components = new Container('div.components');
-        $components->setBreakpoint(Container::BREAKPOINT_LARGE);
+        #$components->setBreakpoint(Container::BREAKPOINT_LARGE);
+        $components->setMode(Container::MODE_FLUID);
         $this->components($components);
         $main->push($components);
         $body->push($main);

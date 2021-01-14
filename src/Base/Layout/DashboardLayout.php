@@ -2,7 +2,9 @@
 
 namespace Pars\Component\Base\Layout;
 
+use Pars\Component\Base\Grid\Column;
 use Pars\Component\Base\Grid\Container;
+use Pars\Component\Base\Grid\Row;
 use Pars\Component\Base\Navigation\Navigation;
 use Pars\Component\Base\Tabs\Tabs;
 use Pars\Mvc\View\HtmlElement;
@@ -25,6 +27,10 @@ class DashboardLayout extends BaseLayout
 
     protected function components(HtmlElement $components)
     {
+        $row = new Row();
+        $maincolumn = new Column();
+        $maincolumn->setSize(12);
+        $maincolumn->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
         if ($this->exists('actionIdBefore')) {
             $tabs = new Tabs();
             $tabs->setId($this->get('actionIdBefore'));
@@ -32,13 +38,19 @@ class DashboardLayout extends BaseLayout
             foreach ($this->getComponentListBefore() as $component) {
                 $tabs->append($component);
             }
-            $components->push($tabs);
+            $column = new Column();
+            $column->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
+            $column->setSize(6);
+            $maincolumn->setSize(6);
+            $column->push($tabs);
+            $row->push($column);
         }
         $components->addOption('ajax');
         $components->addOption('history');
         $components->setData('component', 'components');
         $components->setId('components');
-        parent::components($components);
+        parent::components($maincolumn);
+        $row->push($maincolumn);
         if ($this->exists('actionIdAfter')) {
             $tabs = new Tabs();
             $tabs->setId($this->get('actionIdAfter'));
@@ -46,8 +58,14 @@ class DashboardLayout extends BaseLayout
             foreach ($this->getComponentListAfter() as $component) {
                 $tabs->append($component);
             }
-            $components->push($tabs);
+            $column = new Column();
+            $column->setSize(6);
+            $column->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
+            $maincolumn->setSize(6);
+            $column->push($tabs);
+            $row->push($column);
         }
+        $components->push($row);
     }
 
 
@@ -61,7 +79,8 @@ class DashboardLayout extends BaseLayout
         $this->getSubNavigation()->setBackground(Navigation::BACKGROUND_LIGHT);
         $this->getSubNavigation()->setBreakpoint(Navigation::BREAKPOINT_LARGE);
         $this->getContainer()->push($this->getSubNavigation());
-        $this->getContainer()->setBreakpoint(Container::BREAKPOINT_LARGE);
+   #     $this->getContainer()->setBreakpoint(Container::BREAKPOINT_LARGE);
+        $this->getContainer()->setMode(Container::MODE_FLUID);
         $main->push($this->getContainer());
     }
 

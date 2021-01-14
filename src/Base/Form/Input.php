@@ -98,6 +98,9 @@ class Input extends AbstractField implements BackgroundAwareInterface, ColorAwar
     public ?string $type = null;
     public ?string $name = null;
     public ?string $autocomplete = null;
+    public bool $autocorrect = false;
+    public bool $autocapitalize = false;
+    public bool $spellcheck = false;
     public ?string $placeholder = null;
     public ?string $value = null;
     public bool $required = false;
@@ -161,6 +164,12 @@ class Input extends AbstractField implements BackgroundAwareInterface, ColorAwar
         }
         if ($this->hasBorderPosition()) {
             $this->addOption($this->getBorderPosition());
+        }
+        if (!$this->isAutocapitalize()) {
+            $this->setAttribute('autocapitalize', 'off');
+        }
+        if (!$this->isSpellcheck()) {
+            $this->setAttribute('spellcheck', 'false');
         }
     }
 
@@ -332,6 +341,55 @@ class Input extends AbstractField implements BackgroundAwareInterface, ColorAwar
     {
         return isset($this->value);
     }
+
+    /**
+     * @return bool
+     */
+    public function isAutocorrect(): bool
+    {
+        return $this->autocorrect;
+    }
+
+    /**
+     * @param bool $autocorrect
+     */
+    public function setAutocorrect(bool $autocorrect): void
+    {
+        $this->autocorrect = $autocorrect;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAutocapitalize(): bool
+    {
+        return $this->autocapitalize;
+    }
+
+    /**
+     * @param bool $autocapitalize
+     */
+    public function setAutocapitalize(bool $autocapitalize): void
+    {
+        $this->autocapitalize = $autocapitalize;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSpellcheck(): bool
+    {
+        return $this->spellcheck;
+    }
+
+    /**
+     * @param bool $spellcheck
+     */
+    public function setSpellcheck(bool $spellcheck): void
+    {
+        $this->spellcheck = $spellcheck;
+    }
+
 
 
 }
