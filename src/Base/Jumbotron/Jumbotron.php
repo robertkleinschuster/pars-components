@@ -37,7 +37,8 @@ class Jumbotron extends AbstractComponent
         $this->setTag('div');
         $this->addOption('jumbotron');
         $this->addOption('rounded-0');
-        $this->addOption('py-3');
+        $this->addOption('py-2');
+        $this->addOption('px-2');
         $this->addOption('mb-4');
         $this->addOption('bg-light');
         $this->addOption('shadow-sm');
@@ -55,26 +56,21 @@ class Jumbotron extends AbstractComponent
         }
         $container = new Container();
         $container->setMode(Container::MODE_FLUID);
-
         ksort($this->columnMap);
-        $prevCount = null;
         foreach ($this->columnMap as $row => $columns) {
             ksort($columns);
             $formRow = $this->getRow($row);
             $count = count($columns);
             $values = array_values($columns);
             foreach ($values as $index => $column) {
+                $column->addOption('p-0');
                 if ($index + 1 < $count) {
-                    $column->addOption('mr-xl-3');
+                    $column->addOption('mr-sm-3');
                 }
                 $column->push($this->createFieldRow($column->getElementList()->pop(), $count));
                 $formRow->push($column);
             }
-            if ($prevCount != null && $prevCount != $count) {
-                $formRow->addOption('mt-xl-3');
-            }
             $container->push($formRow);
-            $prevCount = $count;
         }
 
         foreach ($this->getFieldList() as $field) {
@@ -91,27 +87,22 @@ class Jumbotron extends AbstractComponent
      * @return Row
      * @throws \Niceshops\Bean\Type\Base\BeanException
      */
-    protected function createFieldRow(FieldInterface $field, $count = 1): Row
+    protected function createFieldRow(FieldInterface $field, $count = 1): HtmlElement
     {
-        $row = new Row();
-        $row->addOption('mb-2');
-        $value = new Column();
-        $value->setBreakpoint(Column::BREAKPOINT_MEDIUM);
+        $div = new HtmlElement();
         if ($field->hasLabel()) {
-            $label = new Column();
-            $label->addOption('pl-0');
-            $label->setBreakpoint(Column::BREAKPOINT_MEDIUM);
             $span = new Span($field->getLabel());
-            $label->push($span);
-            $row->push($label);
-            $value->setSize(9);
-            $value->setBackground(Column::BACKGROUND_WHITE);
-            $value->setBorder(Column::BORDER_SECONDARY);
-            $value->setRounded(Column::ROUNDED_NONE);
+            $div->push($span);
         }
-        $value->push($field);
-        $row->push($value);
-        return $row;
+        $paragraph = new HtmlElement();
+        $paragraph->addOption('mb-2');
+        $paragraph->addOption('bg-white');
+        $paragraph->addOption('border');
+        $paragraph->addOption('border-secondary');
+        $paragraph->addOption('p-1');
+        $paragraph->push($field);
+        $div->push($paragraph);
+        return $div;
     }
 
     /**
@@ -179,7 +170,7 @@ class Jumbotron extends AbstractComponent
         if ($row !== null || $column !== null) {
             $col = $this->getColumn($row ?? 1, $column ?? 1);
             $col->push($field);
-            $col->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
+            $col->setBreakpoint(Column::BREAKPOINT_SMALL);
         } else {
             $this->getFieldList()->push($field);
         }

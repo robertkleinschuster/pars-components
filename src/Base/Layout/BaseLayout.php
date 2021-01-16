@@ -11,6 +11,7 @@ use Pars\Mvc\View\HtmlElement;
 
 class BaseLayout extends AbstractLayout
 {
+    protected bool $wide = true;
 
     protected function initialize()
     {
@@ -39,8 +40,11 @@ class BaseLayout extends AbstractLayout
         $main->setId('main');
         $this->main($main);
         $components = new Container('div.components');
-        #$components->setBreakpoint(Container::BREAKPOINT_LARGE);
-        $components->setMode(Container::MODE_FLUID);
+        if ($this->isWide()) {
+            $components->setMode(Container::MODE_FLUID);
+        } else {
+            $components->setBreakpoint(Container::BREAKPOINT_LARGE);
+        }
         $this->components($components);
         $main->push($components);
         $body->push($main);
@@ -135,4 +139,22 @@ class BaseLayout extends AbstractLayout
             }
         }
     }
+
+    /**
+     * @return bool
+     */
+    public function isWide(): bool
+    {
+        return $this->wide;
+    }
+
+    /**
+     * @param bool $wide
+     */
+    public function setWide(bool $wide): void
+    {
+        $this->wide = $wide;
+    }
+
+
 }

@@ -28,23 +28,10 @@ class DashboardLayout extends BaseLayout
     protected function components(HtmlElement $components)
     {
         $row = new Row();
+        $column = new Column();
         $maincolumn = new Column();
-        $maincolumn->setSize(12);
-        $maincolumn->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
-        if ($this->exists('actionIdBefore')) {
-            $tabs = new Tabs();
-            $tabs->setId($this->get('actionIdBefore'));
-            $tabs->setActive($this->get('actionActiveBefore'));
-            foreach ($this->getComponentListBefore() as $component) {
-                $tabs->append($component);
-            }
-            $column = new Column();
-            $column->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
-            $column->setSize(6);
-            $maincolumn->setSize(6);
-            $column->push($tabs);
-            $row->push($column);
-        }
+   #     $maincolumn->setSize(12);
+   #     $maincolumn->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
         $components->addOption('ajax');
         $components->addOption('history');
         $components->setData('component', 'components');
@@ -55,14 +42,34 @@ class DashboardLayout extends BaseLayout
             $tabs = new Tabs();
             $tabs->setId($this->get('actionIdAfter'));
             $tabs->setActive($this->get('actionActiveAfter'));
-            foreach ($this->getComponentListAfter() as $component) {
+            foreach ($this->getComponentListSubAction() as $component) {
                 $tabs->append($component);
             }
-            $column = new Column();
-            $column->setSize(6);
-            $column->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
-            $maincolumn->setSize(6);
+            $column->addOption('col-xl-7');
+            $column->addOption('col-lg-6');
+            $column->addOption('col-md-4');
+            $column->addOption('col-12');
+            $maincolumn->addOption('col-12');
+            $maincolumn->addOption('col-xl-5');
+            $maincolumn->addOption('col-lg-6');
+            $maincolumn->addOption('col-md-8');
             $column->push($tabs);
+            foreach ($this->getComponentListAfter() as $component) {
+                $maincolumn->push($component);
+            }
+            $row->push($column);
+        } elseif($this->getComponentListAfter()->count()) {
+            foreach ($this->getComponentListAfter() as $component) {
+                $column->push($component);
+            }
+            $column->addOption('col-xl-4');
+            $column->addOption('col-lg-6');
+            $column->addOption('col-md-12');
+            $column->addOption('col-12');
+            $maincolumn->addOption('col-xl-8');
+            $maincolumn->addOption('col-lg-6');
+            $maincolumn->addOption('col-md-12');
+            $maincolumn->addOption('col-12');
             $row->push($column);
         }
         $components->push($row);

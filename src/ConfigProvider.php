@@ -55,6 +55,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/css/quill.bubble.css',
                             __DIR__ . '/../bundles/css/quill.snow.css',
                             __DIR__ . '/../bundles/css/pars.css',
+                            __DIR__ . '/../bundles/css/cms.css',
                         ]
                     ]
                 ]
