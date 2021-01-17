@@ -9,7 +9,6 @@ use Pars\Component\Base\Jumbotron\Jumbotron;
 use Pars\Component\Base\Toolbar\Toolbar;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldInterface;
-use Pars\Mvc\View\HtmlElement;
 
 class Detail extends AbstractComponent implements BeanAwareInterface
 {

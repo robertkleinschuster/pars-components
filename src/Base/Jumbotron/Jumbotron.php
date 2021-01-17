@@ -4,8 +4,6 @@ namespace Pars\Component\Base\Jumbotron;
 
 use Pars\Component\Base\Field\Paragraph;
 use Pars\Component\Base\Field\Span;
-use Pars\Component\Base\Form\FormColumn;
-use Pars\Component\Base\Form\FormRow;
 use Pars\Component\Base\Grid\Column;
 use Pars\Component\Base\Grid\Container;
 use Pars\Component\Base\Grid\Row;
@@ -13,7 +11,6 @@ use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldInterface;
 use Pars\Mvc\View\FieldListAwareTrait;
 use Pars\Mvc\View\HtmlElement;
-use Pars\Mvc\View\HtmlInterface;
 
 class Jumbotron extends AbstractComponent
 {

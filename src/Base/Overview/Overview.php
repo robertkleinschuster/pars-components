@@ -4,8 +4,6 @@ namespace Pars\Component\Base\Overview;
 
 use Niceshops\Bean\Type\Base\BeanListAwareTrait;
 use Pars\Component\Base\Field\Span;
-use Pars\Component\Base\Grid\Row;
-use Pars\Component\Base\Jumbotron\Jumbotron;
 use Pars\Component\Base\Table\Table;
 use Pars\Component\Base\Table\TableResponsive;
 use Pars\Component\Base\Toolbar\Toolbar;
