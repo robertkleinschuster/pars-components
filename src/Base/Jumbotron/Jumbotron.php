@@ -48,7 +48,9 @@ class Jumbotron extends AbstractComponent
             $this->getElementList()->unshift($p);
         }
         if ($this->hasHeadline()) {
-            $this->getElementList()->unshift(new HtmlElement('hr.my-4'));
+            if ($this->getFieldList()->count()) {
+                $this->getElementList()->unshift(new HtmlElement('hr.my-4'));
+            }
             $h1 = new HtmlElement('h1');
             $h1->setContent($this->getHeadline());
             $h1->addOption('display-5');
