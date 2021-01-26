@@ -16,11 +16,15 @@ class Detail extends AbstractComponent implements BeanAwareInterface
 
     private ?Jumbotron $jumbotron = null;
     protected ?Toolbar $toolbar = null;
+    protected ?Toolbar $subToolbar = null;
 
     protected function initialize()
     {
         if ($this->getToolbar()->getElementList()->count()) {
             $this->push($this->getToolbar());
+        }
+        if ($this->getSubToolbar()->getElementList()->count()) {
+            $this->push($this->getSubToolbar());
         }
         $this->push($this->getJumbotron());
     }
@@ -136,4 +140,16 @@ class Detail extends AbstractComponent implements BeanAwareInterface
     {
         $this->toolbar = $toolbar;
     }
+
+    /**
+     * @return Toolbar|null
+     */
+    public function getSubToolbar(): ?Toolbar
+    {
+        if (null == $this->subToolbar) {
+            $this->subToolbar = new Toolbar();
+        }
+        return $this->subToolbar;
+    }
+
 }
