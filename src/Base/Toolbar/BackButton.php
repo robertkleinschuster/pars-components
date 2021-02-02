@@ -22,7 +22,7 @@ class BackButton extends ToolbarButton
         $this->setStyle(self::STYLE_SECONDARY);
         $icon = new Icon(Icon::ICON_ARROW_LEFT_CIRCLE);
         $this->push($icon);
-        $this->addOption('history-back');
+        $this->addOption('cache');
         parent::initialize();
     }
 }
