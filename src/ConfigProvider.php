@@ -32,7 +32,7 @@ class ConfigProvider
                         'unlink' => "component-bundle_*.js",
                         'sources' => [
                             __DIR__ . '/../bundles/js/01-jquery.min.js',
-                            __DIR__ . '/../bundles/js/bootstrap.bundle.min.js',
+                            __DIR__ . '/../bundles/js/02-bootstrap.bundle.min.js',
                             __DIR__ . '/../bundles/js/03-bs-custom-file-input.min.js',
                             __DIR__ . '/../bundles/js/04-popper.min.js',
                             __DIR__ . '/../bundles/js/05-quill.min.js',
