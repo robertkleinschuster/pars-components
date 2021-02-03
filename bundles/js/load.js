@@ -86,6 +86,7 @@
             $source.attr('data-component', component);
             $source.attr('data-href', href);
             $destination.replaceWith($source);
+            $(document).trigger('injected');
         }
     }
 }(jQuery));

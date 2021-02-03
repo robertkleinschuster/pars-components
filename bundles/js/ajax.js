@@ -38,6 +38,37 @@
             event.preventDefault();
             $(this).parents('.ajax').submit(this);
         });
+        let data = null;
+        $body.on('change', '.ajax > select', function (event) {
+            let value = $(this).val();
+            let name = $(this).attr('name');
+            let pathHelper = new PathHelper();
+            let parameter = new Parameter('data');
+            parameter.setAtttribute(name, value);
+            pathHelper.addParamter(parameter);
+            let path = pathHelper.getPath();
+            data = $(this).parents('form').serializeArray();
+            $(this).parents('.ajax').load(path);
+        });
+        $(document).on('injected', function () {
+            if (data !== null) {
+                data.forEach(function (item) {
+                    if (item.value) {
+                        $('input#' + item.name).val(item.value);
+                        let $checkbox = $('input[type=checkbox]#' + item.name);
+                        if ($checkbox.val() === 'true') {
+                            $checkbox.attr('checked', 'checked');
+                        } else if ($checkbox.val() === 'false') {
+                            $checkbox.removeAttr('checked', 'checked');
+                        }
+                        let $select = $('select#' + item.name);
+                        $select.find('option').removeAttr('checked');
+                        $select.find('option').removeAttr('selected');
+                        $select.find('option[value='+ item.value +']').attr('selected', 'selected');
+                    }
+                });
+            }
+        });
         $('.ajax.onload').load();
     });
 
