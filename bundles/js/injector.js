@@ -1,4 +1,20 @@
 (function ($) {
+    let datepickeroptions = {
+        singleDatePicker: true,
+        timePicker: true,
+        timePicker24Hour: true,
+        timePickerSeconds: true,
+        showWeekNumbers: true,
+        locale: {
+            format: 'YYYY-MM-DDTHH:mm:ss'
+        },
+        autoApply: true
+    };
+    if (!Modernizr.inputtypes['datetime-local']) {
+        $(document).ready(function () {
+            $('input[type="datetime-local"]').daterangepicker(datepickeroptions);
+        });
+    }
     let open = XMLHttpRequest.prototype.open;
     XMLHttpRequest.prototype.open = function () {
         this.addEventListener("loadend", function (event) {
@@ -6,6 +22,9 @@
                 inject(JSON.parse(event.target.response));
             } catch (e) {
                 console.error('inject error: ' + e);
+            }
+            if (!Modernizr.inputtypes['datetime-local']) {
+                $('input[type="datetime-local"]').daterangepicker(datepickeroptions);
             }
             $('body').overlay(false);
         }, false);

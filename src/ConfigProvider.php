@@ -36,6 +36,10 @@ class ConfigProvider
                             __DIR__ . '/../bundles/js/03-bs-custom-file-input.min.js',
                             __DIR__ . '/../bundles/js/04-popper.min.js',
                             __DIR__ . '/../bundles/js/05-quill.min.js',
+                            __DIR__ . '/../bundles/js/06-moment.js',
+                            __DIR__ . '/../bundles/js/07-daterangepicker.js',
+                            __DIR__ . '/../bundles/js/08-modernizr-inputtypes.js',
+                            __DIR__ . '/../bundles/js/09-jquery.inputmask.min.js',
                             __DIR__ . '/../bundles/js/overlay.js',
                             __DIR__ . '/../bundles/js/history.js',
                             __DIR__ . '/../bundles/js/bulk.js',
@@ -54,6 +58,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/css/bootstrap.min.css',
                             __DIR__ . '/../bundles/css/quill.bubble.css',
                             __DIR__ . '/../bundles/css/quill.snow.css',
+                            __DIR__ . '/../bundles/css/daterangepicker.css',
                             __DIR__ . '/../bundles/css/pars.css',
                             __DIR__ . '/../bundles/css/cms.css',
                         ]
