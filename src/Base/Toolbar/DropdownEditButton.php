@@ -13,7 +13,9 @@ class DropdownEditButton extends DropdownButton
     {
         parent::initialize();
         $this->getDropdownButton()->addOption('my-2');
-        $this->getDropdownButton()->setStyle(Button::STYLE_WARNING);
+        $button = clone $this->getButton();
+        $button->initialize();
+        $this->getDropdownButton()->setStyle($button->getStyle());
         $this->getButton()->removeOption('mr-1');
     }
 
