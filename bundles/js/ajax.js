@@ -3,7 +3,7 @@
         var $body = $('body');
         $body.on('click', '.ajax a', function (event) {
             if (!event.currentTarget.hasAttribute('target') && !$(event.currentTarget).hasClass('ql-action')
-                && !$(event.currentTarget).hasClass('nav-link')
+                && !$(event.currentTarget).hasClass('nav-link') && $(event.currentTarget).find('.noajax').length === 0
             ) {
                 event.preventDefault();
                 if ($('html').hasClass('reload')) {
