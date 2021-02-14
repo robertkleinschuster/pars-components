@@ -4,7 +4,7 @@
     });
 
     function attatchEvent() {
-        $('body').on('click.fileselectModal mousedown.fileselectModal', '.fileselect-modal', function (e) {
+        $('body').on('click.fileselectModal mousedown.fileselectModal touchstart.fileselectModal', '.fileselect-modal', function (e) {
             e.preventDefault();
             var data = $(this).data('fileselect-list');
             var element = createFolderListing(data);
