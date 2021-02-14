@@ -259,6 +259,21 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         return $this->addInput(new Select($options), $name, $value, $label, $row, $column);
     }
 
+
+    /**
+     * @param string $name
+     * @param array $options
+     * @param string|null $value
+     * @param string|null $label
+     * @param int $row
+     * @param int $column
+     * @return FormGroup
+     */
+    public function addFileSelect(string $name, FileSelect $fileSelect, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    {
+        return $this->addInput($fileSelect, $name, $value, $label, $row, $column);
+    }
+
     /**
      * @param string $name
      * @param array $options

@@ -16,3 +16,21 @@
     visibility: visible;
     opacity: 1;
 }
+
+.fileselect-element .card-img-top{
+    height: 100px;
+    width: auto;
+    flex-grow: 1;
+    object-fit: contain;
+}
+
+.fileselect-element:hover,
+.fileselect-element:focus {
+    background: #eee;
+    cursor: pointer;
+}
+
+.fileselect-element.active {
+    border-color: #2fba52;
+    background: #eee;
+}

@@ -44,6 +44,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/js/history.js',
                             __DIR__ . '/../bundles/js/bulk.js',
                             __DIR__ . '/../bundles/js/confirm.js',
+                            __DIR__ . '/../bundles/js/fileselect.js',
                             __DIR__ . '/../bundles/js/injector.js',
                             __DIR__ . '/../bundles/js/load.js',
                             __DIR__ . '/../bundles/js/submit.js',
