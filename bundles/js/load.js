@@ -93,15 +93,19 @@
             if ($body.find('form').length) {
                 $body.find('form').attr('action', href);
             }
-            $('#ajax-modal').modal('show');
-            $('#ajax-modal .close-modal').one('click', function () {
+            $('#ajax-modal').modal({backdrop: 'static', keyboard: false});
+            $('#ajax-modal').on('click.closeModal', '.close-modal', function () {
                 $('#ajax-modal').modal('hide');
             });
         } else {
             if (remote) {
                 id = component;
             }
-            var $destination = $('#' + id);
+            if ($('#ajax-modal').hasClass('show')) {
+                var $destination = $('#ajax-modal').find('#' + id);
+            } else {
+                var $destination = $('#' + id);
+            }
             if ($destination) {
                 if (history) {
                     $.fn.history(data, id, href);

@@ -90,6 +90,9 @@
                 $source.attr('data-component', component);
                 $source.attr('data-href', href);
                 $destination.replaceWith($source);
+                if ($body.find('form').length) {
+                    $body.find('form').attr('action', href);
+                }
             }
         }
     }
@@ -124,6 +127,9 @@
                     $source.attr('data-component', component);
                     $source.attr('data-href', href);
                     $destination.replaceWith($source);
+                    if ($body.find('form').length) {
+                        $body.find('form').attr('action', href);
+                    }
                 }
             }
         });
