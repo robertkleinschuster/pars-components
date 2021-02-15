@@ -15,6 +15,9 @@
     };
 
     window.addEventListener('popstate', (event) => {
+        if ($('#ajax-modal').hasClass('show')) {
+            $('#ajax-modal').modal('hide');
+        }
         if ($('html').hasClass('reload')) {
             $('#' + event.state.attributes.component).load(event.target.location.href);
         } else {
