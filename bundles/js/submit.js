@@ -28,8 +28,7 @@
     var clickedButton = null;
     $('body').on('click', '[type="submit"]', function (event) {
         clickedButton = this;
-    })
-
+    });
     function submit(form, href, id, component, history, remote)
     {
         var hrefcomponent = '';
@@ -38,6 +37,7 @@
         } else {
             hrefcomponent = href + '?component=' + component + '&componentonly=1';
         }
+        var modal = $(form).parents('#ajax-modal').length > 0;
         var fd = new FormData(form);
         var $clickedButton = $(clickedButton);
         if (!$clickedButton.hasClass('confirm-modal') || $clickedButton.hasClass('confirmed')) {
@@ -46,7 +46,7 @@
             $.ajaxSetup({
                 error: function(xhr, status, err) {
                     if (xhr.responseJSON.html) {
-                        inject(xhr.responseJSON, href, id, component, remote, history);
+                        inject(xhr.responseJSON, href, id, component, remote, history, modal);
                     } else {
                         console.error('ajax error: ' + err);
                     }
@@ -59,23 +59,27 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    inject(data, href, id, component, remote, history);
+                    inject(data, href, id, component, remote, history, modal);
                 }
             });
         }
 
     }
 
-    function inject(data, href, id, component, remote, history)
+    function inject(data, href, id, component, remote, history, modal)
     {
         if (data && data.attributes && data.attributes.redirect_url) {
-            load(data.attributes.redirect_url, id, component, history, remote);
+            load(data.attributes.redirect_url, id, component, history, remote, modal);
             $('html').addClass('reload');
         } else if (data && data.html) {
             if (remote) {
                 id = component;
             }
-            var $destination = $('#' + id);
+            if (modal && $('#ajax-modal').hasClass('show')) {
+                var $destination = $('#ajax-modal').find('#' + id);
+            } else {
+                var $destination = $('#' + id);
+            }
             if ($destination) {
                 if (history) {
                     $.fn.history(data, id, href, true);
@@ -90,7 +94,7 @@
         }
     }
 
-    function load(href, id, component, history, remote)
+    function load(href, id, component, history, remote, modal)
     {
         var hrefcomponent = '';
         if (href.includes('?')) {
@@ -100,12 +104,16 @@
         }
         $.get(hrefcomponent, function (data) {
             if (data && data.attributes && data.attributes.redirect_url) {
-                load(data.attributes.redirect_url, id, component, history, remote);
+                load(data.attributes.redirect_url, id, component, history, remote, modal);
             } else if (data && data.html) {
                 if (remote) {
                     id = component;
                 }
-                var $destination = $('#' + id);
+                if (modal && $('#ajax-modal').hasClass('show')) {
+                    var $destination = $('#ajax-modal').find('#' + id);
+                } else {
+                    var $destination = $('#' + id);
+                }
                 if ($destination) {
                     if (history) {
                         $.fn.history(data, id, href, true);

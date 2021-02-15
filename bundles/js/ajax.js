@@ -6,16 +6,18 @@
                 && !$(event.currentTarget).hasClass('nav-link') && $(event.currentTarget).find('.noajax').length === 0
             ) {
                 event.preventDefault();
+                var modal = $(event.currentTarget).find('button').attr('target') === 'modal';
+
                 if ($('html').hasClass('reload')) {
                     if (!$(event.currentTarget).find('button').hasClass('history-back')) {
                         $('html').removeClass('reload')
                     }
-                    $(this).parents('.ajax').load($(event.currentTarget).attr('href'));
+                    $(this).parents('.ajax').load({href: $(event.currentTarget).attr('href'), modal: modal});
                 } else {
                     if ($(event.currentTarget).find('button').hasClass('history-back')) {
                         window.history.back();
                     } else {
-                        $(this).parents('.ajax').load($(event.currentTarget).attr('href'), ($(event.currentTarget).find('.cache').length > 0));
+                        $(this).parents('.ajax').load({href: $(event.currentTarget).attr('href'), cache: ($(event.currentTarget).find('.cache').length > 0), modal: modal});
                     }
                 }
             }
@@ -46,9 +48,10 @@
             let parameter = new Parameter('data');
             parameter.setAtttribute(name, value);
             pathHelper.addParamter(parameter);
+            let modal = $(this).parents('#ajax-modal').length > 0;
             let path = pathHelper.getPath();
             data = $(this).parents('form').serializeArray();
-            $(this).parents('.ajax').load(path);
+            $(this).parents('.ajax').load({href: path, modal: modal});
         });
         $(document).on('injected', function () {
             if (data !== null) {

@@ -14,7 +14,7 @@ class Toolbar extends AbstractComponent
     protected function initialize()
     {
         if ($this->hasCreatePath()) {
-            $this->getElementList()->unshift(new CreateButton($this->getCreatePath()));
+            $this->getElementList()->unshift((new CreateButton($this->getCreatePath()))->setModal(true));
         }
         $this->addOption('btn-toolbar');
         parent::initialize();

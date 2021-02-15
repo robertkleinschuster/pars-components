@@ -6,6 +6,7 @@ use Pars\Component\Base\Form\FormGroup;
 use Pars\Component\Base\Form\Input;
 use Pars\Component\Base\Grid\Container;
 use Pars\Component\Base\Modal\ConfirmModal;
+use Pars\Component\Base\Modal\AjaxModal;
 use Pars\Component\Base\Modal\FileSelectModal;
 use Pars\Mvc\View\AbstractLayout;
 use Pars\Mvc\View\HtmlElement;
@@ -56,6 +57,7 @@ class BaseLayout extends AbstractLayout
         $this->scripts($body);
         $body->push(new ConfirmModal());
         $body->push(new FileSelectModal());
+        $body->push(new AjaxModal());
         $this->push($body);
         $inputTemplate = new HtmlElement('div');
         $inputTemplate->setId('dynamic-field-template');

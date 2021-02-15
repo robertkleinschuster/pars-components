@@ -47,10 +47,10 @@ class Overview extends AbstractComponent
             $this->prepend(new MoveDownButton($this->getMoveDownPath()));
         }
         if ($this->hasDeletePath()) {
-            $this->prepend(new DeleteButton($this->getDeletePath()));
+            $this->prepend((new DeleteButton($this->getDeletePath()))->setModal(true));
         }
         if ($this->hasEditPath()) {
-            $this->prepend(new EditButton($this->getEditPath()));
+            $this->prepend((new EditButton($this->getEditPath()))->setModal(true));
         }
         if ($this->hasDetailPath()) {
             $this->prepend(new DetailButton($this->getDetailPath()));

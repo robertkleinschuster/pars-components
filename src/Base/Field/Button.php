@@ -19,6 +19,7 @@ class Button extends AbstractField implements StyleAwareInterface
     public ?string $value = null;
     public ?string $confirmTitle = null;
     public ?string $confirmCancel = null;
+    public bool $modal = false;
 
     public function __construct(?string $content = null, ?string $style = null, ?string $path = null)
     {
@@ -37,6 +38,9 @@ class Button extends AbstractField implements StyleAwareInterface
         }
         if ($this->hasValue()) {
             $this->setAttribute('value', $this->getValue());
+        }
+        if ($this->isModal()) {
+            $this->setAttribute('target', 'modal');
         }
         if ($this->hasConfirm()) {
             $this->addOption('confirm-modal');
@@ -209,6 +213,25 @@ class Button extends AbstractField implements StyleAwareInterface
     {
         return isset($this->confirmCancel);
     }
+
+    /**
+     * @return bool
+     */
+    public function isModal(): bool
+    {
+        return $this->modal;
+    }
+
+    /**
+     * @param bool $modal
+     * @return Button
+     */
+    public function setModal(bool $modal): Button
+    {
+        $this->modal = $modal;
+        return $this;
+    }
+
 
 
 }

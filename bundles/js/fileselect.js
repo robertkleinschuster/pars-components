@@ -6,6 +6,10 @@
     function attatchEvent() {
         $('body').on('click.fileselectModal mousedown.fileselectModal touchstart.fileselectModal', '.fileselect-modal', function (e) {
             e.preventDefault();
+            var modal = $(this).parents('#ajax-modal').length > 0;
+            if (modal) {
+                $('#ajax-modal').modal('hide');
+            }
             var data = $(this).data('fileselect-list');
             var element = createFolderListing(data);
             var parent = data;
@@ -30,6 +34,12 @@
                 var $modal = $('#fileselect-modal');
                 var id = $modal.find('.fileselect-element.active').attr('id');
                 $(that).val(id);
+            });
+            $('body').on('hidden.bs.modal', '#fileselect-modal', function (e) {
+                if (modal) {
+                    $('#ajax-modal').modal('show');
+                    $('#ajax-modal').modal('handleUpdate');
+                }
             });
             $('#fileselect-modal-title').text($(this).data('fileselect-title'));
             $('#fileselect-modal-cancel').text($(this).data('fileselect-cancel'));
