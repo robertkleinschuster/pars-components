@@ -6,7 +6,7 @@ namespace Pars\Component\Base\Toolbar;
 
 use Pars\Component\Base\Field\Icon;
 
-class DeleteButton extends BulkButton
+class DeleteButton extends ToolbarButton
 {
     protected function initialize()
     {

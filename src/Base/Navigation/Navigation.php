@@ -157,11 +157,10 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
 
     /**
      * @param string $content
-     * @param string $path
      * @param string $id
      * @param int|null $order
      * @param bool $active
-     * @return Item
+     * @return Dropdown
      */
     public function addDropdownRight(string $content, string $id, ?int $order = null, bool $active = false): Dropdown
     {

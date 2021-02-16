@@ -4,6 +4,7 @@ namespace Pars\Component\Base\Detail;
 
 use Niceshops\Bean\Type\Base\BeanAwareInterface;
 use Niceshops\Bean\Type\Base\BeanAwareTrait;
+use Niceshops\Bean\Type\Base\BeanException;
 use Pars\Component\Base\Field\Span;
 use Pars\Component\Base\Jumbotron\Jumbotron;
 use Pars\Component\Base\Toolbar\Toolbar;
@@ -44,7 +45,7 @@ class Detail extends AbstractComponent implements BeanAwareInterface
      * @param Jumbotron|null $jumbotron
      * @return Detail
      */
-    public function setJumbotron(?Jumbotron $jumbotron): Detail
+    public function setJumbotron(?Jumbotron $jumbotron): self
     {
         $this->jumbotron = $jumbotron;
         return $this;
@@ -56,9 +57,9 @@ class Detail extends AbstractComponent implements BeanAwareInterface
      * @param int|null $row
      * @param int|null $col
      * @return Span
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws BeanException
      */
-    public function addField(string $name, string $label, int $row = null, int $col = null)
+    public function addField(string $name, string $label, int $row = null, int $col = null): Span
     {
         $span = new Span("{{$name}}", $label);
         $this->getJumbotron()->append($span, $row, $col);
@@ -66,11 +67,11 @@ class Detail extends AbstractComponent implements BeanAwareInterface
     }
 
     /**
-     * @param string $headline
+     * @param string $heading
      */
-    public function setHeadline(string $headline)
+    public function setHeading(string $heading)
     {
-        $this->getJumbotron()->setHeadline($headline);
+        $this->getJumbotron()->setHeading($heading);
     }
 
     /**
@@ -79,7 +80,7 @@ class Detail extends AbstractComponent implements BeanAwareInterface
      * @param int|null $column
      * @return $this
      */
-    public function append(FieldInterface $field, int $row = null, int $column = null)
+    public function append(FieldInterface $field, int $row = null, int $column = null): self
     {
         $this->getJumbotron()->append($field, $row, $column);
         return $this;
@@ -89,7 +90,7 @@ class Detail extends AbstractComponent implements BeanAwareInterface
      * @param FieldInterface $field
      * @return $this
      */
-    public function prepend(FieldInterface $field)
+    public function prepend(FieldInterface $field): Detail
     {
         $this->getJumbotron()->getFieldList()->unshift($field);
         return $this;

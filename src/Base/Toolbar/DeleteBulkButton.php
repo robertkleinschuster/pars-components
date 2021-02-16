@@ -6,13 +6,12 @@ namespace Pars\Component\Base\Toolbar;
 
 use Pars\Component\Base\Field\Icon;
 
-class CreateNewButton extends ToolbarButton
+class DeleteBulkButton extends BulkButton
 {
-
     protected function initialize()
     {
-        $this->setStyle(self::STYLE_SUCCESS);
-        $icon = new Icon(Icon::ICON_FILE_PLUS);
+        $this->setStyle(self::STYLE_DANGER);
+        $icon = new Icon(Icon::ICON_TRASH);
         $this->push($icon);
         parent::initialize();
     }

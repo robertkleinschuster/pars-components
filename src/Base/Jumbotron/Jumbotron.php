@@ -26,7 +26,7 @@ class Jumbotron extends AbstractComponent
     private array $columnMap = [];
 
 
-    public ?string $headline = null;
+    public ?string $heading = null;
     public ?string $lead = null;
 
     protected function initialize()
@@ -44,12 +44,12 @@ class Jumbotron extends AbstractComponent
             $this->addOption('lead');
             $this->getElementList()->unshift($p);
         }
-        if ($this->hasHeadline()) {
+        if ($this->hasHeading()) {
             if ($this->getFieldList()->count()) {
                 $this->getElementList()->unshift(new HtmlElement('hr.my-4'));
             }
             $h1 = new HtmlElement('h1');
-            $h1->setContent($this->getHeadline());
+            $h1->setContent($this->getHeading());
             $h1->addOption('display-5');
             $this->getElementList()->unshift($h1);
         }
@@ -135,34 +135,35 @@ class Jumbotron extends AbstractComponent
     /**
      * @return string
      */
-    public function getHeadline(): string
+    public function getHeading(): string
     {
-        return $this->headline;
+        return $this->heading;
     }
 
     /**
-     * @param string $headline
+     * @param string $heading
      *
      * @return $this
      */
-    public function setHeadline(string $headline): self
+    public function setHeading(string $heading): self
     {
-        $this->headline = $headline;
+        $this->heading = $heading;
         return $this;
     }
 
     /**
      * @return bool
      */
-    public function hasHeadline(): bool
+    public function hasHeading(): bool
     {
-        return isset($this->headline);
+        return isset($this->heading);
     }
 
     /**
      * @param FieldInterface $field
-     * @param int $row
-     * @param int $column
+     * @param int|null $row
+     * @param int|null $column
+     * @return Jumbotron
      */
     public function append(FieldInterface $field, ?int $row = null, ?int $column = null): self
     {
