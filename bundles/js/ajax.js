@@ -1,6 +1,7 @@
 (function ($) {
     $(document).ready(function () {
         var $body = $('body');
+        $('.remove-href').attr('href', null);
         $body.on('click', '.ajax a', function (event) {
             if (!event.currentTarget.hasAttribute('target') && !$(event.currentTarget).hasClass('ql-action')
                 && !$(event.currentTarget).hasClass('nav-link') && $(event.currentTarget).find('.noajax').length === 0
@@ -24,14 +25,9 @@
             if ($(event.currentTarget).hasClass('nav-link')) {
                 var $nav = $(event.currentTarget).parents('.nav-tabs')
                 if ($nav.length) {
-                    var $navItem = $(event.currentTarget).parents('.nav-item')
-                    var navid = $nav.attr('id');
-                    var navindex = $navItem.data('index');
-                    var search = insertParam(document.location.search, 'nav' , 'id:' + navid + ';' + 'index:' + navindex);
-                    var component = $(event.currentTarget).attr('href');
+                    var component = $(event.currentTarget).attr('data-target');
                     var id = component.substr(1);
-                    var href = document.location.pathname + '?'  + search;
-                    $(component).load(href, true, false, id, id);
+                    $(component).load($(event.currentTarget).attr('href'), true, false, id, id);
                     $('html').removeClass('reload');
                 }
             }
@@ -51,7 +47,7 @@
             let modal = $(this).parents('#ajax-modal').length > 0;
             let path = pathHelper.getPath();
             data = $(this).parents('form').serializeArray();
-            $(this).parents('.ajax').load({href: path, modal: modal});
+        //    $(this).parents('.ajax').load({href: path, modal: modal});
         });
         $(document).on('injected', function () {
             if (data !== null) {

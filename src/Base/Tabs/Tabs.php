@@ -34,6 +34,7 @@ class Tabs extends AbstractComponent
                 $tab->setRole('presentation');
                 $tab->setData('index', $i);
                 $link = new HtmlElement('a.nav-link');
+            #    $link->addOption('remove-href');
                 if ($this->hasId()) {
                     $link->setId($this->getId() . '__tab__' . $i);
                 }
@@ -58,7 +59,13 @@ class Tabs extends AbstractComponent
                 }
                 if ($this->hasId()) {
                     $pane->setId($this->getId() . '__pane__' . $i);
-                    $link->setAttribute('href', '#' . $pane->getId());
+                    if ($component->hasPath()) {
+                        $link->setAttribute('href', $component->getPath());
+                        $component->setPath(null);
+                    } else {
+                        $link->setAttribute('href', '#' . $pane->getId());
+                    }
+                    $link->setData('target', '#' . $pane->getId());
                     $link->setAria('controls', $pane->getId());
                 }
                 $pane->push($component);
