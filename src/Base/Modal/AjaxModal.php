@@ -32,8 +32,8 @@ class AjaxModal extends AbstractComponent
         $modalClose->setAttribute('type', 'button');
         $modalClose->setData('dismiss', 'modal');
         $modalClose->setContent('<span aria-hidden="true">&times;</span>');
-        $modalHeader->push($modalClose);
-        #$modalContent->push($modalHeader);
+        #$modalHeader->push($modalClose);
+        $modalContent->push($modalHeader);
         $modalBody = new HtmlElement('div.modal-body');
         $modalContent->push($modalBody);
         $modalFooter = new HtmlElement('div.modal-footer');

@@ -87,6 +87,7 @@
                 $.fn.history(data, id, href, true);
             }
             $body = $('#ajax-modal .modal-body');
+            $('#ajax-modal .modal-title').html($(modal).data('modal-title') ?? '');
             $body.empty();
             $body.append($source);
             $body.find('#components').removeClass('container-fluid');

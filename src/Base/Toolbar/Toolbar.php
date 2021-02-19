@@ -13,40 +13,8 @@ class Toolbar extends AbstractComponent
 
     protected function initialize()
     {
-        if ($this->hasCreatePath()) {
-            $this->getElementList()->unshift((new CreateButton($this->getCreatePath()))->setModal(true));
-        }
         $this->addOption('btn-toolbar');
         parent::initialize();
     }
-
-
-    /**
-     * @return string
-     */
-    public function getCreatePath(): string
-    {
-        return $this->createPath;
-    }
-
-    /**
-     * @param string $createPath
-     *
-     * @return $this
-     */
-    public function setCreatePath(string $createPath): self
-    {
-        $this->createPath = $createPath;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasCreatePath(): bool
-    {
-        return isset($this->createPath);
-    }
-
 
 }

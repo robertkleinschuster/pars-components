@@ -6,19 +6,8 @@ namespace Pars\Component;
 
 class ConfigProvider
 {
-
-    protected static $hash = '';
-
-    public static function hash() {
-        if (self::$hash == '') {
-            self::$hash = md5(random_bytes(5));
-        }
-        return self::$hash;
-    }
-
     public function __invoke()
     {
-        $hash = self::hash();
         return [
             'assets' => [
                 'list' => [
@@ -28,8 +17,7 @@ class ConfigProvider
                 'list' => [
                     [
                         'type' => 'js',
-                        'output' => "component-bundle_$hash.js",
-                        'unlink' => "component-bundle_*.js",
+                        'output' => "component.js",
                         'sources' => [
                             __DIR__ . '/../bundles/js/01-jquery.min.js',
                             __DIR__ . '/../bundles/js/02-bootstrap.bundle.min.js',
@@ -52,18 +40,11 @@ class ConfigProvider
                         ]
                     ],
                     [
-                        'type' => 'css',
-                        'output' => "component-bundle_$hash.css",
-                        'unlink' => "component-bundle_*.css",
-                        'sources' => [
-                            __DIR__ . '/../bundles/css/bootstrap.min.css',
-                            __DIR__ . '/../bundles/css/quill.bubble.css',
-                            __DIR__ . '/../bundles/css/quill.snow.css',
-                            __DIR__ . '/../bundles/css/daterangepicker.css',
-                            __DIR__ . '/../bundles/css/pars.css',
-                            __DIR__ . '/../bundles/css/cms.css',
-                        ]
-                    ]
+                        'type' => 'scss',
+                        'import' => __DIR__ . '/../bundles/scss',
+                        'output' => "component.css",
+                        'entrypoint' =>  __DIR__ . '/../bundles/scss/component.scss',
+                    ],
                 ]
 
             ]

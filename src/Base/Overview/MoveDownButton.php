@@ -26,7 +26,7 @@ class MoveDownButton extends Button
         $this->addInlineStyle('padding', '4px');
         $this->addInlineStyle('line-height', '1');
         $icon = new Icon(Icon::ICON_ARROW_DOWN);
-        $icon->setWidth('16px');
+        $icon->setWidth('14px');
         $this->push($icon);
         parent::initialize();
         $this->removeOption('mr-1');

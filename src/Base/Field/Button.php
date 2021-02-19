@@ -4,6 +4,8 @@
 namespace Pars\Component\Base\Field;
 
 
+use Niceshops\Core\Exception\AttributeExistsException;
+use Niceshops\Core\Exception\AttributeLockException;
 use Pars\Component\Base\BorderAwareInterface;
 use Pars\Component\Base\StyleAwareInterface;
 use Pars\Component\Base\StyleAwareTrait;
@@ -232,6 +234,16 @@ class Button extends AbstractField implements StyleAwareInterface
         return $this;
     }
 
-
+    /**
+     * @param string $title
+     * @return $this
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
+     */
+    public function setModalTitle(string $title): self
+    {
+        $this->setData('modal-title', $title);
+        return $this;
+    }
 
 }

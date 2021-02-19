@@ -7,7 +7,7 @@
                 && !$(event.currentTarget).hasClass('nav-link') && $(event.currentTarget).find('.noajax').length === 0
             ) {
                 event.preventDefault();
-                var modal = $(event.currentTarget).find('button').attr('target') === 'modal';
+                var modal = $(event.currentTarget).find('button').attr('target') === 'modal' ? $(event.currentTarget).find('button') : null;
 
                 if ($('html').hasClass('reload')) {
                     if (!$(event.currentTarget).find('button').hasClass('history-back')) {
@@ -70,26 +70,6 @@
         });
         $('.ajax.onload').load();
     });
-
-    function insertParam(search, key, value) {
-        key = encodeURIComponent(key);
-        value = encodeURIComponent(value);
-        var kvp = search.substr(1).split('&');
-        let i=0;
-        for(; i<kvp.length; i++){
-            if (kvp[i].startsWith(key + '=')) {
-                let pair = kvp[i].split('=');
-                pair[1] = value;
-                kvp[i] = pair.join('=');
-                break;
-            }
-        }
-        if(i >= kvp.length){
-            kvp[kvp.length] = [key,value].join('=');
-        }
-        let params = kvp.join('&');
-        return params;
-    }
 }(jQuery));
 
 

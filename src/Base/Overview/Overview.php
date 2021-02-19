@@ -46,12 +46,8 @@ class Overview extends AbstractComponent
         if ($this->hasMoveDownPath()) {
             $this->prepend(new MoveDownButton($this->getMoveDownPath()));
         }
-        if ($this->hasDeletePath()) {
-            $this->prepend((new DeleteButton($this->getDeletePath()))->setModal(true));
-        }
-        if ($this->hasEditPath()) {
-            $this->prepend((new EditButton($this->getEditPath()))->setModal(true));
-        }
+        $this->initDeleteButton();
+        $this->initEditButton();
         if ($this->hasDetailPath()) {
             $this->prepend(new DetailButton($this->getDetailPath()));
         }
@@ -70,6 +66,32 @@ class Overview extends AbstractComponent
             $this->append($span);
         }
         $this->push($this->getAfter());
+    }
+
+    /**
+     * @return EditButton
+     */
+    protected function initEditButton(): EditButton
+    {
+        $button = (new EditButton())->setModal(true);
+        if ($this->hasEditPath()) {
+            $button->setPath($this->getEditPath());
+            $this->prepend($button);
+        }
+        return $button;
+    }
+
+    /**
+     * @return DeleteButton
+     */
+    protected function initDeleteButton(): DeleteButton
+    {
+        $button = (new DeleteButton())->setModal(true);
+        if ($this->hasDeletePath()) {
+            $button->setPath($this->getDeletePath());
+            $this->prepend($button);
+        }
+        return $button;
     }
 
     /**

@@ -127,6 +127,12 @@ class BaseLayout extends AbstractLayout
                 $link->setAttribute('href', '/' . $bundle['output']);
                 $head->push($link);
             }
+            if ($bundle['type'] == 'scss') {
+                $link = new HtmlElement('link');
+                $link->setAttribute('rel', 'stylesheet');
+                $link->setAttribute('href', '/' . $bundle['output']);
+                $head->push($link);
+            }
         }
     }
 
