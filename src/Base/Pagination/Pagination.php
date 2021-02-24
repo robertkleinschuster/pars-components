@@ -59,7 +59,7 @@ class Pagination extends AbstractComponent
      * @return PaginationItem
      * @throws \Niceshops\Bean\Type\Base\BeanException
      */
-    public function addPage(string $path, string $content = null, bool $active = false)
+    public function addPage(?string $path, string $content = null, bool $active = false)
     {
         $item = new PaginationItem();
         $item->setActive($active);
