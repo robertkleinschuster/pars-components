@@ -36,7 +36,7 @@ class Alert extends AbstractComponent implements StyleAwareInterface
         parent::__construct();
         $this->heading = $heading;
         if (null !== $text) {
-            $this->addParagraph($text);
+            $this->addBlock($text);
         }
     }
 
@@ -64,13 +64,13 @@ class Alert extends AbstractComponent implements StyleAwareInterface
      * @param string $value
      * @return Paragraph
      */
-    public function addParagraph(string $value): Paragraph
+    public function addBlock(string $value): Paragraph
     {
-        $paragraph = new Paragraph();
-        $paragraph->addOption('mb-0');
-        $paragraph->setContent($value);
-        $this->getElementList()->push($paragraph);
-        return $paragraph;
+        $block = new Paragraph();
+        $block->addOption('mb-0');
+        $block->setContent($value);
+        $this->getElementList()->push($block);
+        return $block;
     }
 
     /**

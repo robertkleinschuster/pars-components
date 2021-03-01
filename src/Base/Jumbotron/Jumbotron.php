@@ -93,14 +93,14 @@ class Jumbotron extends AbstractComponent
             $span = new Span($field->getLabel());
             $div->push($span);
         }
-        $paragraph = new HtmlElement();
-        $paragraph->addOption('mb-2');
-        $paragraph->addOption('bg-white');
-        $paragraph->addOption('border');
-        $paragraph->addOption('border-secondary');
-        $paragraph->addOption('p-1');
-        $paragraph->push($field);
-        $div->push($paragraph);
+        $block = new HtmlElement();
+        $block->addOption('mb-2');
+        $block->addOption('bg-white');
+        $block->addOption('border');
+        $block->addOption('border-secondary');
+        $block->addOption('p-1');
+        $block->push($field);
+        $div->push($block);
         return $div;
     }
 
