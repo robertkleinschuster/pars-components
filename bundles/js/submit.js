@@ -3,6 +3,7 @@
         if (!href) {
             href = $(form).attr('action');
         }
+        var method = $(form).attr('method');
         if (!href) {
             href = window.location.href;
         }
@@ -20,7 +21,7 @@
             history = $ajax.hasClass('history');
         }
         if (href && id && component) {
-            submit(form, href, id, component, history, remote);
+            submit(form, href, id, component, history, remote, method);
         }
         return this;
     };
@@ -29,7 +30,7 @@
     $('body').on('click', '[type="submit"]', function (event) {
         clickedButton = this;
     });
-    function submit(form, href, id, component, history, remote)
+    function submit(form, href, id, component, history, remote, method)
     {
         var hrefcomponent = '';
         if (href.includes('?')) {
@@ -42,7 +43,9 @@
         var $clickedButton = $(clickedButton);
         if (!$clickedButton.hasClass('confirm-modal') || $clickedButton.hasClass('confirmed')) {
             $clickedButton.removeClass('confirmed')
-            fd.append(clickedButton.name, clickedButton.value)
+            if (clickedButton) {
+                fd.append(clickedButton.name, clickedButton.value)
+            }
             $.ajaxSetup({
                 error: function(xhr, status, err) {
                     if (xhr.responseJSON.html) {
@@ -54,7 +57,7 @@
             });
             $.ajax({
                 url: hrefcomponent,
-                type: 'post',
+                type: method ?? 'post',
                 data: fd,
                 contentType: false,
                 processData: false,
@@ -90,6 +93,7 @@
                 $source.attr('data-component', component);
                 $source.attr('data-href', href);
                 $destination.replaceWith($source);
+                var $body = $('body');
                 if ($body.find('form').length) {
                     $body.find('form').attr('action', href);
                 }
@@ -127,6 +131,7 @@
                     $source.attr('data-component', component);
                     $source.attr('data-href', href);
                     $destination.replaceWith($source);
+                    var $body = $('body');
                     if ($body.find('form').length) {
                         $body.find('form').attr('action', href);
                     }
