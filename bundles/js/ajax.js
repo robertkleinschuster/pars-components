@@ -47,7 +47,7 @@
             let modal = $(this).parents('#ajax-modal').length > 0;
             let path = pathHelper.getPath();
             data = $(this).parents('form').serializeArray();
-            $(this).parents('.ajax').load({href: path, modal: modal});
+            $(this).parents('.ajax').load({href: path, modal: modal, history: false});
         });
         $(document).on('injected', function () {
             if (data !== null) {

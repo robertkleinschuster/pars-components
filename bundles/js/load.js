@@ -1,6 +1,6 @@
 (function ($) {
     var datacache = [];
-    $.fn.load = function (href = null, cache = false, history = false, id = null, component = null, remote = false, modal = false) {
+    $.fn.load = function (href = null, cache = false, history = null, id = null, component = null, remote = false, modal = false) {
         this.each(function () {
             if (href === Object(href)) {
                 id = href.id;
@@ -23,7 +23,7 @@
             if (!remote) {
                 remote = $(this).hasClass('remote');
             }
-            if (!history) {
+            if (history === null) {
                 history = $(this).hasClass('history');
             }
             if (href === '#') {
