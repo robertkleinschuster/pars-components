@@ -98,6 +98,7 @@
             $('#ajax-modal').on('click.closeModal', '.close-modal', function () {
                 $('#ajax-modal').modal('hide');
             });
+            $(document).trigger('injected');
         } else {
             if (remote) {
                 id = component;
