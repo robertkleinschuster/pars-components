@@ -66,6 +66,7 @@
                         $select.find('option[value='+ item.value +']').attr('selected', 'selected');
                     }
                 });
+                data = null;
             }
         });
         $('.ajax.onload').load();
