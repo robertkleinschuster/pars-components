@@ -38,6 +38,8 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
      */
     protected ?Input $search = null;
 
+    protected ?string $searchAction = null;
+
     /**
      * @throws \Niceshops\Core\Exception\AttributeExistsException
      * @throws \Niceshops\Core\Exception\AttributeLockException
@@ -81,6 +83,9 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
             $this->push($this->getCollapse());
             if ($this->hasSearch()) {
                 $form = new Form();
+                if ($this->hasSearchAction()) {
+                    $form->setAction($this->getSearchAction());
+                }
                 $form->addOption('order-3');
                 $this->getSearch()->setRounded(Input::ROUNDED_NONE);
                 if ($this->hasBackground()) {
@@ -224,6 +229,33 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     public function hasSearch(): bool
     {
         return $this->search !== null;
+    }
+
+    /**
+    * @return string
+    */
+    public function getSearchAction(): string
+    {
+        return $this->searchAction;
+    }
+
+    /**
+    * @param string $searchAction
+    *
+    * @return $this
+    */
+    public function setSearchAction(string $searchAction): self
+    {
+        $this->searchAction = $searchAction;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasSearchAction(): bool
+    {
+        return isset($this->searchAction);
     }
 
 }
