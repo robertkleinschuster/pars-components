@@ -19,7 +19,7 @@
         if ($('#ajax-modal').hasClass('show')) {
             $('#ajax-modal').modal('hide');
         }
-        $('#' + event.state.attributes.component).load({href: event.state.href, history: false});
+        $('#' + event.state.attributes.component).load({href: event.state.href, history: false, modal: event.state.modal});
     });
 
     function formatdata(html, component, href) {

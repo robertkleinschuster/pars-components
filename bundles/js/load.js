@@ -82,13 +82,19 @@
         var $modal = $('#ajax-modal');
         var $source = $(data.html);
         if (modal) {
+            if ($(modal).data('modal-title')) {
+                modal = {
+                    title: $(modal).data('modal-title')
+                };
+            }
+            data.modal = modal;
             if (history) {
                 $.fn.history(data, id, href);
             } else {
                 $.fn.history(data, id, href, true);
             }
             var $modalBody = $('#ajax-modal .modal-body');
-            $('#ajax-modal .modal-title').html($(modal).data('modal-title') ?? '');
+            $('#ajax-modal .modal-title').html(modal.title ?? '');
             $modalBody.empty();
             $modalBody.append($source);
             $modalBody.find('#components').removeClass('container-fluid');
