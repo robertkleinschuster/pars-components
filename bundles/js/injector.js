@@ -72,5 +72,21 @@
                 });
             }
         }
+        if (data.debug) {
+            if ($('#debug').length) {
+                $('#debug .modal-body').html(data.debug);
+            } else {
+                $('#main').prepend("<div id='debug' class='modal'><div class='modal-dialog modal-dialog-scrollable'><div class='modal-content'>" +
+                    " <div class=\"modal-header\">\n" +
+                    "        " +
+                    "        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+                    "          <span aria-hidden=\"true\">&times;</span>\n" +
+                    "        </button>\n" +
+                    "      </div>" +
+                    "<div class=\"modal-body\"></div></div></div></div>")
+                $('#debug .modal-body').html(data.debug);
+            }
+            $('#debug').modal();
+        }
     }
 }(jQuery));
