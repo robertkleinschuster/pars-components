@@ -79,34 +79,36 @@
     }
 
     function inject(data, href, id, component, remote, history, modal) {
+        var $modal = $('#ajax-modal');
+        var $source = $(data.html);
         if (modal) {
-            var $source = $(data.html);
             if (history) {
                 $.fn.history(data, id, href);
             } else {
                 $.fn.history(data, id, href, true);
             }
-            $body = $('#ajax-modal .modal-body');
+            var $modalBody = $('#ajax-modal .modal-body');
             $('#ajax-modal .modal-title').html($(modal).data('modal-title') ?? '');
-            $body.empty();
-            $body.append($source);
-            $body.find('#components').removeClass('container-fluid');
-            if ($body.find('form').length) {
-                $body.find('form').attr('action', href);
+            $modalBody.empty();
+            $modalBody.append($source);
+            $modalBody.find('#components').removeClass('container-fluid');
+            if ($modalBody.find('form').length) {
+                $modalBody.find('form').attr('action', href);
             }
-            $('#ajax-modal').modal({backdrop: 'static', keyboard: false});
-            $('#ajax-modal').on('click.closeModal', '.close-modal', function () {
-                $('#ajax-modal').modal('hide');
+            $modal.modal({backdrop: 'static', keyboard: false});
+            $modal.on('click.closeModal', '.close-modal', function () {
+                $modal.modal('hide');
             });
             $(document).trigger('injected');
         } else {
             if (remote) {
                 id = component;
             }
-            if ($('#ajax-modal').hasClass('show')) {
-                var $destination = $('#ajax-modal').find('#' + id);
+            var $destination;
+            if ($modal.hasClass('show')) {
+                $destination = $modal.find('#' + id);
             } else {
-                var $destination = $('#' + id);
+                $destination = $('#' + id);
             }
             if ($destination) {
                 if (history) {
@@ -114,7 +116,6 @@
                 } else {
                     $.fn.history(data, id, href, true);
                 }
-                var $source = $(data.html);
                 $source.attr('id', id);
                 $source.attr('class', $destination.attr('class'));
                 $source.attr('data-component', component);

@@ -93,9 +93,9 @@
                 $source.attr('data-component', component);
                 $source.attr('data-href', href);
                 $destination.replaceWith($source);
-                var $body = $('body');
-                if ($body.find('form').length) {
-                    $body.find('form').attr('action', href);
+                var $modalBody = $('#ajax-modal .modal-body');
+                if ($modalBody.find('form').length) {
+                    $modalBody.find('form').attr('action', href);
                 }
             }
         }
@@ -131,9 +131,9 @@
                     $source.attr('data-component', component);
                     $source.attr('data-href', href);
                     $destination.replaceWith($source);
-                    var $body = $('body');
-                    if ($body.find('form').length) {
-                        $body.find('form').attr('action', href);
+                    var $modalBody = $('#ajax-modal .modal-body');
+                    if ($modalBody.find('form').length) {
+                        $modalBody.find('form').attr('action', href);
                     }
                 }
             }
