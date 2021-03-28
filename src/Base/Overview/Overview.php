@@ -3,11 +3,13 @@
 namespace Pars\Component\Base\Overview;
 
 use Niceshops\Bean\Type\Base\BeanListAwareTrait;
+use Pars\Admin\Base\BaseOverview;
 use Pars\Component\Base\Field\Span;
 use Pars\Component\Base\Table\Table;
 use Pars\Component\Base\Table\TableResponsive;
 use Pars\Component\Base\Toolbar\Toolbar;
 use Pars\Mvc\View\AbstractComponent;
+use Pars\Mvc\View\FieldAcceptInterface;
 use Pars\Mvc\View\FieldInterface;
 use Pars\Mvc\View\HtmlElement;
 
@@ -22,6 +24,7 @@ class Overview extends AbstractComponent
     public ?string $moveUpPath = null;
     public ?string $bulkFieldName = null;
     public ?string $bulkFieldValue = null;
+    public ?FieldAcceptInterface $showEditAccept = null;
 
     public array $fields = [];
 
@@ -74,6 +77,9 @@ class Overview extends AbstractComponent
     protected function initEditButton(): EditButton
     {
         $button = (new EditButton())->setModal(true);
+        if ($this->hasShowEditFieldAccept()) {
+            $button->setAccept($this->getShowEditFieldAccept());
+        }
         if ($this->hasEditPath()) {
             $button->setPath($this->getEditPath());
             $this->prepend($button);
@@ -357,4 +363,33 @@ class Overview extends AbstractComponent
         unset($this->fields[$name]);
         return $this;
     }
+
+
+    /**
+     * @return FieldAcceptInterface
+     */
+    public function getShowEditFieldAccept(): FieldAcceptInterface
+    {
+        return $this->showEditAccept;
+    }
+
+    /**
+     * @param FieldAcceptInterface $showEditAccept
+     *
+     * @return $this
+     */
+    public function setShowEditFieldAccept(FieldAcceptInterface $showEditAccept): self
+    {
+        $this->showEditAccept = $showEditAccept;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasShowEditFieldAccept(): bool
+    {
+        return isset($this->showEditAccept);
+    }
+
 }

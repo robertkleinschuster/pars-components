@@ -254,7 +254,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $column
      * @return FormGroup
      */
-    public function addSelect(string $name, array $options, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addSelect(string $name, array $options, string $value = '', string $label = null, int $row = 1, int $column = 1)
     {
         return $this->addInput(new Select($options), $name, $value, $label, $row, $column);
     }

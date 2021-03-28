@@ -9,6 +9,7 @@ use Pars\Component\Base\Field\Span;
 use Pars\Component\Base\Jumbotron\Jumbotron;
 use Pars\Component\Base\Toolbar\Toolbar;
 use Pars\Mvc\View\AbstractComponent;
+use Pars\Mvc\View\FieldAcceptInterface;
 use Pars\Mvc\View\FieldInterface;
 
 class Detail extends AbstractComponent implements BeanAwareInterface
@@ -18,6 +19,7 @@ class Detail extends AbstractComponent implements BeanAwareInterface
     private ?Jumbotron $jumbotron = null;
     protected ?Toolbar $toolbar = null;
     protected ?Toolbar $subToolbar = null;
+    public ?FieldAcceptInterface $showEditAccept = null;
 
     protected function initialize()
     {
@@ -151,6 +153,33 @@ class Detail extends AbstractComponent implements BeanAwareInterface
             $this->subToolbar = new Toolbar();
         }
         return $this->subToolbar;
+    }
+
+    /**
+     * @return FieldAcceptInterface
+     */
+    public function getShowEditFieldAccept(): FieldAcceptInterface
+    {
+        return $this->showEditAccept;
+    }
+
+    /**
+     * @param FieldAcceptInterface $showEditAccept
+     *
+     * @return $this
+     */
+    public function setShowEditFieldAccept(FieldAcceptInterface $showEditAccept): self
+    {
+        $this->showEditAccept = $showEditAccept;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasShowEditFieldAccept(): bool
+    {
+        return isset($this->showEditAccept);
     }
 
 }
