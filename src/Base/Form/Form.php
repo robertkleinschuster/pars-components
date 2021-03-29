@@ -317,6 +317,21 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     }
 
     /**
+     * @param string $name
+     * @param string $content
+     * @param string|null $value
+     * @param string|null $style
+     * @param string|null $label
+     * @param int $row
+     * @param int $column
+     * @return FormGroup
+     */
+    public function addReset(string $name, string $content, string $value = null, string $style = null, string $label = null, int $row = 1, int $column = 1)
+    {
+        return $this->addInput(new Reset($content, $style ?? Reset::STYLE_DANGER), $name, $value, $label, $row, $column);
+    }
+
+    /**
      * @param string $label
      * @param string $path
      */
