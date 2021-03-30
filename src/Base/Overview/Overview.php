@@ -356,6 +356,21 @@ class Overview extends AbstractComponent
 
     /**
      * @param string $name
+     * @param string $label
+     */
+    public function addFieldSpan(string $name, string $label)
+    {
+        $span = new Span("{{$name}}", $label);
+        if ($this->hasDetailPath()) {
+            $span->setPath($this->getDetailPath());
+            $span->addOption(Span::OPTION_DECORATION_NONE);
+        }
+        $this->append($span);
+        return $span;
+    }
+
+    /**
+     * @param string $name
      * @return $this
      */
     public function removeField(string $name)
