@@ -50,7 +50,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
         if (!$this->isEmpty()) {
             $this->setTag('nav');
             $this->addOption('navbar');
-            $this->addOption('mb-3');
+            $this->addOption('mb-1');
             $this->addOption('shadow-sm');
             if ($this->hasBackground()) {
                 $this->addOption($this->getBackground());

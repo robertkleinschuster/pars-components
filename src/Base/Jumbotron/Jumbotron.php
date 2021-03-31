@@ -94,7 +94,7 @@ class Jumbotron extends AbstractComponent
             $div->push($span);
         }
         $block = new HtmlElement();
-        $block->addOption('mb-2');
+        $block->addOption('mb-1');
         $block->addOption('bg-white');
         $block->addOption('border');
         $block->addOption('border-secondary');

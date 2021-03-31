@@ -36,7 +36,7 @@ class DashboardLayout extends BaseLayout
         $components->addOption('history');
         $components->setData('component', 'components');
         $components->setId('components');
-        parent::components($maincolumn);
+        parent::components($components);
         $row->push($maincolumn);
         if ($this->exists('actionIdAfter')) {
             $tabs = new Tabs();
@@ -53,14 +53,15 @@ class DashboardLayout extends BaseLayout
             $maincolumn->addOption('col-xl-5');
             $maincolumn->addOption('col-lg-6');
             $maincolumn->addOption('col-md-8');
-            $column->push($tabs);
             foreach ($this->getComponentListAfter() as $component) {
-                $maincolumn->push($component);
+                $components->push($component);
             }
+            $components->push($tabs);
+
             $row->push($column);
         } elseif($this->getComponentListAfter()->count()) {
             foreach ($this->getComponentListAfter() as $component) {
-                $column->push($component);
+                $components->push($component);
             }
             $column->addOption('col-xl-4');
             $column->addOption('col-lg-6');
@@ -72,7 +73,7 @@ class DashboardLayout extends BaseLayout
             $maincolumn->addOption('col-12');
             $row->push($column);
         }
-        $components->push($row);
+        #$components->push($row);
     }
 
 
