@@ -1134,6 +1134,8 @@
 
             // Reposition the picker if the window is resized while it's open
             $(window).on('resize.daterangepicker', $.proxy(function(e) { this.move(e); }, this));
+            var that = this;
+            document.addEventListener('scroll', function(e){ that.move(e); }, true);
 
             this.oldStartDate = this.startDate.clone();
             this.oldEndDate = this.endDate.clone();
