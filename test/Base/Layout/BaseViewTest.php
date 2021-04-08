@@ -9,16 +9,16 @@ declare(strict_types=1);
 
 namespace ParsTest\Mvc\View;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBean;
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Type\Base\AbstractBaseBean;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Component\Base\Layout\BaseLayout;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class DefaultTestCaseTest
- * @package Niceshops\Bean
+ * @package Pars\Bean
  */
-class BaseViewTest extends \Niceshops\Core\PHPUnit\DefaultTestCase
+class BaseViewTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
 {
 
 

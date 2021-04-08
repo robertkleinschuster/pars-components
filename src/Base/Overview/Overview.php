@@ -2,7 +2,7 @@
 
 namespace Pars\Component\Base\Overview;
 
-use Niceshops\Bean\Type\Base\BeanListAwareTrait;
+use Pars\Bean\Type\Base\BeanListAwareTrait;
 use Pars\Admin\Base\BaseOverview;
 use Pars\Component\Base\Field\Span;
 use Pars\Component\Base\Table\Table;

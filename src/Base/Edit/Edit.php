@@ -4,8 +4,8 @@
 namespace Pars\Component\Base\Edit;
 
 
-use Niceshops\Bean\Type\Base\BeanAwareInterface;
-use Niceshops\Bean\Type\Base\BeanAwareTrait;
+use Pars\Bean\Type\Base\BeanAwareInterface;
+use Pars\Bean\Type\Base\BeanAwareTrait;
 use Pars\Component\Base\Form\Form;
 use Pars\Mvc\View\AbstractComponent;
 

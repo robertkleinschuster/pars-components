@@ -4,8 +4,8 @@
 namespace Pars\Component\Base\Table;
 
 
-use Niceshops\Bean\Type\Base\BeanListAwareInterface;
-use Niceshops\Bean\Type\Base\BeanListAwareTrait;
+use Pars\Bean\Type\Base\BeanListAwareInterface;
+use Pars\Bean\Type\Base\BeanListAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldListAwareTrait;
 

@@ -2,9 +2,9 @@
 
 namespace Pars\Component\Base\Detail;
 
-use Niceshops\Bean\Type\Base\BeanAwareInterface;
-use Niceshops\Bean\Type\Base\BeanAwareTrait;
-use Niceshops\Bean\Type\Base\BeanException;
+use Pars\Bean\Type\Base\BeanAwareInterface;
+use Pars\Bean\Type\Base\BeanAwareTrait;
+use Pars\Bean\Type\Base\BeanException;
 use Pars\Component\Base\Field\Span;
 use Pars\Component\Base\Jumbotron\Jumbotron;
 use Pars\Component\Base\Toolbar\Toolbar;

@@ -4,7 +4,7 @@
 namespace Pars\Component\Base\Form;
 
 
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Mvc\View\HtmlElement;
 
 class Select extends Input
@@ -20,8 +20,8 @@ class Select extends Input
 
     /**
      * @return mixed|void
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     protected function initialize()
     {

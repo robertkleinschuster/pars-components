@@ -36,7 +36,7 @@ class Pagination extends AbstractComponent
     /**
      * @param string $path
      * @return PaginationItem
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Pars\Bean\Type\Base\BeanException
      */
     public function addPrevious(string $path)
     {
@@ -46,7 +46,7 @@ class Pagination extends AbstractComponent
     /**
      * @param string $path
      * @return PaginationItem
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Pars\Bean\Type\Base\BeanException
      */
     public function addNext(string $path)
     {
@@ -57,7 +57,7 @@ class Pagination extends AbstractComponent
      * @param string $path
      * @param string|null $content
      * @return PaginationItem
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Pars\Bean\Type\Base\BeanException
      */
     public function addPage(?string $path, string $content = null, bool $active = false)
     {

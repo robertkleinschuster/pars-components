@@ -4,7 +4,7 @@
 namespace Pars\Component\Base\Toolbar;
 
 
-use Niceshops\Bean\Type\Base\BeanException;
+use Pars\Bean\Type\Base\BeanException;
 use Pars\Component\Base\Field\Button;
 
 class ToolbarButton extends Button

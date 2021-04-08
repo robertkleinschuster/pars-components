@@ -29,7 +29,7 @@ class Alert extends AbstractComponent implements StyleAwareInterface
      * Alert constructor.
      * @param string|null $heading
      * @param string|null $text
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Pars\Bean\Type\Base\BeanException
      */
     public function __construct(?string $heading = null, ?string $text = null)
     {

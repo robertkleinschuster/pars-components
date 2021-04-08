@@ -4,7 +4,7 @@
 namespace Pars\Component\Base\Form;
 
 
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Mvc\View\HtmlElement;
 
 class Checkbox extends Input

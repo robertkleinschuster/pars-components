@@ -4,8 +4,8 @@
 namespace Pars\Component\Base\Field;
 
 
-use Niceshops\Core\Mode\ModeAwareInterface;
-use Niceshops\Core\Mode\ModeAwareTrait;
+use Pars\Pattern\Mode\ModeAwareInterface;
+use Pars\Pattern\Mode\ModeAwareTrait;
 use Pars\Mvc\View\AbstractField;
 
 class Image extends AbstractField implements ModeAwareInterface

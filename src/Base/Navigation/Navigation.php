@@ -41,9 +41,9 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     protected ?string $searchAction = null;
 
     /**
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     protected function initialize()
     {

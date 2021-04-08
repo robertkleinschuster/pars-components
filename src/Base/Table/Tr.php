@@ -2,9 +2,9 @@
 
 namespace Pars\Component\Base\Table;
 
-use Niceshops\Bean\Type\Base\BeanAwareInterface;
-use Niceshops\Bean\Type\Base\BeanAwareTrait;
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Type\Base\BeanAwareInterface;
+use Pars\Bean\Type\Base\BeanAwareTrait;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Component\Base\Field\Badge;
 use Pars\Component\Base\Field\Button;
 use Pars\Component\Base\Field\Icon;

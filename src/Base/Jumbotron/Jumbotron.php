@@ -84,7 +84,7 @@ class Jumbotron extends AbstractComponent
      * @param FieldInterface $field
      * @param int $count
      * @return Row
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Pars\Bean\Type\Base\BeanException
      */
     protected function createFieldRow(FieldInterface $field, $count = 1): HtmlElement
     {

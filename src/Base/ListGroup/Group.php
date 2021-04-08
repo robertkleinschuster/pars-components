@@ -4,8 +4,8 @@
 namespace Pars\Component\Base\ListGroup;
 
 
-use Niceshops\Core\Mode\ModeAwareInterface;
-use Niceshops\Core\Mode\ModeAwareTrait;
+use Pars\Pattern\Mode\ModeAwareInterface;
+use Pars\Pattern\Mode\ModeAwareTrait;
 use Pars\Component\Base\BreakpointAwareInterface;
 use Pars\Component\Base\BreakpointAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
