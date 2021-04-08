@@ -1,7 +1,7 @@
 # pars-components
 
-[![Build Status](https://travis-ci.com/pars/pars-components.svg?branch=master)](https://travis-ci.com/pars/pars-components)
-[![Coverage Status](https://coveralls.io/repos/github/pars/pars-components/badge.svg?branch=master)](https://coveralls.io/github/pars/pars-components?branch=master)
+[![Build Status](https://travis-ci.com/pars-framework/pars-components.svg?branch=master)](https://travis-ci.com/pars-framework/pars-components)
+[![Coverage Status](https://coveralls.io/repos/github/pars-framework/pars-components/badge.svg?branch=master)](https://coveralls.io/github/pars-framework/pars-components?branch=master)
 
 This library provides …
 
