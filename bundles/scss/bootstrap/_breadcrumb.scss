@@ -10,6 +10,11 @@
 }
 
 .breadcrumb-item {
+  color: $breadcrumb-color;
+  a {
+    color: $breadcrumb-color;
+  }
+
   // The separator between breadcrumbs (by default, a forward-slash: "/")
   + .breadcrumb-item {
     padding-left: $breadcrumb-item-padding;
@@ -37,6 +42,9 @@
   }
 
   &.active {
+    color: $breadcrumb-active-color;
+  }
+  &.active a {
     color: $breadcrumb-active-color;
   }
 }

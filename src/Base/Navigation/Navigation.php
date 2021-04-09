@@ -211,6 +211,14 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     }
 
     /**
+     * @return string
+     */
+    public function getActive(): string
+    {
+        return $this->getCollapse()->getActive();
+    }
+
+    /**
      * @param string $name
      * @param string $placeholder
      * @return $this

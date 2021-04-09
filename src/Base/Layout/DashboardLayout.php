@@ -2,6 +2,7 @@
 
 namespace Pars\Component\Base\Layout;
 
+use Pars\Component\Base\Breadcrumb\Breadcrumb;
 use Pars\Component\Base\Grid\Column;
 use Pars\Component\Base\Grid\Container;
 use Pars\Component\Base\Grid\Row;
@@ -12,7 +13,7 @@ use Pars\Mvc\View\HtmlElement;
 class DashboardLayout extends BaseLayout
 {
     public ?Navigation $navigation = null;
-
+    public ?Breadcrumb $breadcrumb = null;
     public ?Container $container = null;
 
     public ?Navigation $subNavigation = null;
@@ -163,6 +164,19 @@ class DashboardLayout extends BaseLayout
         }
         return $this->subNavigation;
     }
+
+    /**
+     * @return Breadcrumb|null
+     */
+    public function getBreadcrumb(): ?Breadcrumb
+    {
+        if (!isset($this->breadcrumb)) {
+            $this->breadcrumb = new Breadcrumb();
+        }
+        return $this->breadcrumb;
+    }
+
+
 
     /**
      * @param Navigation $navigation
