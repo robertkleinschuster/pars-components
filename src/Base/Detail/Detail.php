@@ -17,20 +17,14 @@ class Detail extends AbstractComponent implements BeanAwareInterface
     use BeanAwareTrait;
 
     private ?Jumbotron $jumbotron = null;
-    protected ?Toolbar $toolbar = null;
-    protected ?Toolbar $subToolbar = null;
     public ?FieldAcceptInterface $showEditAccept = null;
 
-    protected function initialize()
+    protected function initFields()
     {
-        if ($this->getToolbar()->getElementList()->count()) {
-            $this->push($this->getToolbar());
-        }
-        if ($this->getSubToolbar()->getElementList()->count()) {
-            $this->push($this->getSubToolbar());
-        }
+        parent::initFields();
         $this->push($this->getJumbotron());
     }
+
 
     /**
      * @return Jumbotron|null
@@ -96,63 +90,6 @@ class Detail extends AbstractComponent implements BeanAwareInterface
     {
         $this->getJumbotron()->getFieldList()->unshift($field);
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSection(): string
-    {
-        return $this->getName();
-    }
-
-    /**
-     * @param string $section
-     *
-     * @return $this
-     */
-    public function setSection(string $section): self
-    {
-        return $this->setName($section);
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasSection(): bool
-    {
-        return $this->hasName();
-    }
-
-
-    /**
-     * @return Toolbar|null
-     */
-    public function getToolbar(): ?Toolbar
-    {
-        if (null == $this->toolbar) {
-            $this->toolbar = new Toolbar();
-        }
-        return $this->toolbar;
-    }
-
-    /**
-     * @param Toolbar|null $toolbar
-     */
-    public function setToolbar(?Toolbar $toolbar): void
-    {
-        $this->toolbar = $toolbar;
-    }
-
-    /**
-     * @return Toolbar|null
-     */
-    public function getSubToolbar(): ?Toolbar
-    {
-        if (null == $this->subToolbar) {
-            $this->subToolbar = new Toolbar();
-        }
-        return $this->subToolbar;
     }
 
     /**

@@ -3,15 +3,12 @@
 namespace Pars\Component\Base\Overview;
 
 use Pars\Bean\Type\Base\BeanListAwareTrait;
-use Pars\Admin\Base\BaseOverview;
 use Pars\Component\Base\Field\Span;
 use Pars\Component\Base\Table\Table;
 use Pars\Component\Base\Table\TableResponsive;
-use Pars\Component\Base\Toolbar\Toolbar;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldAcceptInterface;
 use Pars\Mvc\View\FieldInterface;
-use Pars\Mvc\View\HtmlElement;
 
 class Overview extends AbstractComponent
 {
@@ -29,37 +26,18 @@ class Overview extends AbstractComponent
     public array $fields = [];
 
     private ?TableResponsive $table = null;
-    private ?Toolbar $toolbar = null;
-    private ?HtmlElement $before = null;
-    private ?HtmlElement $after = null;
 
-    protected function initialize()
+
+    protected function handleFields()
     {
-        if ($this->hasBeanList()) {
-            $this->getTableResponsive()->setBeanList($this->getBeanList());
-        }
-        $this->push($this->getBefore());
-        if ($this->hasToolbar()) {
-            $this->push($this->getToolbar());
-        }
-        $this->push($this->getTableResponsive());
-        if ($this->hasMoveUpPath()) {
-            $this->prepend(new MoveUpButton($this->getMoveUpPath()));
-        }
-        if ($this->hasMoveDownPath()) {
-            $this->prepend(new MoveDownButton($this->getMoveDownPath()));
-        }
-        $this->initDeleteButton();
-        $this->initEditButton();
-        if ($this->hasDetailPath()) {
-            $this->prepend(new DetailButton($this->getDetailPath()));
-        }
-        if ($this->hasBulkField()) {
-            $check = new BulkCheckbox();
-            $check->setName($this->getBulkFieldName());
-            $check->setValue($this->getBulkFieldValue());
-            $this->prepend($check);
-        }
+        parent::handleFields();
+        $this->handleTable();
+        $this->handleMoveUpButton();
+        $this->handleMoveDownButton();
+        $this->handleDeleteButton();
+        $this->handleEditButton();
+        $this->handleDetailButton();
+        $this->handleBulkField();
         foreach ($this->fields as $name => $label) {
             $span = new Span("{{$name}}", $label);
             if ($this->hasDetailPath()) {
@@ -68,13 +46,65 @@ class Overview extends AbstractComponent
             }
             $this->append($span);
         }
-        $this->push($this->getAfter());
+    }
+
+
+    protected function handleBulkField()
+    {
+        if ($this->hasBulkField()) {
+            $check = new BulkCheckbox();
+            $check->setName($this->getBulkFieldName());
+            $check->setValue($this->getBulkFieldValue());
+            $this->prepend($check);
+        }
+    }
+
+    protected function handleDetailButton()
+    {
+        if ($this->hasDetailPath()) {
+            $this->prepend(new DetailButton($this->getDetailPath()));
+        }
+    }
+
+    protected function handleTable()
+    {
+        if ($this->hasBeanList()) {
+            $this->getTableResponsive()->setBeanList($this->getBeanList());
+        }
+        $this->push($this->getTableResponsive());
+    }
+
+    protected function handleMoveUpButton()
+    {
+        if ($this->hasMoveUpPath()) {
+            $this->prepend(new MoveUpButton($this->getMoveUpPath()));
+        }
+
+    }
+
+    protected function handleMoveDownButton()
+    {
+        if ($this->hasMoveDownPath()) {
+            $this->prepend(new MoveDownButton($this->getMoveDownPath()));
+        }
+    }
+
+    protected function handleAdditionalBefore()
+    {
+        parent::handleAdditionalBefore();
+
+    }
+
+
+    protected function handleAdditionalAfter()
+    {
+        parent::handleAdditionalAfter();
     }
 
     /**
      * @return EditButton
      */
-    protected function initEditButton(): EditButton
+    protected function handleEditButton(): EditButton
     {
         $button = (new EditButton())->setModal(true);
         if ($this->hasShowEditFieldAccept()) {
@@ -90,7 +120,7 @@ class Overview extends AbstractComponent
     /**
      * @return DeleteButton
      */
-    protected function initDeleteButton(): DeleteButton
+    protected function handleDeleteButton(): DeleteButton
     {
         $button = (new DeleteButton())->setModal(true);
         if ($this->hasDeletePath()) {
@@ -155,34 +185,6 @@ class Overview extends AbstractComponent
         return $this->table;
     }
 
-    public function getToolbar(): Toolbar
-    {
-        if (null === $this->toolbar) {
-            $this->toolbar = new Toolbar();
-        }
-        return $this->toolbar;
-    }
-
-    public function getBefore(): HtmlElement
-    {
-        if (null === $this->before) {
-            $this->before = new HtmlElement();
-        }
-        return $this->before;
-    }
-
-    public function getAfter(): HtmlElement
-    {
-        if (null === $this->after) {
-            $this->after = new HtmlElement();
-        }
-        return $this->after;
-    }
-
-    public function hasToolbar(): bool
-    {
-        return isset($this->toolbar);
-    }
 
     public function getTable(): Table
     {

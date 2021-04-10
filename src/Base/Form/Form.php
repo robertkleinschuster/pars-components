@@ -29,16 +29,16 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     /**
      * @var FormRow[]
      */
-    private array $rowMap = [];
+    protected array $rowMap = [];
     /**
      * @var FormColumn[]
      */
-    private array $columnMap = [];
+    protected array $columnMap = [];
 
     /**
      * @var array
      */
-    private array $formGroupList = [];
+    protected array $formGroupList = [];
 
     public ?string $action = null;
 

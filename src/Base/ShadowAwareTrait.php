@@ -6,7 +6,7 @@ namespace Pars\Component\Base;
 
 trait ShadowAwareTrait
 {
-    private ?string $shadow = null;
+    protected ?string $shadow = null;
 
     /**
      * @return string
