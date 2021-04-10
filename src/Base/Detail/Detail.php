@@ -19,9 +19,9 @@ class Detail extends AbstractComponent implements BeanAwareInterface
     private ?Jumbotron $jumbotron = null;
     public ?FieldAcceptInterface $showEditAccept = null;
 
-    protected function initFields()
+    protected function handleFields()
     {
-        parent::initFields();
+        parent::handleFields();
         $this->push($this->getJumbotron());
     }
 
