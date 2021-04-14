@@ -39,6 +39,16 @@ class Item extends AbstractField
         $this->push($this->getLink());
     }
 
+    public function setCache(bool $cache): self
+    {
+        if ($cache) {
+            $this->addOption('cache');
+        } else {
+            $this->removeOption('cache');
+        }
+        return $this;
+    }
+
     /**
      * @return Link|null
      */

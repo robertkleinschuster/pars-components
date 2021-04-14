@@ -21,7 +21,7 @@ class Collapse extends AbstractComponent
         $this->addOption('navbar-collapse');
         if ($this->hasActive()) {
             foreach ($this->getItemList() as $item) {
-                if ($item->getId() === $this->getActive()) {
+                if ($this->hasActive() && $item->getId() === $this->getActive()) {
                     $item->setActive(true);
                 }
             }
