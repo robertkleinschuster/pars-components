@@ -142,6 +142,12 @@ class BaseLayout extends AbstractLayout
     protected function scripts(HtmlElement $body)
     {
         foreach ($this->getStaticFiles() as $bundle) {
+            if ($bundle['type'] == 'js-sw') {
+                $script = new HtmlElement('script');
+                $script->addOption('service-worker');
+                $script->setAttribute('data-src', '/' . $bundle['output']);
+                $body->push($script);
+            }
             if ($bundle['type'] == 'js') {
                 $script = new HtmlElement('script');
                 $script->setAttribute('src', '/' . $bundle['output']);
