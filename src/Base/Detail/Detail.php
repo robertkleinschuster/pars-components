@@ -5,9 +5,9 @@ namespace Pars\Component\Base\Detail;
 use Pars\Bean\Type\Base\BeanAwareInterface;
 use Pars\Bean\Type\Base\BeanAwareTrait;
 use Pars\Bean\Type\Base\BeanException;
+use Pars\Component\Base\Collapsable\Collapsable;
 use Pars\Component\Base\Field\Span;
 use Pars\Component\Base\Jumbotron\Jumbotron;
-use Pars\Component\Base\Toolbar\Toolbar;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldAcceptInterface;
 use Pars\Mvc\View\FieldInterface;
@@ -16,13 +16,19 @@ class Detail extends AbstractComponent implements BeanAwareInterface
 {
     use BeanAwareTrait;
 
-    private ?Jumbotron $jumbotron = null;
-    public ?FieldAcceptInterface $showEditAccept = null;
+    protected ?Jumbotron $jumbotron = null;
+    protected ?Collapsable $collapsable = null;
+    protected ?FieldAcceptInterface $showEditAccept = null;
 
     protected function handleFields()
     {
         parent::handleFields();
-        $this->push($this->getJumbotron());
+        if ($this->hasCollapsable()) {
+            $this->getCollapsable()->pushComponent($this->getJumbotron());
+            $this->push($this->getCollapsable());
+        } else {
+            $this->push($this->getJumbotron());
+        }
     }
 
 
@@ -118,5 +124,33 @@ class Detail extends AbstractComponent implements BeanAwareInterface
     {
         return isset($this->showEditAccept);
     }
+
+    /**
+     * @return Collapsable
+     */
+    public function getCollapsable(): Collapsable
+    {
+        return $this->collapsable;
+    }
+
+    /**
+     * @param Collapsable $collapsable
+     *
+     * @return $this
+     */
+    public function setCollapsable(Collapsable $collapsable): self
+    {
+        $this->collapsable = $collapsable;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCollapsable(): bool
+    {
+        return isset($this->collapsable);
+    }
+
 
 }

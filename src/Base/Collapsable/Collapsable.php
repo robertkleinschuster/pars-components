@@ -27,8 +27,8 @@ class Collapsable extends AbstractComponent
     {
         $content = $this->getComponentGroup();
         $content->addOption("collapse");
-        if($this->isExpanded()) {
-           $content->addOption("show");
+        if ($this->isExpanded()) {
+            $content->addOption("show");
         }
         $this->push($content);
     }
@@ -46,7 +46,9 @@ class Collapsable extends AbstractComponent
         $title = new Span();
         $title->addOption("my-auto");
         $title->setContent($this->getTitle());
-
+        if ($button->hasPath()) {
+            $title->setPath($button->getPath());
+        }
         $header->push($title);
         $header->push($button);
         $this->push($header);
@@ -57,7 +59,7 @@ class Collapsable extends AbstractComponent
      */
     public function getButton(): ?ToggleCollapsableButton
     {
-        if(!isset($this->button)) {
+        if (!isset($this->button)) {
             $this->button = new ToggleCollapsableButton($this->getComponentGroup()->generateId());
         }
         return $this->button;
