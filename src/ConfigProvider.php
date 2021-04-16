@@ -14,6 +14,9 @@ class ConfigProvider
                 ]
             ],
             'bundles' => [
+                'entrypoints' => [
+                  'component'
+                ],
                 'list' => [
                     [
                         'type' => 'js',

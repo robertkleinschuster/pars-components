@@ -123,17 +123,12 @@ class BaseLayout extends AbstractLayout
 
     protected function stylesheets(HtmlElement $head)
     {
-        foreach ($this->getStaticFiles() as $bundle) {
-            if ($bundle['type'] == 'css') {
+        $files = $this->getStaticFiles();
+        if (isset($files['css']) && is_array($files['css'])) {
+            foreach ($files['css'] as $file) {
                 $link = new HtmlElement('link');
                 $link->setAttribute('rel', 'stylesheet');
-                $link->setAttribute('href', '/' . $bundle['output']);
-                $head->push($link);
-            }
-            if ($bundle['type'] == 'scss') {
-                $link = new HtmlElement('link');
-                $link->setAttribute('rel', 'stylesheet');
-                $link->setAttribute('href', '/' . $bundle['output']);
+                $link->setAttribute('href', $file);
                 $head->push($link);
             }
         }
@@ -144,16 +139,11 @@ class BaseLayout extends AbstractLayout
      */
     protected function scripts(HtmlElement $body)
     {
-        foreach ($this->getStaticFiles() as $bundle) {
-            if ($bundle['type'] == 'js-sw') {
+        $files = $this->getStaticFiles();
+        if (isset($files['js']) && is_array($files['js'])) {
+            foreach ($files['js'] as $file) {
                 $script = new HtmlElement('script');
-                $script->addOption('service-worker');
-                $script->setAttribute('data-src', '/' . $bundle['output']);
-                $body->push($script);
-            }
-            if ($bundle['type'] == 'js') {
-                $script = new HtmlElement('script');
-                $script->setAttribute('src', '/' . $bundle['output']);
+                $script->setAttribute('src', $file);
                 $body->push($script);
             }
         }
