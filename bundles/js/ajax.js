@@ -42,8 +42,8 @@
             let name = $(this).attr('name');
             let pathHelper = new PathHelper();
             let parameter = new Parameter('data');
-            parameter.setAtttribute(name, value);
-            pathHelper.addParamter(parameter);
+            parameter.setAttributes(name, value);
+            pathHelper.addParameter(parameter);
             let modal = $(this).parents('#ajax-modal').length > 0;
             let path = pathHelper.getPath();
             data = $(this).parents('form').serializeArray();
