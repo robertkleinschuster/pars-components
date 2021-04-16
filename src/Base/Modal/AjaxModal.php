@@ -5,18 +5,20 @@ namespace Pars\Component\Base\Modal;
 
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\HtmlElement;
+use PHPUnit\TextUI\XmlConfiguration\Logging\TestDox\Html;
 
 class AjaxModal extends AbstractComponent
 {
     protected function initialize()
     {
-        $this->setId('ajax-modal');
-        $this->addOption('modal');
-        $this->addOption('fade');
-        $this->setAttribute('tabindes', '-1');
-        $this->setRole('dialog');
-        $this->setAria('labelledby', 'ajax-modal-title');
-        $this->setAria('hidden', 'true');
+        $modal = new HtmlElement();
+        $modal->setId('ajax-modal');
+        $modal->addOption('modal');
+        $modal->addOption('fade');
+        $modal->setAttribute('tabindes', '-1');
+        $modal->setRole('dialog');
+        $modal->setAria('labelledby', 'ajax-modal-title');
+        $modal->setAria('hidden', 'true');
 
         $modalDialog = new HtmlElement('div.modal-dialog');
         $modalDialog->addOption('modal-dialog-scrollable');
@@ -39,7 +41,8 @@ class AjaxModal extends AbstractComponent
         $modalFooter = new HtmlElement('div.modal-footer');
         #$modalContent->push($modalFooter);
         $modalDialog->push($modalContent);
-        $this->push($modalDialog);
+        $modal->push($modalDialog);
+        $this->push($modal);
         parent::initialize();
     }
 }

@@ -9,6 +9,7 @@ use Pars\Component\Base\Table\TableResponsive;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldAcceptInterface;
 use Pars\Mvc\View\FieldInterface;
+use Pars\Mvc\View\HtmlElementEvent;
 
 class Overview extends AbstractComponent
 {
@@ -62,7 +63,9 @@ class Overview extends AbstractComponent
     protected function handleDetailButton()
     {
         if ($this->hasDetailPath()) {
-            $this->prepend(new DetailButton($this->getDetailPath()));
+            $button = new DetailButton($this->getDetailPath());
+            $button->setEvent(HtmlElementEvent::createLink($this->getDetailPath()));
+            $this->prepend($button);
         }
     }
 
@@ -77,7 +80,9 @@ class Overview extends AbstractComponent
     protected function handleMoveUpButton()
     {
         if ($this->hasMoveUpPath()) {
-            $this->prepend(new MoveUpButton($this->getMoveUpPath()));
+            $button = new MoveUpButton($this->getMoveUpPath());
+            $button->setEvent(HtmlElementEvent::createLink($this->getMoveUpPath()));
+            $this->prepend($button);
         }
 
     }
@@ -85,7 +90,9 @@ class Overview extends AbstractComponent
     protected function handleMoveDownButton()
     {
         if ($this->hasMoveDownPath()) {
-            $this->prepend(new MoveDownButton($this->getMoveDownPath()));
+            $button = new MoveDownButton($this->getMoveDownPath());
+            $button->setEvent(HtmlElementEvent::createLink($this->getMoveDownPath()));
+            $this->prepend($button);
         }
     }
 
@@ -112,6 +119,7 @@ class Overview extends AbstractComponent
         }
         if ($this->hasEditPath()) {
             $button->setPath($this->getEditPath());
+            $button->setEvent(HtmlElementEvent::createLink($this->getEditPath()));
             $this->prepend($button);
         }
         return $button;
@@ -125,6 +133,7 @@ class Overview extends AbstractComponent
         $button = (new DeleteButton())->setModal(true);
         if ($this->hasDeletePath()) {
             $button->setPath($this->getDeletePath());
+            $button->setEvent(HtmlElementEvent::createLink($this->getDeletePath()));
             $this->prepend($button);
         }
         return $button;

@@ -30,7 +30,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/js/vendor/09-jquery.inputmask.min.js',
                         ]
                     ],
-                    [
+                  /*  [
                         'type' => 'js',
                         'output' => "component_base.js",
                         'sources' => [
@@ -50,7 +50,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/js/submit.js',
                             __DIR__ . '/../bundles/js/ajax.js',
                         ]
-                    ],
+                    ],*/
                     [
                         'type' => 'scss',
                         'import' => __DIR__ . '/../bundles/scss',

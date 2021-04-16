@@ -26,6 +26,9 @@ class BaseLayout extends AbstractLayout
         $title = new HtmlElement('title');
         $title->setContent('{title}');
         $head->push($title);
+        $base = new HtmlElement('base');
+        $base->setAttribute('href', '{baseUrl}');
+        $head->push($base);
         $link = new HtmlElement('link');
         $link->setAttribute('rel', 'shortcut icon');
         $link->setAttribute('href', '{favicon}');

@@ -12,4 +12,5 @@ class BaseView extends AbstractView
     public ?string $favicon = '/favicon.ico';
     public ?string $description = 'PARS Admin';
     public ?string $charset = 'utf-8';
+    public ?string $baseUrl = '';
 }
