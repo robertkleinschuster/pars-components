@@ -8,7 +8,7 @@ use Pars\Component\Base\Grid\Container;
 use Pars\Component\Base\Grid\Row;
 use Pars\Component\Base\Navigation\Navigation;
 use Pars\Component\Base\Tabs\Tabs;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElementElement;
 use Pars\Mvc\View\ViewElement;
 
 class DashboardLayout extends BaseLayout
@@ -133,6 +133,9 @@ class DashboardLayout extends BaseLayout
         if (!$this->hasNavigation()) {
             $this->setNavigation(new Navigation());
         }
+        if ($this->hasPathHelper()) {
+            $this->navigation->setPathHelper($this->getPathHelper(false));
+        }
         return $this->navigation;
     }
 
@@ -143,6 +146,9 @@ class DashboardLayout extends BaseLayout
      */
     public function setNavigation(Navigation $navigation): self
     {
+        if ($this->hasPathHelper()) {
+            $navigation->setPathHelper($this->getPathHelper(false));
+        }
         $this->navigation = $navigation;
         return $this;
     }
@@ -163,6 +169,9 @@ class DashboardLayout extends BaseLayout
         if (!$this->hasSubNavigation()) {
             $this->setSubNavigation(new Navigation());
         }
+        if ($this->hasPathHelper()) {
+            $this->subNavigation->setPathHelper($this->getPathHelper(false));
+        }
         return $this->subNavigation;
     }
 
@@ -173,6 +182,9 @@ class DashboardLayout extends BaseLayout
     {
         if (!isset($this->breadcrumb)) {
             $this->breadcrumb = new Breadcrumb();
+        }
+        if ($this->hasPathHelper()) {
+            $this->breadcrumb->setPathHelper($this->getPathHelper(false));
         }
         return $this->breadcrumb;
     }
@@ -186,6 +198,9 @@ class DashboardLayout extends BaseLayout
      */
     public function setSubNavigation(Navigation $navigation): self
     {
+        if ($this->hasPathHelper()) {
+            $navigation->setPathHelper($this->getPathHelper(false));
+        }
         $this->subNavigation = $navigation;
         return $this;
     }

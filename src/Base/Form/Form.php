@@ -15,7 +15,7 @@ use Pars\Component\Base\ShadowAwareInterface;
 use Pars\Component\Base\ShadowAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\Event\ViewEvent;
-use Pars\Mvc\View\HtmlInterface;
+use Pars\Mvc\View\ViewElementInterface;
 
 class Form extends AbstractComponent implements BorderAwareInterface, BackgroundAwareInterface, ShadowAwareInterface, ColorAwareInterface
 {
@@ -385,7 +385,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         return $formGroup;
     }
 
-    public function addElement(HtmlInterface $html, int $row, int $column)
+    public function addElement(ViewElementInterface $html, int $row, int $column)
     {
         $formCol = $this->getColumn($row, $column);
         $formCol->push($html);

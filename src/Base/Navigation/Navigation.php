@@ -15,6 +15,7 @@ use Pars\Component\Base\ContrastTrait;
 use Pars\Component\Base\Form\Form;
 use Pars\Component\Base\Form\Input;
 use Pars\Mvc\View\AbstractComponent;
+use Pars\Mvc\View\Event\ViewEvent;
 use Pars\Mvc\View\ViewElement;
 
 /**
@@ -39,6 +40,45 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     protected ?Input $search = null;
 
     protected ?string $searchAction = null;
+
+    protected ?ViewElement $toggle = null;
+
+    protected bool $expanded = false;
+
+    protected function initEvent()
+    {
+        parent::initEvent();
+        if ($this->hasId() && $this->hasPathHelper()) {
+            $path = $this->getPathHelper(false)->getPath();
+            $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
+            $event = ViewEvent::createCallback(function (ViewElement $element)  {
+                $expanded = !$this->getState()->get('expanded', $this->isExpanded());
+                $element->getState()->set('expanded', $expanded);
+                $element->setExpanded($expanded);
+            }, $path, $this->getId());
+            $this->setEvent($event);
+            $event->setDelegate('button');
+            $event->setTargetId($this->getId());
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExpanded(): bool
+    {
+        return $this->expanded;
+    }
+
+    /**
+     * @param bool $expanded
+     * @return Navigation
+     */
+    public function setExpanded(bool $expanded): Navigation
+    {
+        $this->expanded = $expanded;
+        return $this;
+    }
 
     /**
      * @throws \Pars\Pattern\Exception\AttributeExistsException
@@ -67,13 +107,20 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
             }
             if ($this->hasBreakpoint()) {
                 $this->addOption('navbar-expand-' . $this->getBreakpoint());
-                $toggle = new ViewElement('button.navbar-toggler.rounded-0');
+                $toggle = $this->getToggle();
+                if ($this->isExpanded()) {
+                    $toggle->setAria('expanded', 'true');
+                    $this->getCollapse()->addOption('show');
+                } else {
+                    $this->getCollapse()->removeOption('show');
+                    $toggle->setAria('expanded', 'false');
+                }
                 $toggle->setAttribute('type', 'button');
-                $id = $this->getCollapse()->generateId();
+                $id = $this->getId()  . '_collapse';
+                $this->getCollapse()->setId($id);
                 $toggle->setData('target', '#' . $id);
                 $toggle->setData('toggle', 'collapse');
                 $toggle->setAria('controls', $id);
-                $toggle->setAria('expanded', 'false');
                 $toggle->setAria('label', 'Toggle navigation');
                 $toggle->push(new ViewElement('span.navbar-toggler-icon'));
                 $this->push($toggle);
@@ -98,6 +145,17 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
             }
         }
 
+    }
+
+    /**
+     * @return ViewElement|null
+     */
+    public function getToggle(): ?ViewElement
+    {
+        if (!isset($this->toggle)) {
+            $this->toggle = new ViewElement('button.navbar-toggler.rounded-0');
+        }
+        return $this->toggle;
     }
 
 
@@ -248,18 +306,18 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getSearchAction(): string
     {
         return $this->searchAction;
     }
 
     /**
-    * @param string $searchAction
-    *
-    * @return $this
-    */
+     * @param string $searchAction
+     *
+     * @return $this
+     */
     public function setSearchAction(string $searchAction): self
     {
         $this->searchAction = $searchAction;
@@ -267,8 +325,8 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasSearchAction(): bool
     {
         return isset($this->searchAction);
