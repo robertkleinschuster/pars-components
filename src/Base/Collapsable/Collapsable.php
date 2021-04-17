@@ -47,7 +47,7 @@ class Collapsable extends AbstractComponent
         if ($this->getButton()->hasPath() && $this->hasId()) {
             $this->setState(new ViewState($this->getId()));
             $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
-            $event = ViewEvent::createCallback(function ($element) {
+            $event = ViewEvent::createCallback(function (self $element) {
                 $expanded = !$this->getState()->get('expanded', $this->isExpanded());
                 $element->getState()->set('expanded', $expanded);
                 $element->setExpanded($expanded);
