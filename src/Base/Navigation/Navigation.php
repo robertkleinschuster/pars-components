@@ -50,14 +50,13 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
         parent::initEvent();
         if ($this->hasId() && $this->hasPathHelper()) {
             $path = $this->getPathHelper(false)->getPath();
-            $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
-            $event = ViewEvent::createCallback(function (ViewElement $element)  {
+            $event = ViewEvent::createCallback(function (ViewElement $element) {
                 $expanded = !$this->getState()->get('expanded', $this->isExpanded());
-                $element->getState()->set('expanded', $expanded);
-                $element->setExpanded($expanded);
+                $this->getState()->set('expanded', $expanded);
+              #  $element->setExpanded($expanded);
             }, $path, $this->getId());
             $this->setEvent($event);
-            $event->setDelegate('button');
+            $event->setDelegate('.navbar-toggler');
             $event->setTargetId($this->getId());
         }
     }
@@ -88,6 +87,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     protected function initialize()
     {
         if (!$this->isEmpty()) {
+            $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
             $this->setTag('nav');
             $this->addOption('navbar');
             $this->addOption('mb-1');
