@@ -14,7 +14,7 @@ use Pars\Component\Base\Field\Button;
 use Pars\Component\Base\ShadowAwareInterface;
 use Pars\Component\Base\ShadowAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
-use Pars\Mvc\View\HtmlElementEvent;
+use Pars\Mvc\View\Event\ViewEvent;
 use Pars\Mvc\View\HtmlInterface;
 
 class Form extends AbstractComponent implements BorderAwareInterface, BackgroundAwareInterface, ShadowAwareInterface, ColorAwareInterface
@@ -316,7 +316,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     {
         $submit = new Submit($content, $style ?? Submit::STYLE_PRIMARY);
         if ($this->hasAction()) {
-            $submit->setEvent(HtmlElementEvent::createSubmit($this->getAction(), $this->generateId()));
+            $submit->setEvent(ViewEvent::createSubmit($this->getAction(), $this->generateId()));
         }
         return $this->addInput($submit, $name, $value, $label, $row, $column);
     }

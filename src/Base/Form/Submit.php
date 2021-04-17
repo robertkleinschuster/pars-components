@@ -6,7 +6,7 @@ namespace Pars\Component\Base\Form;
 
 use Pars\Component\Base\StyleAwareInterface;
 use Pars\Component\Base\StyleAwareTrait;
-use Pars\Mvc\View\HtmlElementEvent;
+use Pars\Mvc\View\Event\ViewEvent;
 
 class Submit extends Input implements StyleAwareInterface
 {

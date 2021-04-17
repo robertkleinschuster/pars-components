@@ -7,7 +7,9 @@ use Pars\Component\Base\Field\Span;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\ComponentGroup;
 use Pars\Mvc\View\ComponentInterface;
+use Pars\Mvc\View\Event\ViewEvent;
 use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\State\ViewState;
 
 class Collapsable extends AbstractComponent
 {
@@ -16,20 +18,30 @@ class Collapsable extends AbstractComponent
     protected string $title = "";
     protected ?ToggleCollapsableButton $button = null;
 
+
+
     protected function initialize()
     {
         parent::initialize();
+        if ($this->getButton()->hasPath() && $this->hasId()) {
+            $this->setState(new ViewState($this->getId()));
+            $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
+            $this->getButton()->setEvent(ViewEvent::createCallback($this->getButton()->getPath(), $this->getId(),
+                function (){
+                    $expanded = !$this->getState()->get('expanded', $this->isExpanded());
+                    $this->getState()->set('expanded', $expanded);
+                    $this->initExpanded($expanded);
+            }));
+        }
         $this->initCollapsableHeader();
         $this->initCollapsableContent();
+        $this->initExpanded($this->isExpanded());
     }
 
     protected function initCollapsableContent()
     {
         $content = $this->getComponentGroup();
         $content->addOption("collapse");
-        if ($this->isExpanded()) {
-            $content->addOption("show");
-        }
         $this->push($content);
     }
 
@@ -41,7 +53,6 @@ class Collapsable extends AbstractComponent
         $header->addOption("mb-2");
 
         $button = $this->getButton();
-        $button->setToggle($this->isExpanded());
 
         $title = new Span();
         $title->addOption("my-auto");
@@ -52,6 +63,16 @@ class Collapsable extends AbstractComponent
         $header->push($title);
         $header->push($button);
         $this->push($header);
+    }
+
+    protected function initExpanded(bool $expanded)
+    {
+        $this->getButton()->setToggle($expanded);
+        if ($expanded) {
+            $this->getComponentGroup()->addOption("show");
+        } else {
+            $this->getComponentGroup()->removeOption("show");
+        }
     }
 
     /**
