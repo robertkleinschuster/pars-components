@@ -9,6 +9,7 @@ use Pars\Component\Base\Grid\Row;
 use Pars\Component\Base\Navigation\Navigation;
 use Pars\Component\Base\Tabs\Tabs;
 use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class DashboardLayout extends BaseLayout
 {
@@ -18,7 +19,7 @@ class DashboardLayout extends BaseLayout
 
     public ?Navigation $subNavigation = null;
 
-    protected function header(HtmlElement $body)
+    protected function header(ViewElement $body)
     {
         parent::header($body);
         $this->getNavigation()->setBackground(Navigation::BACKGROUND_DARK);
@@ -26,7 +27,7 @@ class DashboardLayout extends BaseLayout
         $body->push($this->getNavigation());
     }
 
-    protected function components(HtmlElement $components)
+    protected function components(ViewElement $components)
     {
         $row = new Row();
         $column = new Column();
@@ -79,9 +80,9 @@ class DashboardLayout extends BaseLayout
 
 
     /**
-     * @param HtmlElement $body
+     * @param ViewElement $body
      */
-    protected function main(HtmlElement $main)
+    protected function main(ViewElement $main)
     {
         parent::main($main);
         $main->addInlineStyle('min-height', 'calc(100% - 140px)');
@@ -90,7 +91,7 @@ class DashboardLayout extends BaseLayout
         $this->getContainer()->push($this->getSubNavigation());
    #     $this->getContainer()->setBreakpoint(Container::BREAKPOINT_LARGE);
         $this->getContainer()->setMode(Container::MODE_FLUID);
-        $main->push($this->getContainer());
+        $main->unshift($this->getContainer());
     }
 
     /**

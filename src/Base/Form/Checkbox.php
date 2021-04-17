@@ -5,7 +5,7 @@ namespace Pars\Component\Base\Form;
 
 
 use Pars\Bean\Type\Base\BeanInterface;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Checkbox extends Input
 {
@@ -39,7 +39,7 @@ class Checkbox extends Input
         }
     }
 
-    protected function beforeRenderElement(HtmlElement $element, BeanInterface $bean = null)
+    protected function beforeRenderElement(ViewElement $element, BeanInterface $bean = null)
     {
         parent::beforeRenderElement($element, $bean);
         if (null !== $bean) {

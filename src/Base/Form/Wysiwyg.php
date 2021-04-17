@@ -4,7 +4,7 @@
 namespace Pars\Component\Base\Form;
 
 
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Wysiwyg extends Textarea
 {
@@ -33,7 +33,7 @@ class Wysiwyg extends Textarea
                 $script->setContent($js);
                 $this->push($script);
             }*/
-            $editor = new HtmlElement('div');
+            $editor = new ViewElement('div');
             $editor->setId('edit-' . $input->getName());
             $editor->addOption('wysiwyg-editor');
             $editor->addOption('d-none');

@@ -5,7 +5,7 @@ namespace Pars\Component\Base\Form;
 
 
 use Pars\Bean\Type\Base\BeanInterface;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Select extends Input
 {
@@ -29,7 +29,7 @@ class Select extends Input
         $this->setTag('select');
         if ($this->hasOptions()) {
             foreach ($this->getOptions() as $value => $label) {
-                $option = new HtmlElement('option');
+                $option = new ViewElement('option');
                 $option->setAttribute('value', $value);
                 $option->setContent($label);
                 $this->push($option);
@@ -39,7 +39,7 @@ class Select extends Input
 
     protected $replacedValue = null;
 
-    protected function beforeRenderElement(HtmlElement $element, BeanInterface $bean = null)
+    protected function beforeRenderElement(ViewElement $element, BeanInterface $bean = null)
     {
         parent::beforeRenderElement($element, $bean);
         if ($element->hasAttribute('value') && $bean !== null) {

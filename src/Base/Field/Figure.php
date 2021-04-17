@@ -5,7 +5,7 @@ namespace Pars\Component\Base\Field;
 
 
 use Pars\Mvc\View\AbstractField;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Figure extends AbstractField
 {
@@ -28,7 +28,7 @@ class Figure extends AbstractField
         $this->addOption('figure');
         $image = new Image($this->getSource());
         $this->push($image);
-        $figcaption = new HtmlElement('figcaption');
+        $figcaption = new ViewElement('figcaption');
         $figcaption->addOption('figure-caption');
         if ($this->hasContent()) {
             $figcaption->setContent($this->getContent());

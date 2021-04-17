@@ -6,7 +6,7 @@ namespace Pars\Component\Base\Pagination;
 
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldListAwareTrait;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Pagination extends AbstractComponent
 {
@@ -15,7 +15,7 @@ class Pagination extends AbstractComponent
     protected function initialize()
     {
         $this->setTag('nav');
-        $ul = new HtmlElement('ul.pagination');
+        $ul = new ViewElement('ul.pagination');
         foreach ($this->getFieldList() as $item) {
             $ul->push($item);
         }

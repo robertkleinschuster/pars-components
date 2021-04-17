@@ -10,7 +10,7 @@ use Pars\Component\Base\Grid\Row;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldInterface;
 use Pars\Mvc\View\FieldListAwareTrait;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Jumbotron extends AbstractComponent
 {
@@ -46,9 +46,9 @@ class Jumbotron extends AbstractComponent
         }
         if ($this->hasHeading()) {
             if ($this->getFieldList()->count()) {
-                $this->getElementList()->unshift(new HtmlElement('hr.my-4'));
+                $this->getElementList()->unshift(new ViewElement('hr.my-4'));
             }
-            $h1 = new HtmlElement('h1');
+            $h1 = new ViewElement('h1');
             $h1->setContent($this->getHeading());
             $h1->addOption('display-5');
             $this->getElementList()->unshift($h1);
@@ -86,14 +86,14 @@ class Jumbotron extends AbstractComponent
      * @return Row
      * @throws \Pars\Bean\Type\Base\BeanException
      */
-    protected function createFieldRow(FieldInterface $field, $count = 1): HtmlElement
+    protected function createFieldRow(FieldInterface $field, $count = 1): ViewElement
     {
-        $div = new HtmlElement();
+        $div = new ViewElement();
         if ($field->hasLabel()) {
             $span = new Span($field->getLabel());
             $div->push($span);
         }
-        $block = new HtmlElement();
+        $block = new ViewElement();
         $block->addOption('mb-1');
         $block->addOption('bg-white');
         $block->addOption('border');

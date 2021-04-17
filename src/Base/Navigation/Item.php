@@ -5,7 +5,7 @@ namespace Pars\Component\Base\Navigation;
 
 
 use Pars\Mvc\View\AbstractField;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Item extends AbstractField
 {
@@ -21,12 +21,12 @@ class Item extends AbstractField
         $this->addOption('nav-item');
         $this->getLink()->setActive($this->isActive());
         if ($this->hasHint()) {
-            $small = new HtmlElement('small', $this->getHint() . ' ');
+            $small = new ViewElement('small', $this->getHint() . ' ');
             $small->addOption('text-secondary');
             $this->getLink()->push($small);
         }
         if ($this->hasContent()) {
-            $this->getLink()->push(new HtmlElement('span', $this->getContent()));
+            $this->getLink()->push(new ViewElement('span', $this->getContent()));
             $this->set('content', null);
         }
         if ($this->hasPath()) {

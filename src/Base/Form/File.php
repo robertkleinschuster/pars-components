@@ -4,7 +4,7 @@
 namespace Pars\Component\Base\Form;
 
 
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class File extends Input
 {
@@ -60,7 +60,7 @@ class File extends Input
         if ($this->getMultiple()) {
             $this->getInput()->setAttribute('multiple', 'multiple');
         }
-        $script = new HtmlElement('script');
+        $script = new ViewElement('script');
         $script->setContent("
 document.getElementById('{$this->getInput()->getName()}').addEventListener('change', function(e) {
     var file = document.getElementById('{$this->getInput()->getName()}').files[0];

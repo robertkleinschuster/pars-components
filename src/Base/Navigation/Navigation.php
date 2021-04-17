@@ -15,7 +15,7 @@ use Pars\Component\Base\ContrastTrait;
 use Pars\Component\Base\Form\Form;
 use Pars\Component\Base\Form\Input;
 use Pars\Mvc\View\AbstractComponent;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 /**
  * Class Navigation
@@ -67,7 +67,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
             }
             if ($this->hasBreakpoint()) {
                 $this->addOption('navbar-expand-' . $this->getBreakpoint());
-                $toggle = new HtmlElement('button.navbar-toggler.rounded-0');
+                $toggle = new ViewElement('button.navbar-toggler.rounded-0');
                 $toggle->setAttribute('type', 'button');
                 $id = $this->getCollapse()->generateId();
                 $toggle->setData('target', '#' . $id);
@@ -75,7 +75,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
                 $toggle->setAria('controls', $id);
                 $toggle->setAria('expanded', 'false');
                 $toggle->setAria('label', 'Toggle navigation');
-                $toggle->push(new HtmlElement('span.navbar-toggler-icon'));
+                $toggle->push(new ViewElement('span.navbar-toggler-icon'));
                 $this->push($toggle);
             } else {
                 $this->addOption('navbar-expand');

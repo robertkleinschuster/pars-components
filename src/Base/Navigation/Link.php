@@ -5,7 +5,7 @@ namespace Pars\Component\Base\Navigation;
 
 
 use Pars\Mvc\View\AbstractField;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Link extends AbstractField
 {
@@ -17,7 +17,7 @@ class Link extends AbstractField
         $this->addOption(self::OPTION_DECORATION_NONE);
         if ($this->isActive()) {
             $this->addOption('active');
-            $span = new HtmlElement('span.sr-only');
+            $span = new ViewElement('span.sr-only');
             $span->setContent('(current)');
             $this->push($span);
         }

@@ -8,7 +8,7 @@ use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\ComponentGroup;
 use Pars\Mvc\View\ComponentInterface;
 use Pars\Mvc\View\Event\ViewEvent;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 use Pars\Mvc\View\State\ViewState;
 
 class Collapsable extends AbstractComponent
@@ -36,22 +36,28 @@ class Collapsable extends AbstractComponent
     protected function initialize()
     {
         parent::initialize();
-        if ($this->getButton()->hasPath() && $this->hasId()) {
-            $this->setState(new ViewState($this->getId()));
-            $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
-            $event = ViewEvent::createCallback($this->getButton()->getPath(), $this->getId(),
-                function () {
-                    $expanded = !$this->getState()->get('expanded', $this->isExpanded());
-                    $this->getState()->set('expanded', $expanded);
-                    $this->initExpanded($expanded);
-                });
-            $event->set('delegate', 'button');
-            $this->setEvent($event);
-        }
         $this->initCollapsableHeader();
         $this->initCollapsableContent();
         $this->initExpanded($this->isExpanded());
     }
+
+    protected function initEvent()
+    {
+        parent::initEvent();
+        if ($this->getButton()->hasPath() && $this->hasId()) {
+            $this->setState(new ViewState($this->getId()));
+            $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
+            $event = ViewEvent::createCallback(function ($element) {
+                $expanded = !$this->getState()->get('expanded', $this->isExpanded());
+                $element->getState()->set('expanded', $expanded);
+                $element->setExpanded($expanded);
+            }, $this->getButton()->getPath());
+            $event->setDelegate('button');
+            $event->setTargetId($this->getId());
+            $this->setEvent($event);
+        }
+    }
+
 
     protected function initCollapsableContent()
     {
@@ -61,7 +67,7 @@ class Collapsable extends AbstractComponent
 
     protected function initCollapsableHeader()
     {
-        $header = new HtmlElement();
+        $header = new ViewElement();
         $header->addOption("d-flex");
         $header->addOption("justify-content-between");
         $header->addOption("mb-2");

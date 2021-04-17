@@ -11,9 +11,8 @@ use Pars\Component\Base\Form\Input;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldListAwareTrait;
 
-class Tr extends AbstractComponent implements BeanAwareInterface
+class Tr extends AbstractComponent
 {
-    use BeanAwareTrait;
     use FieldListAwareTrait;
 
     protected function initialize()

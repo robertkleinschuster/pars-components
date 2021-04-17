@@ -7,7 +7,7 @@ namespace Pars\Component\Base\Field;
 use Pars\Component\Base\StyleAwareInterface;
 use Pars\Component\Base\StyleAwareTrait;
 use Pars\Mvc\View\AbstractField;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Progress extends AbstractField implements StyleAwareInterface
 {
@@ -30,7 +30,7 @@ class Progress extends AbstractField implements StyleAwareInterface
     {
         $this->setTag('div');
         $this->addOption('progress');
-        $bar = new HtmlElement('div');
+        $bar = new ViewElement('div');
         $bar->setRole('progressbar');
         if ($this->hasValue()) {
             $bar->addInlineStyle('width', "{$this->getValue()}%");

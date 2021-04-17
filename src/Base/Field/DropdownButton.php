@@ -6,7 +6,7 @@ namespace Pars\Component\Base\Field;
 
 use Pars\Mvc\View\AbstractField;
 use Pars\Mvc\View\FieldList;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class DropdownButton extends AbstractField
 {
@@ -50,7 +50,7 @@ class DropdownButton extends AbstractField
         $dropdownButton->setAria('haspopup', 'true');
         $dropdownButton->setAria('expanded', 'false');
         $this->push($dropdownButton);
-        $dropdown = new HtmlElement('div.dropdown-menu');
+        $dropdown = new ViewElement('div.dropdown-menu');
         foreach ($this->getDropdownList() as $item) {
             $item->addOption('dropdown-item');
             $dropdown->push($item);

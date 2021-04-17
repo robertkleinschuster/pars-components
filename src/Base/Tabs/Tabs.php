@@ -7,7 +7,7 @@ namespace Pars\Component\Base\Tabs;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\ComponentInterface;
 use Pars\Mvc\View\ComponentList;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Tabs extends AbstractComponent
 {
@@ -18,22 +18,22 @@ class Tabs extends AbstractComponent
     {
 
         if ($this->getComponentList()->count()) {
-            $tab_List = new HtmlElement('ul.nav.nav-tabs');
+            $tab_List = new ViewElement('ul.nav.nav-tabs');
             if ($this->hasId()) {
                 $tab_List->setId($this->getId() . '__list');
             }
             $tab_List->setRole('tablist');
-            $tab_Content = new HtmlElement('div.tab-content');
+            $tab_Content = new ViewElement('div.tab-content');
             if ($this->hasId()) {
                 $tab_Content->setId($this->getId() . '__content');
             }
             $i = 1;
             foreach ($this->getComponentList() as $component) {
                 $component->handleInitialize();
-                $tab = new HtmlElement('li.nav-item');
+                $tab = new ViewElement('li.nav-item');
                 $tab->setRole('presentation');
                 $tab->setData('index', $i);
-                $link = new HtmlElement('a.nav-link');
+                $link = new ViewElement('a.nav-link');
             #    $link->addOption('remove-href');
                 if ($this->hasId()) {
                     $link->setId($this->getId() . '__tab__' . $i);
@@ -46,7 +46,7 @@ class Tabs extends AbstractComponent
                 $link->setAria('selected', 'false');
                 $tab->push($link);
                 $tab_List->push($tab);
-                $pane = new HtmlElement('div.tab-pane.fade');
+                $pane = new ViewElement('div.tab-pane.fade');
                 if ($i === $this->active) {
                     $pane->addOption('show');
                     $pane->addOption('active');

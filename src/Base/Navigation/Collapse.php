@@ -5,12 +5,12 @@ namespace Pars\Component\Base\Navigation;
 
 
 use Pars\Mvc\View\AbstractComponent;
-use Pars\Mvc\View\HtmlElementList;
+use Pars\Mvc\View\ViewElementList;
 
 class Collapse extends AbstractComponent
 {
-    protected ?HtmlElementList $itemList = null;
-    protected ?HtmlElementList $itemListRight = null;
+    protected ?ViewElementList $itemList = null;
+    protected ?ViewElementList $itemListRight = null;
 
     public ?string $active = null;
 
@@ -53,12 +53,12 @@ class Collapse extends AbstractComponent
     }
 
     /**
-     * @return HtmlElementList|null
+     * @return ViewElementList|null
      */
     protected function getItemList()
     {
         if (null === $this->itemList) {
-            $this->itemList = new HtmlElementList();
+            $this->itemList = new ViewElementList();
         }
         return $this->itemList;
     }
@@ -66,7 +66,7 @@ class Collapse extends AbstractComponent
     protected function getItemListRight()
     {
         if (null === $this->itemListRight) {
-            $this->itemListRight = new HtmlElementList();
+            $this->itemListRight = new ViewElementList();
         }
         return $this->itemListRight;
     }

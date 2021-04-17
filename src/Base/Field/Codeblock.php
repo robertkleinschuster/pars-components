@@ -3,14 +3,14 @@
 namespace Pars\Component\Base\Field;
 
 use Pars\Mvc\View\AbstractField;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Codeblock extends AbstractField
 {
     protected function initialize()
     {
         $this->setTag('pre');
-        $code = new HtmlElement('code');
+        $code = new ViewElement('code');
         if ($this->hasContent()) {
             $code->setContent($this->getContent());
         }

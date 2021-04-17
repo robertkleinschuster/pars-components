@@ -5,7 +5,7 @@ namespace Pars\Component\Base\Navigation;
 
 
 use Pars\Mvc\View\FieldList;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Dropdown extends Item
 {
@@ -22,7 +22,7 @@ class Dropdown extends Item
         $this->getLink()->setData('toggle', 'dropdown');
         $this->getLink()->setAria('haspopup', 'true');
         $this->getLink()->setAria('expanded', 'false');
-        $dropdownMenu = new HtmlElement('div.dropdown-menu');
+        $dropdownMenu = new ViewElement('div.dropdown-menu');
         $dropdownMenu->addOption('rounded-0');
         $dropdownMenu->addInlineStyle('right', '0 !important');
         $dropdownMenu->addInlineStyle('left', 'auto !important');

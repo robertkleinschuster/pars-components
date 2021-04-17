@@ -4,9 +4,9 @@
 namespace Pars\Component\Base\Pagination;
 
 
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
-class PaginationLink extends HtmlElement
+class PaginationLink extends ViewElement
 {
     public function __construct(?string $path, string $content)
     {

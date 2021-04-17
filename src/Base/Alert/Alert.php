@@ -10,7 +10,7 @@ use Pars\Component\Base\Field\Paragraph;
 use Pars\Component\Base\StyleAwareInterface;
 use Pars\Component\Base\StyleAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 /**
  * Class Alert
@@ -53,7 +53,7 @@ class Alert extends AbstractComponent implements StyleAwareInterface
         $this->addOption(BorderAwareInterface::ROUNDED_NONE);
         $this->setRole('alert');
         if ($this->hasHeading()) {
-            $heading = new HtmlElement('h4');
+            $heading = new ViewElement('h4');
             $heading->setContent($this->getHeading());
             $this->getElementList()->unshift($heading);
         }

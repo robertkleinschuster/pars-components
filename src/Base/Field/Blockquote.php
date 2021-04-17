@@ -7,7 +7,7 @@ namespace Pars\Component\Base\Field;
 use Pars\Component\Base\TextAwareInterface;
 use Pars\Component\Base\TextAwareTrait;
 use Pars\Mvc\View\AbstractField;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class Blockquote extends AbstractField implements TextAwareInterface
 {
@@ -40,16 +40,16 @@ class Blockquote extends AbstractField implements TextAwareInterface
         $this->setTag('blockquote');
         $this->addOption('blockquote');
         if ($this->hasText()) {
-            $p = new HtmlElement('p');
+            $p = new ViewElement('p');
             $p->addOption('mb-0');
             $p->setContent($this->getText());
             $this->push($p);
         }
         if ($this->hasFooter()) {
-            $footer = new HtmlElement('footer');
+            $footer = new ViewElement('footer');
             $footer->setContent($this->getFooter());
             if ($this->hasCite()) {
-                $cite = new HtmlElement('cite');
+                $cite = new ViewElement('cite');
                 $cite->setContent($this->getCite());
                 $footer->push($cite);
             }

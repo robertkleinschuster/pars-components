@@ -4,7 +4,7 @@
 namespace Pars\Component\Base\Form;
 
 
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class DateTimeLocal extends Input
 {

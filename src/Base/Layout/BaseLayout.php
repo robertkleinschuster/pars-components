@@ -9,7 +9,7 @@ use Pars\Component\Base\Modal\ConfirmModal;
 use Pars\Component\Base\Modal\AjaxModal;
 use Pars\Component\Base\Modal\FileSelectModal;
 use Pars\Mvc\View\AbstractLayout;
-use Pars\Mvc\View\HtmlElement;
+use Pars\Mvc\View\ViewElement;
 
 class BaseLayout extends AbstractLayout
 {
@@ -21,39 +21,31 @@ class BaseLayout extends AbstractLayout
         $this->addOption('h-100');
         $this->addOption('reload');
         $this->setAttribute('lang', '{language}');
-        $head = new HtmlElement('head');
+        $head = new ViewElement('head');
         $this->meta($head);
-        $title = new HtmlElement('title');
+        $title = new ViewElement('title');
         $title->setContent('{title}');
         $head->push($title);
-        $base = new HtmlElement('base');
+        $base = new ViewElement('base');
         $base->setAttribute('href', '{baseUrl}');
         $head->push($base);
-        $link = new HtmlElement('link');
+        $link = new ViewElement('link');
         $link->setAttribute('rel', 'shortcut icon');
         $link->setAttribute('href', '{favicon}');
         $head->push($link);
         $this->stylesheets($head);
         $this->push($head);
-        $body = new HtmlElement('body');
+        $body = new ViewElement('body');
         $body->addOption('h-100');
-        $header = new HtmlElement('header');
+        $header = new ViewElement('header');
         $header->setId('header');
         $this->header($header);
         $body->push($header);
-        $main = new HtmlElement('main');
+        $main = new ViewElement('main');
         $main->setId('main');
         $this->main($main);
-        $components = new Container('div.components');
-        if ($this->isWide()) {
-            $components->setMode(Container::MODE_FLUID);
-        } else {
-            $components->setBreakpoint(Container::BREAKPOINT_LARGE);
-        }
-        $this->components($components);
-        $main->push($components);
         $body->push($main);
-        $footer = new HtmlElement('footer.footer');
+        $footer = new ViewElement('footer.footer');
         $footer->setId('footer');
         $this->footer($footer);
         $body->push($footer);
@@ -62,7 +54,7 @@ class BaseLayout extends AbstractLayout
         $body->push(new FileSelectModal());
         $body->push(new AjaxModal());
         $this->push($body);
-        $inputTemplate = new HtmlElement('div');
+        $inputTemplate = new ViewElement('div');
         $inputTemplate->setId('dynamic-field-template');
         $inputTemplate->addOption('d-none');
         $formGroup = new FormGroup('{name}');
@@ -73,26 +65,34 @@ class BaseLayout extends AbstractLayout
         $body->push($inputTemplate);
     }
 
-    protected function header(HtmlElement $header)
+    protected function header(ViewElement $header)
     {
 
     }
 
-    protected function main(HtmlElement $main)
+    protected function main(ViewElement $main)
     {
-
+        $components = new Container('div.components');
+        if ($this->isWide()) {
+            $components->setMode(Container::MODE_FLUID);
+        } else {
+            $components->setBreakpoint(Container::BREAKPOINT_LARGE);
+        }
+        $this->components($components);
+        $main->push($components);
+        $main->push((new ViewElement('div'))->setId('subactions'));
     }
 
-    protected function components(HtmlElement $components)
+    protected function components(ViewElement $components)
     {
         foreach ($this->getComponentList() as $component) {
             $components->push($component);
         }
     }
 
-    protected function footer(HtmlElement $footer)
+    protected function footer(ViewElement $footer)
     {
-        $copyright = new HtmlElement('span.text-muted');
+        $copyright = new ViewElement('span.text-muted');
         $year = date('Y');
         $copyright->setContent("&copy; {$year}  <a href=\"https://kleinschuster.de\">Robert Kleinschuster</a>");
         $container = new Container();
@@ -102,31 +102,35 @@ class BaseLayout extends AbstractLayout
         $footer->push($container);
     }
 
-    protected function meta(HtmlElement $head)
+    protected function meta(ViewElement $head)
     {
-        $meta = new HtmlElement('meta');
+        $meta = new ViewElement('meta');
         $meta->setAttribute('charset', '{charset}');
         $head->push($meta);
-        $meta = new HtmlElement('meta');
+        $meta = new ViewElement('meta');
         $meta->setAttribute('name', 'viewport');
         $meta->setAttribute('content', 'width=device-width, initial-scale=1, shrink-to-fit=no');
         $head->push($meta);
-        $meta = new HtmlElement('meta');
+        $meta = new ViewElement('meta');
         $meta->setAttribute('name', 'description');
         $meta->setAttribute('content', '{description}');
         $head->push($meta);
-        $meta = new HtmlElement('meta');
+        $meta = new ViewElement('meta');
         $meta->setAttribute('name', 'author');
         $meta->setAttribute('content', '{author}');
         $head->push($meta);
     }
 
-    protected function stylesheets(HtmlElement $head)
+    /**
+     * @param ViewElement $head
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
+     */
+    protected function stylesheets(ViewElement $head)
     {
-        $files = $this->getStaticFiles();
-        if (isset($files['css']) && is_array($files['css'])) {
-            foreach ($files['css'] as $file) {
-                $link = new HtmlElement('link');
+        if ($this->hasView()) {
+            foreach ($this->getView()->getStylesheets() as $file) {
+                $link = new ViewElement('link');
                 $link->setAttribute('rel', 'stylesheet');
                 $link->setAttribute('href', $file);
                 $head->push($link);
@@ -135,14 +139,15 @@ class BaseLayout extends AbstractLayout
     }
 
     /**
-     * @param HtmlElement $body
+     * @param ViewElement $body
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
-    protected function scripts(HtmlElement $body)
+    protected function scripts(ViewElement $body)
     {
-        $files = $this->getStaticFiles();
-        if (isset($files['js']) && is_array($files['js'])) {
-            foreach ($files['js'] as $file) {
-                $script = new HtmlElement('script');
+        if ($this->hasView()) {
+            foreach ($this->getView()->getJavascript() as $file) {
+                $script = new ViewElement('script');
                 $script->setAttribute('src', $file);
                 $body->push($script);
             }

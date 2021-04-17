@@ -5,20 +5,20 @@ namespace Pars\Component\Base\Breadcrumb;
 
 
 use Pars\Mvc\View\AbstractComponent;
-use Pars\Mvc\View\HtmlElement;
-use Pars\Mvc\View\HtmlElementList;
+use Pars\Mvc\View\ViewElement;
+use Pars\Mvc\View\ViewElementList;
 use PHPUnit\TextUI\XmlConfiguration\Logging\TestDox\Html;
 
 class Breadcrumb extends AbstractComponent
 {
-    protected ?HtmlElementList $itemList = null;
+    protected ?ViewElementList $itemList = null;
 
     protected function initialize()
     {
         parent::initialize();
         $this->setTag('nav');
         $this->setAria('label', 'breadcrumb');
-        $ol = new HtmlElement('ol.breadcrumb');
+        $ol = new ViewElement('ol.breadcrumb');
         if (!$this->getItemList()->isEmpty()) {
             $this->getItemList()->last()->addOption('active');
             $this->getItemList()->last()->setAria('current', 'page');
@@ -37,8 +37,8 @@ class Breadcrumb extends AbstractComponent
      */
     public function addItem(string $title, string $path)
     {
-        $item = new HtmlElement('li.breadcrumb-item');
-        $link = new HtmlElement('span');
+        $item = new ViewElement('li.breadcrumb-item');
+        $link = new ViewElement('span');
         $link->setPath($path);
         $link->setContent($title);
         $item->push($link);
@@ -47,21 +47,21 @@ class Breadcrumb extends AbstractComponent
     }
 
     /**
-     * @return HtmlElementList
+     * @return ViewElementList
      */
-    public function getItemList(): HtmlElementList
+    public function getItemList(): ViewElementList
     {
         if (!isset($this->itemList)) {
-            $this->itemList = new HtmlElementList();
+            $this->itemList = new ViewElementList();
         }
         return $this->itemList;
     }
 
     /**
-     * @param HtmlElementList $itemList
+     * @param ViewElementList $itemList
      * @return Breadcrumb
      */
-    public function setItemList(HtmlElementList $itemList): Breadcrumb
+    public function setItemList(ViewElementList $itemList): Breadcrumb
     {
         $this->itemList = $itemList;
         return $this;
