@@ -45,21 +45,6 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
 
     protected bool $expanded = false;
 
-    protected function initEvent()
-    {
-        parent::initEvent();
-        if ($this->hasId() && $this->hasPathHelper()) {
-            $path = $this->getPathHelper(false)->getPath();
-            $event = ViewEvent::createCallback(function (ViewElement $element) {
-                $expanded = !$this->getState()->get('expanded', $this->isExpanded());
-                $this->getState()->set('expanded', $expanded);
-              #  $element->setExpanded($expanded);
-            }, $path, $this->getId());
-            $this->setEvent($event);
-            $event->setDelegate('.navbar-toggler');
-            $event->setTargetId($this->getId());
-        }
-    }
 
     /**
      * @return bool

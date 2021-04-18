@@ -1,7 +1,7 @@
 import '../scss/component.scss';
-import Quill from "quill/quill";
+//import Quill from "quill/quill";
 import 'bootstrap/dist/css/bootstrap.css';
-
+/*
 document.addEventListener("DOMContentLoaded", () => initWysiwyg());
 function initWysiwyg() {
     document.querySelectorAll('.wysiwyg-wrap').forEach(
@@ -35,3 +35,4 @@ function initWysiwyg() {
         }
     );
 }
+*/
