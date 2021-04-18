@@ -47,13 +47,13 @@ class Collapsable extends AbstractComponent
         if ($this->getButton()->hasPath() && $this->hasId()) {
             $this->setState(new ViewState($this->getId()));
             $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
-            $event = ViewEvent::createCallback(function (self $element) {
-                $expanded = !$this->getState()->get('expanded', $this->isExpanded());
-                $element->getState()->set('expanded', $expanded);
-                $element->setExpanded($expanded);
-            }, $this->getButton()->getPath());
-            $event->setDelegate('button');
-            $event->setTargetId($this->getId());
+            $event = ViewEvent::createCallback(
+                function (self $element) {
+                    $expanded = !$this->getState()->get('expanded', $this->isExpanded());
+                    $element->getState()->set('expanded', $expanded);
+                    $element->setExpanded($expanded);
+                }, $this->getButton()->getPath());
+            $event->setDelegate('.collapsable-header');
             $this->setEvent($event);
         }
     }
@@ -71,6 +71,8 @@ class Collapsable extends AbstractComponent
         $header->addOption("d-flex");
         $header->addOption("justify-content-between");
         $header->addOption("mb-2");
+        $header->addOption("collapsable-header");
+        $header->addInlineStyle("cursor", "pointer");
 
         $button = $this->getButton();
 

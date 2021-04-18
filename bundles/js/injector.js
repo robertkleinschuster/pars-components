@@ -66,8 +66,8 @@
             }
             if (data.inject.script) {
                 data.inject.script.forEach(function (script) {
-                    if (!script.unique || $('script[src=' + script.script + ']').length === 0) {
-                        $('body').append('<script src="' + script.script + '"></script>');
+                    if (!script.unique || $('script[src=' + script.src + ']').length === 0) {
+                        $('body').append('<script src="' + script.src + '"></script>');
                     }
                 });
             }
