@@ -72,6 +72,10 @@ class Collapsable extends AbstractComponent
         $header->addOption("justify-content-between");
         $header->addOption("mb-2");
         $header->addOption("collapsable-header");
+        $header->addOption("bg-light");
+        $header->addOption("border");
+        $header->addOption("font-weight-bolder");
+        $header->addOption("px-2");
         $header->addInlineStyle("cursor", "pointer");
 
         $button = $this->getButton();
@@ -79,9 +83,6 @@ class Collapsable extends AbstractComponent
         $title = new Span();
         $title->addOption("my-auto");
         $title->setContent($this->getTitle());
-        if ($button->hasPath()) {
-            $title->setPath($button->getPath());
-        }
         $header->push($title);
         $header->push($button);
         $this->push($header);
