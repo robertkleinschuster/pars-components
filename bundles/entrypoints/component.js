@@ -1,6 +1,6 @@
 import '../scss/component.scss';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Editor} from "../js/editor/editor";
+import {Editor} from "../js/Editor/Editor";
 
 document.addEventListener("DOMContentLoaded",  () => initComponents(document.body));
 window.viewEventHandler.listeners.push(initComponents);
