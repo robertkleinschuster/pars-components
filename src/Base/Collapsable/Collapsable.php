@@ -36,6 +36,7 @@ class Collapsable extends AbstractComponent
     protected function initialize()
     {
         parent::initialize();
+        $this->addOption('mb-2');
         $this->initCollapsableHeader();
         $this->initCollapsableContent();
         $this->initExpanded($this->isExpanded());
@@ -74,6 +75,10 @@ class Collapsable extends AbstractComponent
     {
         $content = $this->getComponentGroup();
         $content->addOption("collapse");
+        $content->addOption("container-fluid");
+        $content->addOption("border");
+        $content->addOption("border-top-0");
+        $content->addOption("pt-2");
     }
 
     protected function initCollapsableHeader()
@@ -81,8 +86,9 @@ class Collapsable extends AbstractComponent
         $header = new ViewElement();
         $header->addOption("d-flex");
         $header->addOption("justify-content-between");
-        $header->addOption("mb-2");
+        #$header->addOption("mb-2");
         $header->addOption($this->getHeaderClass());
+        $header->addOption('collapsable-header');
         $header->addOption("bg-light");
         $header->addOption("bg-gradient-light");
         $header->addOption("border");
