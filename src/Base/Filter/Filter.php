@@ -2,6 +2,7 @@
 
 namespace Pars\Component\Base\Filter;
 
+use Pars\Component\Base\Collapsable\Collapsable;
 use Pars\Component\Base\Edit\Edit;
 use Pars\Component\Base\Toolbar\FilterButton;
 use Pars\Mvc\View\Event\ViewEvent;
@@ -12,42 +13,32 @@ use Pars\Mvc\View\Event\ViewEvent;
  */
 class Filter extends Edit
 {
-    protected FilterButton $button;
 
-    protected function initEvent()
+    protected ?Collapsable $collapsable = null;
+
+    protected function initForm()
     {
-        parent::initEvent();
-        $this->getForm()->setId($this->getId() . '_form');
-        $this->getButton()->setId($this->getId() . '_button');
-        $event = ViewEvent::createCallback(function () {
-            $this->getForm()->addOption('show');
-        });
-        $event->setPath($this->getPathHelper(false)->getPath());
-        $this->getButton()->setEvent($event);
-        $event->setTargetId($this->getForm()->getId());
-    }
-
-
-    protected function initialize()
-    {
-        $button = $this->getButton();
-        $button->addOption('show-filter');
-        $button->setData('toggle', 'collapse');
-        $button->setData('target', '#' . $this->getForm()->getId());
-        #  $this->push($button);
-        $this->getForm()->addOption('collapse');
-        parent::initialize();
-    }
-
-    /**
-     * @return FilterButton
-     */
-    public function getButton(): FilterButton
-    {
-        if (!isset($this->button)) {
-            $this->button = new FilterButton();
+        parent::initForm();
+        if ($this->hasId()) {
+            $this->getForm()->setId($this->getId() . '_form');
+            $this->getCollapsable()->setId($this->getId() . '_collapsable');
         }
-        return $this->button;
+    }
+
+
+    protected function handleForm()
+    {
+        $this->getCollapsable()->pushComponent($this->getForm());
+        $this->getMain()->push($this->getCollapsable());
+    }
+
+
+    public function getCollapsable(): Collapsable
+    {
+        if (!isset($this->collapsable)) {
+            $this->collapsable = new Collapsable();
+        }
+        return $this->collapsable;
     }
 
 }

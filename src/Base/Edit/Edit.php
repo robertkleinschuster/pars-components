@@ -18,7 +18,18 @@ class Edit extends AbstractComponent implements BeanAwareInterface
     protected function initialize()
     {
         parent::initialize();
-        $this->push($this->getForm());
+        $this->initForm();
+        $this->handleForm();
+    }
+
+    protected function initForm()
+    {
+
+    }
+
+    protected function handleForm()
+    {
+        $this->getMain()->push($this->getForm());
     }
 
     /**

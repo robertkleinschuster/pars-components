@@ -19,6 +19,10 @@ class Breadcrumb extends AbstractComponent
         $this->setTag('nav');
         $this->setAria('label', 'breadcrumb');
         $ol = new ViewElement('ol.breadcrumb');
+        $ol->addOption('rounded-0');
+        $ol->addOption('bg-transparent');
+        $ol->addOption('border-bottom');
+        $ol->addOption('py-1');
         if (!$this->getItemList()->isEmpty()) {
             $this->getItemList()->last()->addOption('active');
             $this->getItemList()->last()->setAria('current', 'page');

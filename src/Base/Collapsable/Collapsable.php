@@ -44,7 +44,10 @@ class Collapsable extends AbstractComponent
     protected function initEvent()
     {
         parent::initEvent();
-        if ($this->getButton()->hasPath() && $this->hasId()) {
+        if (!$this->getButton()->hasPath() && $this->hasPathHelper()) {
+            $this->getButton()->setPath($this->getPathHelper(false)->getPath());
+        }
+        if ($this->hasId()) {
             $this->setState(new ViewState($this->getId()));
             $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
             $event = ViewEvent::createCallback(
@@ -53,11 +56,19 @@ class Collapsable extends AbstractComponent
                     $element->getState()->set('expanded', $expanded);
                     $element->setExpanded($expanded);
                 }, $this->getButton()->getPath());
-            $event->setDelegate('.collapsable-header');
+            $event->setDelegate('.' . $this->getHeaderClass());
             $this->setEvent($event);
         }
     }
 
+    protected function getHeaderClass(): string
+    {
+        $result = 'collapsable-header';
+        if ($this->hasId()) {
+            $result .= '_' . $this->getId();
+        }
+        return $result;
+    }
 
     protected function initCollapsableContent()
     {
@@ -71,7 +82,7 @@ class Collapsable extends AbstractComponent
         $header->addOption("d-flex");
         $header->addOption("justify-content-between");
         $header->addOption("mb-2");
-        $header->addOption("collapsable-header");
+        $header->addOption($this->getHeaderClass());
         $header->addOption("bg-light");
         $header->addOption("border");
         $header->addOption("font-weight-bolder");

@@ -45,7 +45,7 @@ class Overview extends AbstractComponent
                 $span->setPath($this->getDetailPath());
                 $span->addOption(Span::OPTION_DECORATION_NONE);
             }
-            $this->append($span);
+            $this->pushField($span);
         }
     }
 
@@ -56,7 +56,7 @@ class Overview extends AbstractComponent
             $check = new BulkCheckbox();
             $check->setName($this->getBulkFieldName());
             $check->setValue($this->getBulkFieldValue());
-            $this->prepend($check);
+            $this->unshiftField($check);
         }
     }
 
@@ -65,7 +65,7 @@ class Overview extends AbstractComponent
         if ($this->hasDetailPath()) {
             $button = new DetailButton($this->getDetailPath());
             $button->setEvent(ViewEvent::createLink($this->getDetailPath()));
-            $this->prepend($button);
+            $this->unshiftField($button);
         }
     }
 
@@ -74,7 +74,8 @@ class Overview extends AbstractComponent
         if ($this->hasBeanList()) {
             $this->getTableResponsive()->setBeanList($this->getBeanList());
         }
-        $this->push($this->getTableResponsive());
+        $this->getTable()->setFieldList($this->getFieldList());
+        $this->getMain()->push($this->getTableResponsive());
     }
 
     protected function handleMoveUpButton()
@@ -82,7 +83,7 @@ class Overview extends AbstractComponent
         if ($this->hasMoveUpPath()) {
             $button = new MoveUpButton($this->getMoveUpPath());
             $button->setEvent(ViewEvent::createLink($this->getMoveUpPath()));
-            $this->prepend($button);
+            $this->unshiftField($button);
         }
 
     }
@@ -92,7 +93,7 @@ class Overview extends AbstractComponent
         if ($this->hasMoveDownPath()) {
             $button = new MoveDownButton($this->getMoveDownPath());
             $button->setEvent(ViewEvent::createLink($this->getMoveDownPath()));
-            $this->prepend($button);
+            $this->unshiftField($button);
         }
     }
 
@@ -120,7 +121,7 @@ class Overview extends AbstractComponent
         if ($this->hasEditPath()) {
             $button->setPath($this->getEditPath());
             $button->setEvent(ViewEvent::createLink($this->getEditPath()));
-            $this->prepend($button);
+            $this->unshiftField($button);
         }
         return $button;
     }
@@ -134,7 +135,7 @@ class Overview extends AbstractComponent
         if ($this->hasDeletePath()) {
             $button->setPath($this->getDeletePath());
             $button->setEvent(ViewEvent::createLink($this->getDeletePath()));
-            $this->prepend($button);
+            $this->unshiftField($button);
         }
         return $button;
     }
@@ -199,27 +200,7 @@ class Overview extends AbstractComponent
     {
         return $this->getTableResponsive()->getTable();
     }
-
-    /**
-     * @param FieldInterface $field
-     * @return $this
-     */
-    public function append(FieldInterface $field)
-    {
-        $this->getTable()->getFieldList()->push($field);
-        return $this;
-    }
-
-    /**
-     * @param FieldInterface $field
-     * @return $this
-     */
-    public function prepend(FieldInterface $field)
-    {
-        $this->getTable()->getFieldList()->unshift($field);
-        return $this;
-    }
-
+    
     /**
      * @return string
      */
@@ -376,7 +357,7 @@ class Overview extends AbstractComponent
             $span->setPath($this->getDetailPath());
             $span->addOption(Span::OPTION_DECORATION_NONE);
         }
-        $this->append($span);
+        $this->pushField($span);
         return $span;
     }
 

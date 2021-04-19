@@ -25,9 +25,9 @@ class Detail extends AbstractComponent implements BeanAwareInterface
         parent::handleFields();
         if ($this->hasCollapsable()) {
             $this->getCollapsable()->pushComponent($this->getJumbotron());
-            $this->push($this->getCollapsable());
+            $this->getMain()->push($this->getCollapsable());
         } else {
-            $this->push($this->getJumbotron());
+            $this->getMain()->push($this->getJumbotron());
         }
     }
 
