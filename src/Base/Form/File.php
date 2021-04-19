@@ -84,7 +84,6 @@ document.getElementById('{$this->getInput()->getName()}').addEventListener('chan
         $label->addOption('custom-file-label');
         $label->setFor($this->getInput()->getName());
         $label->setContent($this->getInput()->getValue());
-        $label->addOption('rounded-0');
         $this->addOption('border-0');
         $this->push($label);
         $this->push($script);

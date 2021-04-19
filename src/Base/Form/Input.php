@@ -159,8 +159,6 @@ class Input extends AbstractField implements BackgroundAwareInterface, ColorAwar
         }
         if ($this->hasRounded()) {
             $this->addOption($this->getRounded());
-        } else {
-            $this->addOption(self::ROUNDED_NONE);
         }
         if ($this->hasBorderPosition()) {
             $this->addOption($this->getBorderPosition());

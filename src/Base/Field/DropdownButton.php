@@ -46,7 +46,7 @@ class DropdownButton extends AbstractField
         $dropdownButton = $this->getDropdownButton();
         $dropdownButton->addOption('dropdown-toggle');
         $dropdownButton->addOption('dropdown-toggle-split');
-        $dropdownButton->setData('toggle', 'dropdown');
+        $dropdownButton->setData('bs-toggle', 'dropdown');
         $dropdownButton->setAria('haspopup', 'true');
         $dropdownButton->setAria('expanded', 'false');
         $this->push($dropdownButton);

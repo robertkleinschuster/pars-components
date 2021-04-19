@@ -314,7 +314,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      */
     public function addSubmit(string $name, string $content, string $value = null, string $style = null, string $label = null, int $row = 1, int $column = 1)
     {
-        $submit = new Submit($content, $style ?? Submit::STYLE_PRIMARY);
+        $submit = new Submit($content, $style ?? Submit::STYLE_WARNING);
         if ($this->hasAction()) {
             $submit->setEvent(ViewEvent::createSubmit($this->getAction(), $this->generateId()));
         }
@@ -333,7 +333,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      */
     public function addReset(string $name, string $content, string $value = null, string $style = null, string $label = null, int $row = 1, int $column = 1)
     {
-        return $this->addInput(new Reset($content, $style ?? Reset::STYLE_DANGER), $name, $value, $label, $row, $column);
+        return $this->addInput(new Reset($content, $style ?? Reset::STYLE_SECONDARY), $name, $value, $label, $row, $column);
     }
 
     /**

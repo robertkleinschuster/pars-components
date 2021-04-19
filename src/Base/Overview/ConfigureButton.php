@@ -29,7 +29,7 @@ class ConfigureButton extends Button
         $icon->setWidth('14px');
         $this->push($icon);
         parent::initialize();
-        $this->removeOption('mr-1');
+        $this->removeOption('me-1');
         $this->addOption('btn-sm');
     }
 }

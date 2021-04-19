@@ -14,6 +14,7 @@ use Pars\Component\Base\BreakpointAwareTrait;
 use Pars\Component\Base\ContrastTrait;
 use Pars\Component\Base\Form\Form;
 use Pars\Component\Base\Form\Input;
+use Pars\Component\Base\Grid\Container;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\Event\ViewEvent;
 use Pars\Mvc\View\ViewElement;
@@ -28,6 +29,8 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     use BackgroundAwareTrait;
     use BorderAwareTrait;
     use ContrastTrait;
+
+    protected Container $container;
 
     /**
      * @var Collapse|null
@@ -72,6 +75,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     protected function initialize()
     {
         if (!$this->isEmpty()) {
+            $this->getContainer()->setMode(Container::MODE_FLUID);
             $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
             $this->setTag('nav');
             $this->addOption('navbar');
@@ -103,23 +107,22 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
                 $toggle->setAttribute('type', 'button');
                 $id = $this->getId()  . '_collapse';
                 $this->getCollapse()->setId($id);
-                $toggle->setData('target', '#' . $id);
-                $toggle->setData('toggle', 'collapse');
+                $toggle->setData('bs-target', '#' . $id);
+                $toggle->setData('bs-toggle', 'collapse');
                 $toggle->setAria('controls', $id);
                 $toggle->setAria('label', 'Toggle navigation');
                 $toggle->push(new ViewElement('span.navbar-toggler-icon'));
-                $this->push($toggle);
+                $this->getContainer()->push($toggle);
             } else {
                 $this->addOption('navbar-expand');
             }
-            $this->push($this->getCollapse());
+            $this->getContainer()->push($this->getCollapse());
             if ($this->hasSearch()) {
                 $form = new Form();
                 if ($this->hasSearchAction()) {
                     $form->setAction($this->getSearchAction());
                 }
                 $form->addOption('order-3');
-                $this->getSearch()->setRounded(Input::ROUNDED_NONE);
                 if ($this->hasBackground()) {
                     $this->getSearch()->setBackground($this->getBackground());
                     $this->getSearch()->setColor($this->getContrast()->getColor($this->getBackground()));
@@ -128,8 +131,18 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
                 $form->push($this->getSearch());
                 $this->getCollapse()->push($form);
             }
+            $this->push($this->getContainer());
         }
 
+    }
+
+
+    public function getContainer()
+    {
+        if (!isset($this->container)) {
+            $this->container = new Container();
+        }
+        return $this->container;
     }
 
     /**
@@ -138,7 +151,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
     public function getToggle(): ?ViewElement
     {
         if (!isset($this->toggle)) {
-            $this->toggle = new ViewElement('button.navbar-toggler.rounded-0');
+            $this->toggle = new ViewElement('button.navbar-toggler');
         }
         return $this->toggle;
     }
@@ -155,7 +168,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
         $brand->setContent($value);
         $brand->setPath($path);
         $brand->addOption('order-1');
-        $this->getElementList()->unshift($brand);
+        $this->getContainer()->unshift($brand);
         return $brand;
     }
 

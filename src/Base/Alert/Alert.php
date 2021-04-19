@@ -50,7 +50,6 @@ class Alert extends AbstractComponent implements StyleAwareInterface
         } else {
             $this->addOption('alert-' . self::STYLE_DANGER);
         }
-        $this->addOption(BorderAwareInterface::ROUNDED_NONE);
         $this->setRole('alert');
         if ($this->hasHeading()) {
             $heading = new ViewElement('h4');

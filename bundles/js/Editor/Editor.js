@@ -72,7 +72,7 @@ export class Editor {
             // Choose your custom class names
             classes: {
                 actionbar: 'bg-light border border-bottom-0',
-                button: 'btn btn-secondary rounded-0',
+                button: 'btn btn-secondary',
                 content: 'pell-content h-auto border',
                 selected: 'active'
             }

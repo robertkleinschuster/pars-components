@@ -25,7 +25,6 @@ class AjaxModal extends AbstractComponent
         $modalDialog->addOption('modal-xl');
         $modalDialog->setRole('document');
         $modalContent = new ViewElement('div.modal-content');
-        $modalContent->addOption('rounded-0');
         $modalHeader = new ViewElement('div.modal-header');
         $modalTitle = new ViewElement('div.modal-title');
         $modalTitle->setId('ajax-modal-title');

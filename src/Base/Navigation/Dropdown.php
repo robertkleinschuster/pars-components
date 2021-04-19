@@ -19,11 +19,10 @@ class Dropdown extends Item
         $this->getLink()->setAttribute('href', '#');
         $this->getLink()->addOption('dropdown-toggle');
         $this->getLink()->setRole('button');
-        $this->getLink()->setData('toggle', 'dropdown');
+        $this->getLink()->setData('bs-toggle', 'dropdown');
         $this->getLink()->setAria('haspopup', 'true');
         $this->getLink()->setAria('expanded', 'false');
         $dropdownMenu = new ViewElement('div.dropdown-menu');
-        $dropdownMenu->addOption('rounded-0');
         $dropdownMenu->addInlineStyle('right', '0 !important');
         $dropdownMenu->addInlineStyle('left', 'auto !important');
         $dropdownMenu->setAria('labelledby', $this->getId());

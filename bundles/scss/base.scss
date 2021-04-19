@@ -1,4 +1,22 @@
-//@import "bootstrap/bootstrap";
 .modal .modal-hidden {
   display: none;
 }
+
+@import "~bootstrap/scss/_functions";
+@import "~bootstrap/scss/_variables";
+
+$enable-gradients: false;
+$enable-rounded: false;
+$enable-shadows: true;
+$enable-smooth-scroll: true;
+
+$theme-colors: (
+        "primary":    $purple-500,
+        "secondary":  $gray-600,
+        "success":    $green-500,
+        "info":       $blue-500,
+        "warning":    $orange-700,
+        "danger":     $red-600,
+        "light":      $gray-100,
+        "dark":       $blue-900
+);

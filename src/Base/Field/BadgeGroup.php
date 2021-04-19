@@ -14,7 +14,7 @@ class BadgeGroup extends AbstractField
     protected function initialize()
     {
         foreach ($this->getFieldList() as $field) {
-            $field->addOption('mr-1');
+            $field->addOption('me-1');
             $this->push($field);
         }
     }

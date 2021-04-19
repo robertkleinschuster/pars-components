@@ -32,8 +32,7 @@ class Jumbotron extends AbstractComponent
     protected function initialize()
     {
         $this->setTag('div');
-        $this->addOption('jumbotron');
-        $this->addOption('rounded-0');
+        $this->addOption('bg-light');
         $this->addOption('py-2');
         $this->addOption('px-2');
         $this->addOption('mb-4');
@@ -64,7 +63,7 @@ class Jumbotron extends AbstractComponent
             foreach ($values as $index => $column) {
                 $column->addOption('p-0');
                 if ($index + 1 < $count) {
-                    $column->addOption('mr-sm-3');
+                    $column->addOption('me-sm-3');
                 }
                 $column->push($this->createFieldRow($column->getElementList()->pop(), $count));
                 $formRow->push($column);

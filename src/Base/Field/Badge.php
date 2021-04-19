@@ -31,9 +31,9 @@ class Badge extends AbstractField implements StyleAwareInterface
         $this->clearOptions();
         $this->addOption('badge');
         if ($this->hasStyle()) {
-            $this->addOption('badge-' . $this->getStyle());
+            $this->addOption('bg-' . $this->getStyle());
         } else {
-            $this->addOption('badge-' . self::STYLE_INFO);
+            $this->addOption('bg-' . self::STYLE_INFO);
         }
     }
 

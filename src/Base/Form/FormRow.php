@@ -10,7 +10,7 @@ class FormRow extends Row
 {
     protected function initialize()
     {
-        $this->removeOption('row');
-        $this->addOption('form-row');
+        parent::initialize();
+        $this->addOption('mb-3');
     }
 }

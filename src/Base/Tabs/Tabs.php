@@ -42,7 +42,7 @@ class Tabs extends AbstractComponent
                     $link->setContent($component->getName());
                     $component->setName(null);
                 }
-                $link->setData('toggle', 'tab');
+                $link->setData('bs-toggle', 'tab');
                 $link->setAria('selected', 'false');
                 $tab->push($link);
                 $tab_List->push($tab);
@@ -65,7 +65,7 @@ class Tabs extends AbstractComponent
                     } else {
                         $link->setAttribute('href', '#' . $pane->getId());
                     }
-                    $link->setData('target', '#' . $pane->getId());
+                    $link->setData('bs-target', '#' . $pane->getId());
                     $link->setAria('controls', $pane->getId());
                 }
                 $pane->push($component);

@@ -50,12 +50,11 @@ class Button extends AbstractField implements StyleAwareInterface
             if ($this->hasConfirmCancel()) {
                 $this->setData('confirm-cancel', $this->getConfirmCancel());
             }
-            $this->setData('toggle', 'modal');
-            $this->setData('target', '#confirm-modal');
+            $this->setData('bs-toggle', 'modal');
+            $this->setData('bs-target', '#confirm-modal');
         }
         $this->addOption('btn');
-        $this->addOption('mr-1');
-        $this->addOption(BorderAwareInterface::ROUNDED_NONE);
+        $this->addOption('me-1');
         if ($this->hasStyle()) {
             if ($this->isOutline()) {
                 $this->addOption('btn-outline-' . $this->getStyle());

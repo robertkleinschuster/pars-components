@@ -84,8 +84,9 @@ class Collapsable extends AbstractComponent
         $header->addOption("mb-2");
         $header->addOption($this->getHeaderClass());
         $header->addOption("bg-light");
+        $header->addOption("bg-gradient-light");
         $header->addOption("border");
-        $header->addOption("font-weight-bolder");
+        $header->addOption("fw-bolder");
         $header->addOption("px-2");
         $header->addInlineStyle("cursor", "pointer");
 

@@ -16,7 +16,7 @@ class DropdownEditButton extends DropdownButton
         $button = clone $this->getButton();
         $button->initialize();
         $this->getDropdownButton()->setStyle($button->getStyle());
-        $this->getButton()->removeOption('mr-1');
+        $this->getButton()->removeOption('me-1');
     }
 
 }

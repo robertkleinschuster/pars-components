@@ -54,7 +54,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/js/ajax.js',
                         ]
                     ],*/
-                    [
+                 /*   [
                         'type' => 'scss',
                         'import' => __DIR__ . '/../bundles/scss',
                         'output' => "component_base.css",
@@ -89,7 +89,7 @@ class ConfigProvider
                         'import' => __DIR__ . '/../bundles/scss',
                         'output' => "component_daterangepicker.css",
                         'entrypoint' =>  __DIR__ . '/../bundles/scss/daterangepicker.scss',
-                    ],
+                    ],*/
                 ]
 
             ]

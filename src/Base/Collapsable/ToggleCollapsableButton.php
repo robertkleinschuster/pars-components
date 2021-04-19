@@ -26,8 +26,8 @@ class ToggleCollapsableButton extends Button
         $this->push($icon);
 
         $this->setStyle(Button::STYLE_LIGHT);
-        $this->setData('toggle', 'collapse');
-        $this->setData('target', '#' . $this->collapseTarget);
+        $this->setData('bs-toggle', 'collapse');
+        $this->setData('bs-target', '#' . $this->collapseTarget);
     }
 
     /**

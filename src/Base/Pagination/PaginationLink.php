@@ -19,7 +19,6 @@ class PaginationLink extends ViewElement
             $this->setTag('a');
         }
         $this->addOption('page-link');
-        $this->addOption('rounded-0');
         $this->setAttribute('href', $this->getPath());
         $this->setPath(null);
         parent::initialize();

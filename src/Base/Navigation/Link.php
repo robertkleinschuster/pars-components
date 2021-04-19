@@ -19,7 +19,7 @@ class Link extends AbstractField
             $this->addOption('active');
             $span = new ViewElement('span.sr-only');
             $span->setContent('(current)');
-            $this->push($span);
+            #$this->push($span);
         }
     }
 

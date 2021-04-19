@@ -15,7 +15,7 @@ class Group extends AbstractComponent
         $this->setTag('ul');
         $this->addOption('navbar-nav');
         if (!$this->isRight()) {
-            $this->addOption('mr-auto');
+            $this->addOption('me-auto');
         }
     }
 
