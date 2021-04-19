@@ -8,8 +8,8 @@ use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\ComponentGroup;
 use Pars\Mvc\View\ComponentInterface;
 use Pars\Mvc\View\Event\ViewEvent;
-use Pars\Mvc\View\ViewElement;
 use Pars\Mvc\View\State\ViewState;
+use Pars\Mvc\View\ViewElement;
 
 class Collapsable extends AbstractComponent
 {
