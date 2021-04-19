@@ -15,7 +15,7 @@ class Pagination extends AbstractComponent
     protected function initialize()
     {
         $this->setTag('nav');
-        $ul = new ViewElement('ul.pagination');
+        $ul = new ViewElement('ul.pagination.pagination-sm');
         foreach ($this->getFieldList() as $item) {
             $ul->push($item);
         }

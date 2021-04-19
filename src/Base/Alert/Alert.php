@@ -63,7 +63,7 @@ class Alert extends AbstractComponent implements StyleAwareInterface
      * @param string $value
      * @return Paragraph
      */
-    public function addBlock(string $value): Paragraph
+    public function addBlock(?string $value): Paragraph
     {
         $block = new Paragraph();
         $block->addOption('mb-0');
