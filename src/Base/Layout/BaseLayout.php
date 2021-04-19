@@ -94,7 +94,7 @@ class BaseLayout extends AbstractLayout
     {
         $copyright = new ViewElement('span.text-muted');
         $year = date('Y');
-        $copyright->setContent("&copy; {$year}  <a href=\"https://kleinschuster.de\">Robert Kleinschuster</a>");
+        $copyright->setContent("PARS " . PARS_VERSION . " &copy; {$year}  <a href=\"https://kleinschuster.de\">Robert Kleinschuster</a>");
         $container = new Container();
         $container->push($copyright);
         $footer->addOption('py-3');
