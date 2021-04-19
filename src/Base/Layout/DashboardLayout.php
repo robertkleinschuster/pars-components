@@ -22,7 +22,7 @@ class DashboardLayout extends BaseLayout
     protected function header(ViewElement $body)
     {
         parent::header($body);
-        $this->getNavigation()->setBackground(Navigation::BACKGROUND_DARK);
+        #$this->getNavigation()->setBackground(Navigation::BACKGROUND_DARK);
         $this->getNavigation()->setBreakpoint(Navigation::BREAKPOINT_MEDIUM);
         $body->push($this->getNavigation());
     }

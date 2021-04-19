@@ -16,7 +16,6 @@ use Pars\Component\Base\Form\Form;
 use Pars\Component\Base\Form\Input;
 use Pars\Component\Base\Grid\Container;
 use Pars\Mvc\View\AbstractComponent;
-use Pars\Mvc\View\Event\ViewEvent;
 use Pars\Mvc\View\ViewElement;
 
 /**
@@ -83,8 +82,18 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
             $this->addOption('shadow-sm');
             if ($this->hasBackground()) {
                 $this->addOption($this->getBackground());
-                $this->addOption(str_replace('bg', 'navbar', $this->getBackground()));
+                if ($this->getBackground() == self::BACKGROUND_DARK) {
+
+                    $this->addOption('navbar-dark');
+                } elseif ($this->getBackground() == self::BACKGROUND_LIGHT) {
+                    $this->addOption('navbar-light');
+
+                } elseif ($this->getBackground() == self::BACKGROUND_DANGER) {
+                    $this->addOption('navbar-dark');
+
+                }
             }
+
             if ($this->hasRounded()) {
                 $this->addOption($this->getRounded());
             }
@@ -105,7 +114,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
                     $toggle->setAria('expanded', 'false');
                 }
                 $toggle->setAttribute('type', 'button');
-                $id = $this->getId()  . '_collapse';
+                $id = $this->getId() . '_collapse';
                 $this->getCollapse()->setId($id);
                 $toggle->setData('bs-target', '#' . $id);
                 $toggle->setData('bs-toggle', 'collapse');

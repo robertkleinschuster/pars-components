@@ -11,7 +11,6 @@ class Wysiwyg extends Textarea
     protected function initialize()
     {
         $this->addOption('wysiwyg-wrap');
-        $this->setAttribute("onload", "console.log(\"works\")");
         $id = $this->generateId();
         $input = new Textarea();
         $input->addOption('wysiwyg-textarea');

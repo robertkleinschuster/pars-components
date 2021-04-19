@@ -15,7 +15,6 @@ class Span extends AbstractField implements ColorAwareInterface
     public function __construct(?string $content = null, ?string $label = null)
     {
         parent::__construct($content, $label);
-        $this->setColor(self::COLOR_DARK);
     }
 
 
