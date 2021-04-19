@@ -16,8 +16,8 @@ class FileSelect extends Select
             $this->setData('fileselect-list', json_encode($this->getFiles()));
             $this->options = $this->selectOptions($this->getFiles());
         }
-        $this->setData('bs-toggle', 'modal');
-        $this->setData('bs-target', '#fileselect-modal');
+        #$this->setData('bs-toggle', 'modal');
+        #$this->setData('bs-target', '#fileselect-modal');
         parent::initialize();
     }
 
