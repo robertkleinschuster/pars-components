@@ -1,5 +1,6 @@
 import pell from 'pell';
 import "pell/dist/pell.min.css"
+import {exec} from "pell/dist/pell";
 
 export class Editor {
 
@@ -41,13 +42,39 @@ export class Editor {
             // action.result<Function> (required)
             // Specify the actions you specifically want (in order)
 
+            actions: [
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'olist',
+                'ulist',
+                {
+                    name: 'heading',
+                    icon: '<b>H</b>',
+                    title: 'Heading',
+                    result: () => exec('formatBlock', '<h4>')
+                },
+                {
+                    name: 'heading',
+                    icon: 'P',
+                    title: 'Heading',
+                    result: () => exec('formatBlock', '<p>')
+                },
+                {
+                    name: 'div',
+                    icon: 'DIV',
+                    title: 'DIV',
+                    result: () => exec('formatBlock', '<div>')
+                },
+            ],
             // classes<Array[string]> (optional)
             // Choose your custom class names
             classes: {
-                actionbar: 'pell-actionbar',
-                button: 'pell-button',
+                actionbar: 'bg-light border border-bottom-0',
+                button: 'btn btn-secondary rounded-0',
                 content: 'pell-content h-auto border',
-                selected: 'pell-button-selected'
+                selected: 'active'
             }
         });
 
