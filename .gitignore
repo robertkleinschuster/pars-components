@@ -4,3 +4,6 @@
 /pars-mkdoc-theme.tgz
 /pars-mkdoc-theme/
 /vendor/
+/.idea/
+yarn.lock
+/node_modules/

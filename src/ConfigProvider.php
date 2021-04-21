@@ -18,7 +18,7 @@ class ConfigProvider
                   'component'
                 ],
                 'list' => [
-                    [
+                  /*  [
                         'type' => 'js',
                         'output' => "component_vendor.js",
                         'sources' => [
@@ -32,7 +32,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/src/vendor/08-modernizr-inputtypes.js',
                             __DIR__ . '/../bundles/src/vendor/09-jquery.inputmask.min.js',
                         ]
-                    ],
+                    ],*/
                   /*  [
                         'type' => 'js',
                         'output' => "component_base.js",
