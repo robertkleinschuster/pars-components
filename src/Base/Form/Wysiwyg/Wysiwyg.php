@@ -1,9 +1,10 @@
 <?php
 
 
-namespace Pars\Component\Base\Form;
+namespace Pars\Component\Base\Form\Wysiwyg;
 
 
+use Pars\Component\Base\Form\Textarea;
 use Pars\Mvc\View\ViewElement;
 
 class Wysiwyg extends Textarea

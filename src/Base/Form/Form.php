@@ -16,6 +16,7 @@ use Pars\Component\Base\ShadowAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\Event\ViewEvent;
 use Pars\Mvc\View\ViewElementInterface;
+use Pars\Component\Base\Form\Wysiwyg\Wysiwyg;
 
 class Form extends AbstractComponent implements BorderAwareInterface, BackgroundAwareInterface, ShadowAwareInterface, ColorAwareInterface
 {

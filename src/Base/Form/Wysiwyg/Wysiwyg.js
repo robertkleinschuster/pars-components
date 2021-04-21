@@ -2,7 +2,7 @@ import pell from 'pell';
 import "pell/dist/pell.min.css"
 import {exec} from "pell/dist/pell";
 
-export class Editor {
+export class Wysiwyg {
 
     static init(element) {
         if(element.matches(".wysiwyg-wrap")) {

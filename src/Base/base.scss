@@ -23,3 +23,5 @@ $theme-colors: (
 $pagination-active-bg: $blue-900;
 $pagination-active-border-color: $pagination-active-bg;
 $pagination-color: $pagination-active-bg;
+
+@import '~bootstrap';
