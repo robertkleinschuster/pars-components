@@ -17,6 +17,7 @@ class BulkButton extends ToolbarButton
     protected function initialize()
     {
         $this->setType('submit');
+        $this->addOption('bulk-button');
         parent::initialize();
     }
 
