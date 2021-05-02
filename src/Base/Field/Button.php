@@ -4,13 +4,19 @@
 namespace Pars\Component\Base\Field;
 
 
-use Pars\Pattern\Exception\AttributeExistsException;
-use Pars\Pattern\Exception\AttributeLockException;
-use Pars\Component\Base\BorderAwareInterface;
+use Pars\Component\Base\Modal\Modal;
 use Pars\Component\Base\StyleAwareInterface;
 use Pars\Component\Base\StyleAwareTrait;
+use Pars\Helper\Debug\DebugHelper;
 use Pars\Mvc\View\AbstractField;
+use Pars\Mvc\View\Event\ViewEvent;
+use Pars\Pattern\Exception\AttributeExistsException;
+use Pars\Pattern\Exception\AttributeLockException;
 
+/**
+ * Class Button
+ * @package Pars\Component\Base\Field
+ */
 class Button extends AbstractField implements StyleAwareInterface
 {
     use StyleAwareTrait;
@@ -28,12 +34,20 @@ class Button extends AbstractField implements StyleAwareInterface
         parent::__construct($content);
         $this->style = $style;
         $this->path = $path;
+        $this->setTag('button');
     }
 
+    protected function initEvent()
+    {
+        parent::initEvent();
+        if ($this->hasConfirm()) {
+
+        }
+    }
 
     protected function initialize()
     {
-        $this->setTag('button');
+        parent::initialize();
         $this->setAttribute('type', $this->getType());
         if ($this->hasName()) {
             $this->setAttribute('name', $this->getName());
@@ -44,15 +58,7 @@ class Button extends AbstractField implements StyleAwareInterface
         if ($this->isModal()) {
             $this->setAttribute('target', 'modal');
         }
-        if ($this->hasConfirm()) {
-            $this->addOption('confirm-modal');
-            $this->setData('confirm-title', $this->getConfirmTitle());
-            if ($this->hasConfirmCancel()) {
-                $this->setData('confirm-cancel', $this->getConfirmCancel());
-            }
-            $this->setData('bs-toggle', 'modal');
-            $this->setData('bs-target', '#confirm-modal');
-        }
+
         $this->addOption('btn');
         $this->addOption('me-1');
         if ($this->hasStyle()) {
