@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Pars\Component\Base\Alert;
 
 
-use Pars\Component\Base\BorderAwareInterface;
+use Pars\Component\Base\Field\Codeblock;
 use Pars\Component\Base\Field\Paragraph;
 use Pars\Component\Base\StyleAwareInterface;
 use Pars\Component\Base\StyleAwareTrait;
@@ -67,6 +67,18 @@ class Alert extends AbstractComponent implements StyleAwareInterface
     {
         $block = new Paragraph();
         $block->addOption('mb-0');
+        $block->setContent($value);
+        $this->getElementList()->push($block);
+        return $block;
+    }
+
+    /**
+     * @param string $value
+     * @return Paragraph
+     */
+    public function addCodeblock(?string $value): Codeblock
+    {
+        $block = new Codeblock();
         $block->setContent($value);
         $this->getElementList()->push($block);
         return $block;

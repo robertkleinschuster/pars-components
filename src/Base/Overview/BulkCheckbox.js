@@ -1,10 +1,12 @@
 export class BulkCheckbox {
     static init(element) {
-        if (element.matches(".bulk-all")) {
-            this.#initBulkCheckbox(element);
-        } else {
-            element.querySelectorAll(".bulk-all")
-                .forEach(this.#initBulkCheckbox);
+        if (element) {
+            if (element.matches(".bulk-all")) {
+                this.#initBulkCheckbox(element);
+            } else {
+                element.querySelectorAll(".bulk-all")
+                    .forEach(this.#initBulkCheckbox);
+            }
         }
     }
 
@@ -16,18 +18,20 @@ export class BulkCheckbox {
                 checkbox.checked = element.checked;
             });
         });
-        form.querySelectorAll('.bulk').forEach(checkbox => {
-            checkbox.addEventListener('change', event => {
-                if (form.querySelectorAll('.bulk:checked').length) {
-                    form.querySelectorAll('.bulk-button').forEach(button => {
-                        button.classList.remove('d-none');
-                    });
-                } else {
-                    form.querySelectorAll('.bulk-button').forEach(button => {
-                        button.classList.add('d-none');
-                    });
-                }
+        if (form) {
+            form.querySelectorAll('.bulk').forEach(checkbox => {
+                checkbox.addEventListener('change', event => {
+                    if (form.querySelectorAll('.bulk:checked').length) {
+                        form.querySelectorAll('.bulk-button').forEach(button => {
+                            button.classList.remove('d-none');
+                        });
+                    } else {
+                        form.querySelectorAll('.bulk-button').forEach(button => {
+                            button.classList.add('d-none');
+                        });
+                    }
+                });
             });
-        });
+        }
     }
 }

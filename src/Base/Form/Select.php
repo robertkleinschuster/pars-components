@@ -31,7 +31,7 @@ class Select extends Input
         if ($this->hasOptions()) {
             foreach ($this->getOptions() as $value => $label) {
                 $option = new ViewElement('option');
-                $option->setAttribute('value', $value);
+                $option->setAttribute('value', $value ?? '');
                 $option->setContent($label);
                 $this->push($option);
             }

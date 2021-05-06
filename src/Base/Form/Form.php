@@ -11,12 +11,12 @@ use Pars\Component\Base\BorderAwareTrait;
 use Pars\Component\Base\ColorAwareInterface;
 use Pars\Component\Base\ColorAwareTrait;
 use Pars\Component\Base\Field\Button;
+use Pars\Component\Base\Form\Wysiwyg\Wysiwyg;
 use Pars\Component\Base\ShadowAwareInterface;
 use Pars\Component\Base\ShadowAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\Event\ViewEvent;
 use Pars\Mvc\View\ViewElementInterface;
-use Pars\Component\Base\Form\Wysiwyg\Wysiwyg;
 
 class Form extends AbstractComponent implements BorderAwareInterface, BackgroundAwareInterface, ShadowAwareInterface, ColorAwareInterface
 {
@@ -316,9 +316,11 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     public function addSubmit(string $name, string $content, string $value = null, string $style = null, string $label = null, int $row = 1, int $column = 1)
     {
         $submit = new Submit($content, $style ?? Submit::STYLE_WARNING);
+        $path = null;
         if ($this->hasAction()) {
-            $submit->setEvent(ViewEvent::createSubmit($this->getAction(), $this->generateId()));
+            $path = $this->getAction();
         }
+        $submit->setEvent(ViewEvent::createSubmit($path, $this->generateId()));
         return $this->addInput($submit, $name, $value, $label, $row, $column);
     }
 
@@ -350,6 +352,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         $button->addOption('cache');
         $button->addOption('close-modal');
         $button->addOption('form-control');
+        $button->setEvent(ViewEvent::createLink($path));
         $formGroup = new FormGroup('cancel');
         $formGroup->push($button);
         $this->addElement($formGroup, $row, $column);
