@@ -4,6 +4,7 @@
 namespace Pars\Component\Base\Form;
 
 
+use Pars\Bean\Type\Base\BeanException;
 use Pars\Component\Base\BackgroundAwareInterface;
 use Pars\Component\Base\BackgroundAwareTrait;
 use Pars\Component\Base\BorderAwareInterface;
@@ -17,6 +18,8 @@ use Pars\Component\Base\ShadowAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\Event\ViewEvent;
 use Pars\Mvc\View\ViewElementInterface;
+use Pars\Pattern\Exception\AttributeExistsException;
+use Pars\Pattern\Exception\AttributeLockException;
 
 class Form extends AbstractComponent implements BorderAwareInterface, BackgroundAwareInterface, ShadowAwareInterface, ColorAwareInterface
 {
@@ -42,14 +45,23 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      */
     protected array $formGroupList = [];
 
+    /**
+     * @var string|null
+     */
     public ?string $action = null;
 
+    /**
+     * @var string|null
+     */
     public ?string $method = null;
 
     /**
      * Form constructor.
      * @param string|null $action
      * @param string|null $method
+     * @throws BeanException
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
      */
     public function __construct(?string $action = null, ?string $method = null)
     {
