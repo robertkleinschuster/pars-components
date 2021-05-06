@@ -43,6 +43,7 @@ class DropdownButton extends AbstractField
         parent::initialize();
         $this->addOption('btn-group');
         $this->push($this->getButton());
+        $this->getButton()->removeOption('me-1');
         $dropdownButton = $this->getDropdownButton();
         $dropdownButton->addOption('dropdown-toggle');
         $dropdownButton->addOption('dropdown-toggle-split');

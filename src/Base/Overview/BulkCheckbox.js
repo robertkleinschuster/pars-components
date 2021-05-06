@@ -23,11 +23,11 @@ export class BulkCheckbox {
                 checkbox.addEventListener('change', event => {
                     if (form.querySelectorAll('.bulk:checked').length) {
                         form.querySelectorAll('.bulk-button').forEach(button => {
-                            button.classList.remove('d-none');
+                            //button.classList.remove('d-none');
                         });
                     } else {
                         form.querySelectorAll('.bulk-button').forEach(button => {
-                            button.classList.add('d-none');
+                            //button.classList.add('d-none');
                         });
                     }
                 });

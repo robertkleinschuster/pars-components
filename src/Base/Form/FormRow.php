@@ -11,6 +11,6 @@ class FormRow extends Row
     protected function initialize()
     {
         parent::initialize();
-        $this->addOption('mb-3');
+        $this->addOption('mb-2');
     }
 }

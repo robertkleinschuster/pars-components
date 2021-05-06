@@ -79,7 +79,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
             $this->setTag('nav');
             $this->addOption('navbar');
             $this->addOption('mb-1');
-            $this->addOption('shadow-sm');
+            $this->addOption('py-1');
             if ($this->hasBackground()) {
                 $this->addOption($this->getBackground());
                 if ($this->getBackground() == self::BACKGROUND_DARK) {
@@ -87,7 +87,8 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
                     $this->addOption('navbar-dark');
                 } elseif ($this->getBackground() == self::BACKGROUND_LIGHT) {
                     $this->addOption('navbar-light');
-
+                    $this->addOption('border');
+                    $this->addOption('rounded');
                 } elseif ($this->getBackground() == self::BACKGROUND_DANGER) {
                     $this->addOption('navbar-dark');
 
@@ -131,7 +132,6 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
                 if ($this->hasSearchAction()) {
                     $form->setAction($this->getSearchAction());
                 }
-                $form->addOption('order-3');
                 if ($this->hasBackground()) {
                     $this->getSearch()->setBackground($this->getBackground());
                     $this->getSearch()->setColor($this->getContrast()->getColor($this->getBackground()));
@@ -176,7 +176,6 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
         $brand = new Brand();
         $brand->setContent($value);
         $brand->setPath($path);
-        $brand->addOption('order-1');
         $this->getContainer()->unshift($brand);
         return $brand;
     }

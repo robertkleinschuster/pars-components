@@ -3,7 +3,9 @@
 
 namespace Pars\Component\Base\Collapsable;
 
+use Pars\Component\Base\BorderAwareInterface;
 use Pars\Component\Base\Field\Span;
+use Pars\Component\Base\ShadowAwareInterface;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\ComponentGroup;
 use Pars\Mvc\View\ComponentInterface;
@@ -79,6 +81,7 @@ class Collapsable extends AbstractComponent
         $content->addOption("border");
         $content->addOption("border-top-0");
         $content->addOption("pt-2");
+        $content->addOption(BorderAwareInterface::ROUNDED_BOTTOM);
     }
 
     protected function initCollapsableHeader()
@@ -92,6 +95,15 @@ class Collapsable extends AbstractComponent
         $header->addOption("bg-light");
         $header->addOption("bg-gradient-light");
         $header->addOption("border");
+        $header->addOption(BorderAwareInterface::ROUNDED_TOP);
+        if (!$this->isExpanded()) {
+            $header->addOption(BorderAwareInterface::ROUNDED_BOTTOM);
+            $header->addOption('collapsed');
+
+        } else {
+            $header->addOption('expanded');
+
+        }
         $header->addOption("fw-bolder");
         $header->addOption("px-2");
         $header->addInlineStyle("cursor", "pointer");

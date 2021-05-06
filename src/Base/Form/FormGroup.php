@@ -15,6 +15,7 @@ class FormGroup extends AbstractField
     public ?string $value = null;
     public ?string $hint = null;
     public ?string $error = null;
+    public ?bool $floating = true;
 
     /**
      * FormGroup constructor.
@@ -29,8 +30,9 @@ class FormGroup extends AbstractField
     protected function initialize()
     {
         $this->setTag('div');
-        $this->addOption('form-group');
+
         if ($this->hasInput()) {
+
             if ($this->hasName()) {
                 $this->getInput()->setName($this->getName());
             }
@@ -59,7 +61,18 @@ class FormGroup extends AbstractField
                 $label->setFor($this->getName());
             }
             $label->setContent($this->getLabel());
-            $this->getElementList()->unshift($label);
+            if ($this->isFloating()) {
+                $this->getElementList()->push($label);
+                if ($this->hasInput()) {
+                    $this->getInput()->setPlaceholder($this->getLabel());
+                }
+                $label->addOption('text-secondary');
+                $this->addOption('form-floating');
+            } else {
+                $this->getElementList()->unshift($label);
+                $this->addOption('form-group');
+            }
+
         }
         if ($this->hasHint()) {
             $hint = new Hint();
@@ -76,6 +89,24 @@ class FormGroup extends AbstractField
             $this->push($error);
         }
     }
+
+    /**
+     * @return bool|null
+     */
+    public function isFloating(): ?bool
+    {
+        return $this->floating;
+    }
+
+    /**
+     * @param bool|null $floating
+     */
+    public function setFloating(?bool $floating): self
+    {
+        $this->floating = $floating;
+        return $this;
+    }
+
 
     /**
      * @return string

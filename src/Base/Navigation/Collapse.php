@@ -34,7 +34,6 @@ class Collapse extends AbstractComponent
             $this->getElementList()->unshift($groupRight);
         }
         $group = new Group();
-        $group->addOption('order-2');
         $group->setElementList($this->getItemList());
         $this->getElementList()->unshift($group);
     }

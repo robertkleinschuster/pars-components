@@ -13,7 +13,8 @@ class Toolbar extends AbstractComponent
 
     protected function initialize()
     {
-        $this->addOption('btn-toolbar');
+        #$this->addOption('btn-toolbar');
+        $this->addOption('btn-group');
         parent::initialize();
     }
 

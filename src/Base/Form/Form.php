@@ -159,7 +159,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      */
     public function addWysiwyg(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
     {
-        return $this->addInput(new Wysiwyg(), $name, $value, $label, $row, $column);
+        return $this->addInput(new Wysiwyg(), $name, $value, $label, $row, $column)->setFloating(false);
     }
 
     /**
@@ -333,7 +333,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
             $path = $this->getAction();
         }
         $submit->setEvent(ViewEvent::createSubmit($path, $this->generateId()));
-        return $this->addInput($submit, $name, $value, $label, $row, $column);
+        return $this->addInput($submit, $name, $value, $label, $row, $column)->setFloating(false);
     }
 
     /**
@@ -348,7 +348,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      */
     public function addReset(string $name, string $content, string $value = null, string $style = null, string $label = null, int $row = 1, int $column = 1)
     {
-        return $this->addInput(new Reset($content, $style ?? Reset::STYLE_SECONDARY), $name, $value, $label, $row, $column);
+        return $this->addInput(new Reset($content, $style ?? Reset::STYLE_SECONDARY), $name, $value, $label, $row, $column)->setFloating(false);
     }
 
     /**
@@ -367,6 +367,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         $button->setEvent(ViewEvent::createLink($path));
         $formGroup = new FormGroup('cancel');
         $formGroup->push($button);
+        $formGroup->setFloating(false);
         $this->addElement($formGroup, $row, $column);
     }
 
@@ -397,6 +398,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
             $formGroup->setLabel($label);
         }
         $formGroup->setInput($input);
+        if ($input instanceof Button || $input instanceof Wysiwyg) {
+            $formGroup->setFloating(false);
+        }
         $this->addFormGroup($formGroup, $row, $column);
         return $formGroup;
     }

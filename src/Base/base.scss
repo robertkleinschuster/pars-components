@@ -1,27 +1,35 @@
 .modal .modal-hidden {
   display: none;
 }
-
+$border-radius: .6rem;
 @import "~bootstrap/scss/_functions";
 @import "~bootstrap/scss/_variables";
 
 $enable-gradients: false;
-$enable-rounded: false;
-$enable-shadows: true;
+$enable-rounded: true;
+$enable-shadows: false;
 $enable-smooth-scroll: true;
-
 $theme-colors: (
-        "primary":    $purple-500,
-        "secondary":  $gray-600,
-        "success":    $green-500,
-        "info":       $blue-500,
-        "warning":    $orange-700,
-        "danger":     $red-600,
-        "light":      $gray-100,
-        "dark":       $blue-900
+        "primary": $purple-500,
+        "secondary": $gray-600,
+        "success": $green-500,
+        "info": $blue-500,
+        "warning": $orange-700,
+        "danger": $red-600,
+        "light": $gray-100,
+        "dark": $blue-900
 );
 $pagination-active-bg: $blue-900;
 $pagination-active-border-color: $pagination-active-bg;
 $pagination-color: $pagination-active-bg;
 
 @import '~bootstrap';
+
+.collapsable-header.collapsed {
+  transition: .2s box-shadow, transform ease-in-out;
+}
+
+.collapsable-header.collapsed:hover {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 5px !important;
+  transform: scale(1.001);
+}

@@ -15,9 +15,9 @@ class Modal extends AbstractComponent
     protected ViewElement $modalBody;
     protected ViewElement $modalFooter;
 
-    protected function initialize()
+    protected function initFields()
     {
-        parent::initialize();
+        parent::initFields();
         $this->addOption('modal');
         $this->setAttribute('tabindex', '-1');
         $this->getMain()->addOption('modal-dialog');
@@ -29,11 +29,11 @@ class Modal extends AbstractComponent
         $this->getModalContent()->push($this->getModalBody());
         $this->getModalContent()->push($this->getModalFooter());
         $this->getModalContent()->addOption('modal-content');
+        $this->getModalContent()->addOption('rounded');
         $this->getModalHeader()->addOption('modal-header');
         $this->getModalTitle()->addOption('modal-title');
         $this->getModalBody()->addOption('modal-body');
         $this->getModalFooter()->addOption('modal-footer');
-
     }
 
 

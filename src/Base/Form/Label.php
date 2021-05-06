@@ -14,6 +14,9 @@ class Label extends AbstractField
     protected function initialize()
     {
         $this->setTag('label');
+        if ($this->hasParent() && !$this->getParent()->hasOption('form-floating')) {
+            $this->addOption('form-label');
+        }
         if ($this->hasFor()) {
             $this->setAttribute('for', $this->getFor());
         }

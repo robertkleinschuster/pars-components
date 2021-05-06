@@ -35,14 +35,12 @@ class Button extends AbstractField implements StyleAwareInterface
         $this->style = $style;
         $this->path = $path;
         $this->setTag('button');
+        $this->addOption('me-1');
     }
 
     protected function initEvent()
     {
         parent::initEvent();
-        if ($this->hasConfirm()) {
-
-        }
     }
 
     protected function initialize()
@@ -60,7 +58,6 @@ class Button extends AbstractField implements StyleAwareInterface
         }
 
         $this->addOption('btn');
-        $this->addOption('me-1');
         if ($this->hasStyle()) {
             if ($this->isOutline()) {
                 $this->addOption('btn-outline-' . $this->getStyle());

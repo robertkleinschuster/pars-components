@@ -71,9 +71,9 @@ export class Wysiwyg {
             // classes<Array[string]> (optional)
             // Choose your custom class names
             classes: {
-                actionbar: 'bg-light border border-bottom-0',
-                button: 'btn btn-secondary',
-                content: 'pell-content h-auto border',
+                actionbar: 'bg-light btn-toolbar border border-bottom-0 rounded-top',
+                button: 'btn btn-light',
+                content: 'pell-content h-auto border rounded-bottom',
                 selected: 'active'
             }
         });
