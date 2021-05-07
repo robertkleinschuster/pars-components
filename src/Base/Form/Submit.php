@@ -29,6 +29,7 @@ class Submit extends Input implements StyleAwareInterface
         $this->setTag('button');
         $this->removeOption('form-control');
         $this->addOption('btn');
+        $this->addOption('w-100');
         if ($this->hasStyle()) {
             $this->addOption('btn-' . $this->getStyle());
         }

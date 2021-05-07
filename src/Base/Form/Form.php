@@ -428,6 +428,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         $button->setContent($label);
         $button->setPath($path);
         $button->addOption('close-modal');
+        $button->addOption('w-100');
         $button->setEvent(ViewEvent::createLink($path));
         $formGroup = new FormGroup('cancel');
         $formGroup->push($button);
