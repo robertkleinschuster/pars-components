@@ -16,6 +16,7 @@ use Pars\Component\Base\ShadowAwareInterface;
 use Pars\Component\Base\ShadowAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\Event\ViewEvent;
+use Pars\Mvc\View\ViewElement;
 use Pars\Pattern\Exception\AttributeExistsException;
 use Pars\Pattern\Exception\AttributeLockException;
 
@@ -47,6 +48,8 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @var string|null
      */
     public ?string $method = null;
+
+    public bool $useColumns = true;
 
     /**
      * Form constructor.
@@ -149,22 +152,32 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
                 // intentionally no break to set breakpoints up to the field count
                 $groupFieldCount = count($groupFieldList);
                 $groupFieldCount = $groupFieldCount > 4 ? 4 : $groupFieldCount;
-                switch ($groupFieldCount) {
-                    case 4:
-                        $row->addOption('row-cols-lg-4');
-                    case 3:
-                        $row->addOption('row-cols-md-3');
-                    case 2:
-                        $row->addOption('row-cols-sm-2');
-                    case 1:
-                        $row->addOption('row-cols-1');
+                if ($this->isUseColumns()) {
+                    switch ($groupFieldCount) {
+                        case 4:
+                            $row->addOption('row-cols-lg-4');
+                        case 3:
+                            $row->addOption('row-cols-md-3');
+                        case 2:
+                            $row->addOption('row-cols-sm-2');
+                        case 1:
+                            $row->addOption('row-cols-1');
+                    }
                 }
                 foreach ($groupFieldList as $field) {
+                    if (!$this->isUseColumns()) {
+                        $row = new FormRow();
+                        $container->push($row);
+                    }
                     $column = new FormColumn();
                     $column->push($field);
                     $row->push($column);
+
                 }
+                if ($this->isUseColumns()) {
+
                 $container->push($row);
+                }
             }
         }
         $container->push($rowLast);
@@ -542,6 +555,25 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     {
         return isset($this->method);
     }
+
+    /**
+     * @return bool
+     */
+    public function isUseColumns(): bool
+    {
+        return $this->useColumns;
+    }
+
+    /**
+     * @param bool $useColumns
+     * @return Form
+     */
+    public function setUseColumns(bool $useColumns): Form
+    {
+        $this->useColumns = $useColumns;
+        return $this;
+    }
+
 
 
 }
