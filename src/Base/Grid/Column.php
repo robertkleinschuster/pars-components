@@ -21,8 +21,9 @@ class Column extends AbstractComponent implements BreakpointAwareInterface, Back
     public ?int $size = null;
     public ?int $order = null;
 
-    protected function initialize()
+    protected function initBase()
     {
+        parent::initBase();
         $this->setTag('div');
         if ($this->hasBreakpoint()) {
             if ($this->hasSize()) {
@@ -51,6 +52,15 @@ class Column extends AbstractComponent implements BreakpointAwareInterface, Back
             $this->addOption($this->getRounded());
         }
     }
+
+
+    protected function handleFields()
+    {
+        foreach ($this->getFieldList() as $field) {
+            $this->getMain()->push($field);
+        }
+    }
+
 
     /**
      * @return int

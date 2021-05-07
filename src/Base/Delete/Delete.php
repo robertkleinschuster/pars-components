@@ -13,7 +13,7 @@ class Delete extends AbstractComponent implements TextAwareInterface
 
     public ?string $heading = null;
 
-    protected function initialize()
+    protected function initAdditionalBefore()
     {
         if ($this->hasHeading()) {
             $alert = new Alert($this->getHeading());
@@ -21,9 +21,10 @@ class Delete extends AbstractComponent implements TextAwareInterface
             if ($this->hasText()) {
                 $alert->addBlock($this->getText());
             }
-            $this->getElementList()->unshift($alert);
+            $this->getBefore()->push($alert);
         }
     }
+
 
     /**
      * @return string

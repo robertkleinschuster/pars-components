@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pars\Component\Base\Form;
-
 
 use Pars\Bean\Type\Base\BeanException;
 use Pars\Component\Base\BackgroundAwareInterface;
@@ -13,14 +11,18 @@ use Pars\Component\Base\ColorAwareInterface;
 use Pars\Component\Base\ColorAwareTrait;
 use Pars\Component\Base\Field\Button;
 use Pars\Component\Base\Form\Wysiwyg\Wysiwyg;
+use Pars\Component\Base\Grid\Container;
 use Pars\Component\Base\ShadowAwareInterface;
 use Pars\Component\Base\ShadowAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\Event\ViewEvent;
-use Pars\Mvc\View\ViewElementInterface;
 use Pars\Pattern\Exception\AttributeExistsException;
 use Pars\Pattern\Exception\AttributeLockException;
 
+/**
+ * Class Form
+ * @package Pars\Component\Base\Form
+ */
 class Form extends AbstractComponent implements BorderAwareInterface, BackgroundAwareInterface, ShadowAwareInterface, ColorAwareInterface
 {
     use BorderAwareTrait;
@@ -28,18 +30,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     use ShadowAwareTrait;
     use ColorAwareTrait;
 
+    public const GROUP_LAST = 'last';
     public const METHOD_POST = 'post';
     public const METHOD_GET = 'get';
-
-    /**
-     * @var FormRow[]
-     */
-    protected array $rowMap = [];
-    /**
-     * @var FormColumn[]
-     */
-    protected array $columnMap = [];
-
     /**
      * @var array
      */
@@ -83,15 +76,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
             $this->setAttribute('action', $this->getAction());
         }
         $this->setAttribute('enctype', 'multipart/form-data');
-        ksort($this->columnMap);
-        foreach ($this->columnMap as $row => $columns) {
-            ksort($columns);
-            $formRow = $this->getRow($row);
-            foreach ($columns as $column) {
-                $formRow->push($column);
-            }
-            $this->push($formRow);
-        }
+
         if ($this->hasBorder()) {
             $this->addOption('border');
             $this->addOption($this->getBorder());
@@ -111,6 +96,66 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         if ($this->hasColor()) {
             $this->addOption($this->getColor());
         }
+        $container = new Container();
+        $container->setMode(Container::MODE_FLUID);
+        $arrGroup_Field = [];
+        foreach ($this->getFieldList() as $field) {
+            if ($field->hasGroup()) {
+                $arrGroup_Field[$field->getGroup()][] = $field;
+            } else {
+                $arrGroup_Field[''][] = $field;
+            }
+        }
+
+            $rowLast = new FormRow();
+        if (isset($arrGroup_Field[self::GROUP_LAST])) {
+            foreach ($arrGroup_Field[self::GROUP_LAST] as $field) {
+                $column = new FormColumn();
+                $column->push($field);
+                $rowLast->push($column);
+            }
+            unset($arrGroup_Field[self::GROUP_LAST]);
+        }
+
+        foreach ($arrGroup_Field as $group => $groupFieldList) {
+            if ($group) {
+                $title = new FormRow();
+                $title->addOption('fw-bold');
+                $title->addOption('mt-3');
+                $title->setContent($group . '<hr>');
+                $container->push($title);
+                $row = new FormRow();
+                // intentionally no break to set breakpoints up to the field count
+                $groupFieldCount = count($groupFieldList);
+                $groupFieldCount = $groupFieldCount > 4 ? 4 : $groupFieldCount;
+                switch ($groupFieldCount) {
+                    case 4:
+                        $row->addOption('row-cols-lg-4');
+                    case 3:
+                        $row->addOption('row-cols-md-3');
+                    case 2:
+                        $row->addOption('row-cols-sm-2');
+                    case 1:
+                        $row->addOption('row-cols-1');
+                }
+                foreach ($groupFieldList as $field) {
+                    $column = new FormColumn();
+                    $column->push($field);
+                    $row->push($column);
+                }
+                $container->push($row);
+            } else {
+                foreach ($groupFieldList as $field) {
+                    $row = new FormRow();
+                    $column = new FormColumn();
+                    $column->push($field);
+                    $row->push($column);
+                    $container->push($row);
+                }
+            }
+        }
+        $container->push($rowLast);
+        $this->push($container);
     }
 
     /**
@@ -120,9 +165,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $row
      * @param int $column
      */
-    public function addText(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addText(string $name, string $value = null, string $label = null)
     {
-        return $this->addInput(new Input(Input::TYPE_TEXT), $name, $value, $label, $row, $column);
+        return $this->addInput(new Input(Input::TYPE_TEXT), $name, $value, $label);
     }
 
     /**
@@ -132,9 +177,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $row
      * @param int $column
      */
-    public function addHidden(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addHidden(string $name, string $value = null, string $label = null)
     {
-        return $this->addInput(new Input(Input::TYPE_HIDDEN), $name, $value, $label, $row, $column);
+        return $this->addInput(new Input(Input::TYPE_HIDDEN), $name, $value, $label);
     }
 
     /**
@@ -144,82 +189,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $row
      * @param int $column
      */
-    public function addTextarea(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addTextarea(string $name, string $value = null, string $label = null)
     {
-        return $this->addInput(new Textarea(), $name, $value, $label, $row, $column);
-    }
-
-
-    /**
-     * @param string $name
-     * @param string|null $value
-     * @param string|null $label
-     * @param int $row
-     * @param int $column
-     */
-    public function addWysiwyg(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
-    {
-        return $this->addInput(new Wysiwyg(), $name, $value, $label, $row, $column)->setFloating(false);
-    }
-
-    /**
-     * @param string $name
-     * @param string|null $value
-     * @param string|null $label
-     * @param int $row
-     * @param int $column
-     */
-    public function addEmail(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
-    {
-        return $this->addInput(new Input(Input::TYPE_EMAIL), $name, $value, $label, $row, $column);
-    }
-
-    /**
-     * @param string $name
-     * @param string|null $value
-     * @param string|null $label
-     * @param int $row
-     * @param int $column
-     */
-    public function addPassword(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
-    {
-        return $this->addInput(new Input(Input::TYPE_PASSWORD), $name, $value, $label, $row, $column);
-    }
-
-    /**
-     * @param string $name
-     * @param string|null $value
-     * @param string|null $label
-     * @param int $row
-     * @param int $column
-     */
-    public function addTel(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
-    {
-        return $this->addInput(new Input(Input::TYPE_TEL), $name, $value, $label, $row, $column);
-    }
-
-    /**
-     * @param string $name
-     * @param string|null $value
-     * @param string|null $label
-     * @param int $row
-     * @param int $column
-     */
-    public function addUrl(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
-    {
-        return $this->addInput(new Input(Input::TYPE_URL), $name, $value, $label, $row, $column);
-    }
-
-    /**
-     * @param string $name
-     * @param string|null $value
-     * @param string|null $label
-     * @param int $row
-     * @param int $column
-     */
-    public function addFile(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
-    {
-        return $this->addInput(new File(), $name, $value, $label, $row, $column);
+        return $this->addInput(new Textarea(), $name, $value, $label);
     }
 
 
@@ -230,9 +202,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $row
      * @param int $column
      */
-    public function addDate(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addWysiwyg(string $name, string $value = null, string $label = null)
     {
-        return $this->addInput(new Date(), $name, $value, $label, $row, $column);
+        return $this->addInput(new Wysiwyg(), $name, $value, $label)->setFloating(false);
     }
 
     /**
@@ -242,9 +214,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $row
      * @param int $column
      */
-    public function addTime(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addEmail(string $name, string $value = null, string $label = null)
     {
-        return $this->addInput(new Time(), $name, $value, $label, $row, $column);
+        return $this->addInput(new Input(Input::TYPE_EMAIL), $name, $value, $label);
     }
 
     /**
@@ -254,9 +226,82 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $row
      * @param int $column
      */
-    public function addDateTime(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addPassword(string $name, string $value = null, string $label = null)
     {
-        return $this->addInput(new DateTimeLocal(), $name, $value, $label, $row, $column);
+        return $this->addInput(new Input(Input::TYPE_PASSWORD), $name, $value, $label);
+    }
+
+    /**
+     * @param string $name
+     * @param string|null $value
+     * @param string|null $label
+     * @param int $row
+     * @param int $column
+     */
+    public function addTel(string $name, string $value = null, string $label = null)
+    {
+        return $this->addInput(new Input(Input::TYPE_TEL), $name, $value, $label);
+    }
+
+    /**
+     * @param string $name
+     * @param string|null $value
+     * @param string|null $label
+     * @param int $row
+     * @param int $column
+     */
+    public function addUrl(string $name, string $value = null, string $label = null)
+    {
+        return $this->addInput(new Input(Input::TYPE_URL), $name, $value, $label);
+    }
+
+    /**
+     * @param string $name
+     * @param string|null $value
+     * @param string|null $label
+     * @param int $row
+     * @param int $column
+     */
+    public function addFile(string $name, string $value = null, string $label = null)
+    {
+        return $this->addInput(new File(), $name, $value, $label);
+    }
+
+
+    /**
+     * @param string $name
+     * @param string|null $value
+     * @param string|null $label
+     * @param int $row
+     * @param int $column
+     */
+    public function addDate(string $name, string $value = null, string $label = null)
+    {
+        return $this->addInput(new Date(), $name, $value, $label);
+    }
+
+    /**
+     * @param string $name
+     * @param string|null $value
+     * @param string|null $label
+     * @param int $row
+     * @param int $column
+     */
+    public function addTime(string $name, string $value = null, string $label = null)
+    {
+        return $this->addInput(new Time(), $name, $value, $label);
+    }
+
+    /**
+     * @param string $name
+     * @param string|null $value
+     * @param string|null $label
+     * @param int $row
+     * @param int $column
+     */
+    public function addDateTime(string $name, string $value = null, string $label = null)
+    {
+        return $this->addInput(new DateTimeLocal(), $name, $value, $label);
     }
 
     /**
@@ -268,9 +313,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $column
      * @return FormGroup
      */
-    public function addSelect(string $name, array $options, string $value = '', string $label = null, int $row = 1, int $column = 1)
+    public function addSelect(string $name, array $options, string $value = '', string $label = null)
     {
-        return $this->addInput(new Select($options), $name, $value, $label, $row, $column);
+        return $this->addInput(new Select($options), $name, $value, $label);
     }
 
 
@@ -283,9 +328,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $column
      * @return FormGroup
      */
-    public function addFileSelect(string $name, FileSelect $fileSelect, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addFileSelect(string $name, FileSelect $fileSelect, string $value = null, string $label = null)
     {
-        return $this->addInput($fileSelect, $name, $value, $label, $row, $column);
+        return $this->addInput($fileSelect, $name, $value, $label);
     }
 
     /**
@@ -297,9 +342,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $column
      * @return FormGroup
      */
-    public function addRadioGroup(string $name, array $options, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addRadioGroup(string $name, array $options, string $value = null, string $label = null)
     {
-        return $this->addInput(new RadioGroup($options), $name, $value, $label, $row, $column);
+        return $this->addInput(new RadioGroup($options), $name, $value, $label);
     }
 
     /**
@@ -310,9 +355,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $column
      * @return FormGroup
      */
-    public function addCheckbox(string $name, string $value = null, string $label = null, int $row = 1, int $column = 1)
+    public function addCheckbox(string $name, string $value = null, string $label = null)
     {
-        return $this->addInput(new Checkbox(), $name, $value, $label, $row, $column);
+        return $this->addInput(new Checkbox(), $name, $value, $label);
     }
 
     /**
@@ -325,7 +370,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $column
      * @return FormGroup
      */
-    public function addSubmit(string $name, string $content, string $value = null, string $style = null, string $label = null, int $row = 1, int $column = 1)
+    public function addSubmit(string $name, string $content, string $value = null, string $style = null, string $label = null)
     {
         $submit = new Submit($content, $style ?? Submit::STYLE_WARNING);
         $path = null;
@@ -333,7 +378,8 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
             $path = $this->getAction();
         }
         $submit->setEvent(ViewEvent::createSubmit($path, $this->generateId()));
-        return $this->addInput($submit, $name, $value, $label, $row, $column)->setFloating(false);
+        return $this->addInput($submit, $name, $value, $label)->setFloating(false)
+            ->setGroup(self::GROUP_LAST);
     }
 
     /**
@@ -346,16 +392,17 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $column
      * @return FormGroup
      */
-    public function addReset(string $name, string $content, string $value = null, string $style = null, string $label = null, int $row = 1, int $column = 1)
+    public function addReset(string $name, string $content, string $value = null, string $style = null, string $label = null)
     {
-        return $this->addInput(new Reset($content, $style ?? Reset::STYLE_SECONDARY), $name, $value, $label, $row, $column)->setFloating(false);
+        return $this->addInput(new Reset($content, $style ?? Reset::STYLE_SECONDARY), $name, $value, $label)->setFloating(false)
+            ->setGroup(self::GROUP_LAST);
     }
 
     /**
      * @param string $label
      * @param string $path
      */
-    public function addCancel(string $label, string $path, int $row = 1, int $column = 1)
+    public function addCancel(string $label, string $path)
     {
         $button = new Button();
         $button->setStyle(Button::STYLE_SECONDARY);
@@ -368,7 +415,8 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         $formGroup = new FormGroup('cancel');
         $formGroup->push($button);
         $formGroup->setFloating(false);
-        $this->addElement($formGroup, $row, $column);
+        $formGroup->setGroup(self::GROUP_LAST);
+        $this->pushField($formGroup);
     }
 
 
@@ -385,9 +433,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         Input $input,
         string $name,
         string $value = null,
-        string $label = null,
-        int $row = 1,
-        int $column = 1
+        string $label = null
     )
     {
         $formGroup = new FormGroup($name);
@@ -401,15 +447,8 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         if ($input instanceof Button || $input instanceof Wysiwyg) {
             $formGroup->setFloating(false);
         }
-        $this->addFormGroup($formGroup, $row, $column);
+        $this->addFormGroup($formGroup);
         return $formGroup;
-    }
-
-    public function addElement(ViewElementInterface $html, int $row, int $column)
-    {
-        $formCol = $this->getColumn($row, $column);
-        $formCol->push($html);
-        $formCol->setBreakpoint(FormColumn::BREAKPOINT_MEDIUM);
     }
 
     /**
@@ -417,10 +456,10 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $row
      * @param int $column
      */
-    protected function addFormGroup(FormGroup $formGroup, int $row = 1, int $column = 1)
+    protected function addFormGroup(FormGroup $formGroup)
     {
         $this->formGroupList[] = $formGroup;
-        $this->addElement($formGroup, $row, $column);
+        $this->pushField($formGroup);
         return $this;
     }
 
@@ -431,24 +470,6 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     {
         return $this->formGroupList;
     }
-
-
-    protected function getRow(int $row)
-    {
-        if (!isset($this->rowMap[$row])) {
-            $this->rowMap[$row] = new FormRow();
-        }
-        return $this->rowMap[$row];
-    }
-
-    protected function getColumn(int $row, int $column)
-    {
-        if (!isset($this->columnMap[$row][$column])) {
-            $this->columnMap[$row][$column] = new FormColumn();
-        }
-        return $this->columnMap[$row][$column];
-    }
-
 
     /**
      * @return string

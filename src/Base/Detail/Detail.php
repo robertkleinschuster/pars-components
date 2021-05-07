@@ -23,6 +23,9 @@ class Detail extends AbstractComponent implements BeanAwareInterface
     protected function handleFields()
     {
         parent::handleFields();
+        foreach ($this->getFieldList() as $field) {
+            $this->getJumbotron()->pushField($field);
+        }
         if ($this->hasCollapsable()) {
             $this->getCollapsable()->pushComponent($this->getJumbotron());
             $this->getMain()->push($this->getCollapsable());
@@ -61,10 +64,10 @@ class Detail extends AbstractComponent implements BeanAwareInterface
      * @return Span
      * @throws BeanException
      */
-    public function addField(string $name, string $label, int $row = null, int $col = null): Span
+    public function addSpan(string $name, string $label, int $row = null, int $col = null): Span
     {
         $span = new Span("{{$name}}", $label);
-        $this->getJumbotron()->append($span, $row, $col);
+        $this->pushField($span, $row, $col);
         return $span;
     }
 
@@ -82,20 +85,11 @@ class Detail extends AbstractComponent implements BeanAwareInterface
      * @param int|null $column
      * @return $this
      */
-    public function append(FieldInterface $field, int $row = null, int $column = null): self
+    public function pushField(FieldInterface $field, int $row = null, int $column = null): self
     {
-        $this->getJumbotron()->append($field, $row, $column);
-        return $this;
-    }
-
-    /**
-     * @param FieldInterface $field
-     * @return $this
-     */
-    public function prepend(FieldInterface $field): Detail
-    {
-        $this->getJumbotron()->getFieldList()->unshift($field);
-        return $this;
+        $field->setRow($row);
+        $field->setColumn($column);
+        return parent::pushField($field);
     }
 
     /**

@@ -9,35 +9,27 @@ use Pars\Component\Base\Grid\Container;
 use Pars\Component\Base\Grid\Row;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\FieldInterface;
-use Pars\Mvc\View\FieldListAwareTrait;
 use Pars\Mvc\View\ViewElement;
 
 class Jumbotron extends AbstractComponent
 {
-    use FieldListAwareTrait;
-
     /**
-     * @var Row[]
+     * @var string|null
      */
-    private array $rowMap = [];
-    /**
-     * @var Column[]
-     */
-    private array $columnMap = [];
-
-
     public ?string $heading = null;
+    /**
+     * @var string|null
+     */
     public ?string $lead = null;
 
-    protected function initialize()
+    protected function initBase()
     {
+        parent::initBase();
         $this->setTag('div');
-        $this->addOption('bg-light');
         $this->addOption('py-2');
         $this->addOption('px-2');
         $this->addOption('mb-4');
-        $this->addOption('bg-light');
-        $this->addOption('shadow-sm');
+
         if ($this->hasLead()) {
             $p = new Paragraph($this->getLead());
             $this->addOption('lead');
@@ -54,30 +46,56 @@ class Jumbotron extends AbstractComponent
         }
         $container = new Container();
         $container->setMode(Container::MODE_FLUID);
-        ksort($this->columnMap);
-        foreach ($this->columnMap as $row => $columns) {
-            ksort($columns);
-            $formRow = $this->getRow($row);
-            $count = count($columns);
-            $values = array_values($columns);
-            foreach ($values as $index => $column) {
-                $column->addOption('p-0');
-                if ($index + 1 < $count) {
-                    $column->addOption('me-sm-3');
-                }
-                $column->push($this->createFieldRow($column->getElementList()->pop(), $count));
-                $formRow->push($column);
-            }
-            $container->push($formRow);
-        }
-
+        $arrGroup_Field = [];
         foreach ($this->getFieldList() as $field) {
-            $container->push($this->createFieldRow($field));
+            if ($field->hasGroup()) {
+                $arrGroup_Field[$field->getGroup()][] = $field;
+            } else {
+                $arrGroup_Field[''][] = $field;
+            }
         }
+        foreach ($arrGroup_Field as $group => $groupFieldList) {
+            if ($group) {
+                $title = new Row();
+                $title->addOption('fw-bold');
+                $title->addOption('mt-3');
+                $title->setContent($group . '<hr>');
+                $container->push($title);
+                $row = new Row();
+                // intentionally no break to set breakpoints up to the field count
+                $groupFieldCount = count($groupFieldList);
+                $groupFieldCount = $groupFieldCount > 4 ? 4: $groupFieldCount;
+                switch ($groupFieldCount) {
+                    case 4:
+                        $row->addOption('row-cols-lg-4');
+                    case 3:
+                        $row->addOption('row-cols-md-3');
+                    case 2:
+                        $row->addOption('row-cols-sm-2');
+                    case 1:
+                        $row->addOption('row-cols-1');
+                }
+                foreach ($groupFieldList as $field) {
+                    $column = new Column();
+                    $column->push($this->createFieldRow($field));
+                    $row->push($column);
+                }
+                $container->push($row);
+            } else {
+                foreach ($groupFieldList as $field) {
+                    $row = new Row();
+                    $column = new Column();
 
+                    $column->push($this->createFieldRow($field));
+                    $row->push($column);
+                    $container->push($row);
+                }
+            }
+        }
 
         $this->push($container);
     }
+
 
     /**
      * @param FieldInterface $field
@@ -85,19 +103,25 @@ class Jumbotron extends AbstractComponent
      * @return Row
      * @throws \Pars\Bean\Type\Base\BeanException
      */
-    protected function createFieldRow(FieldInterface $field, $count = 1): ViewElement
+    protected function createFieldRow(FieldInterface $field): ViewElement
     {
         $div = new ViewElement();
-        if ($field->hasLabel()) {
-            $span = new Span($field->getLabel());
-            $div->push($span);
-        }
         $block = new ViewElement();
+        if ($field->hasLabel()) {
+            $label = new ViewElement();
+            $span = new Span($field->getLabel());
+            $label->addOption('p-2');
+            $label->addOption('bg-light');
+            $label->addOption('rounded-top');
+            $label->addOption('border');
+            $label->addOption('border-bottom-0');
+            $label->push($span);
+            $div->push($label);
+            $block->addOption('border');
+            $block->addOption('rounded-bottom');
+        }
         $block->addOption('mb-1');
-        $block->addOption('bg-white');
-        $block->addOption('border');
-        $block->addOption('border-secondary');
-        $block->addOption('p-1');
+        $block->addOption('p-2');
         $block->push($field);
         $div->push($block);
         return $div;
@@ -156,50 +180,6 @@ class Jumbotron extends AbstractComponent
     public function hasHeading(): bool
     {
         return isset($this->heading);
-    }
-
-    /**
-     * @param FieldInterface $field
-     * @param int|null $row
-     * @param int|null $column
-     * @return Jumbotron
-     */
-    public function append(FieldInterface $field, ?int $row = null, ?int $column = null): self
-    {
-        if ($row !== null || $column !== null) {
-            $col = $this->getColumn($row ?? 1, $column ?? 1);
-            $col->push($field);
-            $col->setBreakpoint(Column::BREAKPOINT_SMALL);
-        } else {
-            $this->getFieldList()->push($field);
-        }
-        return $this;
-    }
-
-
-    /**
-     * @param int $row
-     * @return mixed|Row
-     */
-    protected function getRow(int $row)
-    {
-        if (!isset($this->rowMap[$row])) {
-            $this->rowMap[$row] = new Row();
-        }
-        return $this->rowMap[$row];
-    }
-
-    /**
-     * @param int $row
-     * @param int $column
-     * @return mixed
-     */
-    protected function getColumn(int $row, int $column)
-    {
-        if (!isset($this->columnMap[$row][$column])) {
-            $this->columnMap[$row][$column] = new Column();
-        }
-        return $this->columnMap[$row][$column];
     }
 
 }
