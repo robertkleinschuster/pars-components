@@ -107,7 +107,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
             }
         }
 
-            $rowLast = new FormRow();
+        $rowLast = new FormRow();
         if (isset($arrGroup_Field[self::GROUP_LAST])) {
             foreach ($arrGroup_Field[self::GROUP_LAST] as $field) {
                 $column = new FormColumn();
@@ -145,13 +145,17 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
                 }
                 $container->push($row);
             } else {
+                $row = new FormRow();
+                $row->addOption('row-cols-lg-4');
+                $row->addOption('row-cols-md-3');
+                $row->addOption('row-cols-sm-2');
+                $row->addOption('row-cols-1');
                 foreach ($groupFieldList as $field) {
-                    $row = new FormRow();
                     $column = new FormColumn();
                     $column->push($field);
                     $row->push($column);
-                    $container->push($row);
                 }
+                $container->push($row);
             }
         }
         $container->push($rowLast);
@@ -177,9 +181,15 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      * @param int $row
      * @param int $column
      */
-    public function addHidden(string $name, string $value = null, string $label = null)
+    public function addHidden(string $name, string $value = null)
     {
-        return $this->addInput(new Input(Input::TYPE_HIDDEN), $name, $value, $label);
+        $input = new Input(Input::TYPE_HIDDEN);
+        $input->setName($name);
+        if ($value) {
+            $input->setValue($value);
+        }
+        $this->push($input);
+        return $input;
     }
 
     /**
