@@ -8,5 +8,10 @@ use Pars\Component\Base\Grid\Column;
 
 class FormColumn extends Column
 {
+    protected function initBase()
+    {
+        parent::initBase();
+        $this->addOption('mb-2');
+    }
 
 }

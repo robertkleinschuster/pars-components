@@ -410,8 +410,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
             $path = $this->getAction();
         }
         $submit->setEvent(ViewEvent::createSubmit($path, $this->generateId()));
+        $submit->addOption('h-100');
         return $this->addInput($submit, $name, $value, $label)->setFloating(false)
-            ->setGroup(self::GROUP_LAST);
+            ->setGroup(self::GROUP_LAST)->addOption('h-100');
     }
 
     /**
@@ -426,8 +427,10 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      */
     public function addReset(string $name, string $content, string $value = null, string $style = null, string $label = null)
     {
-        return $this->addInput(new Reset($content, $style ?? Reset::STYLE_SECONDARY), $name, $value, $label)->setFloating(false)
-            ->setGroup(self::GROUP_LAST);
+        $reset = new Reset($content, $style ?? Reset::STYLE_SECONDARY);
+        $reset->addOption('h-100');
+        return $this->addInput($reset, $name, $value, $label)->setFloating(false)
+            ->setGroup(self::GROUP_LAST)->addOption('h-100');
     }
 
     /**
@@ -442,11 +445,13 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         $button->setPath($path);
         $button->addOption('close-modal');
         $button->addOption('w-100');
+        $button->addOption('h-100');
         $button->setEvent(ViewEvent::createLink($path));
         $formGroup = new FormGroup('cancel');
         $formGroup->push($button);
         $formGroup->setFloating(false);
         $formGroup->setGroup(self::GROUP_LAST);
+        $formGroup->addOption('h-100');
         $this->pushField($formGroup);
     }
 
