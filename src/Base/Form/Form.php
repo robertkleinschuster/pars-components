@@ -146,10 +146,19 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
                 $container->push($row);
             } else {
                 $row = new FormRow();
-                $row->addOption('row-cols-lg-4');
-                $row->addOption('row-cols-md-3');
-                $row->addOption('row-cols-sm-2');
-                $row->addOption('row-cols-1');
+                // intentionally no break to set breakpoints up to the field count
+                $groupFieldCount = count($groupFieldList);
+                $groupFieldCount = $groupFieldCount > 4 ? 4 : $groupFieldCount;
+                switch ($groupFieldCount) {
+                    case 4:
+                        $row->addOption('row-cols-lg-4');
+                    case 3:
+                        $row->addOption('row-cols-md-3');
+                    case 2:
+                        $row->addOption('row-cols-sm-2');
+                    case 1:
+                        $row->addOption('row-cols-1');
+                }
                 foreach ($groupFieldList as $field) {
                     $column = new FormColumn();
                     $column->push($field);
