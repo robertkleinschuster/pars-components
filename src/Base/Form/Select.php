@@ -28,6 +28,7 @@ class Select extends Input
         parent::initialize();
         $this->setTag('select');
         $this->addOption('form-select');
+        $this->removeOption('form-control');
         if ($this->hasOptions()) {
             foreach ($this->getOptions() as $value => $label) {
                 $option = new ViewElement('option');
