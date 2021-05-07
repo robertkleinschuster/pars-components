@@ -29,6 +29,7 @@ class Reset extends Input implements StyleAwareInterface
         $this->setType(self::TYPE_RESET);
         parent::initialize();
         $this->setTag('button');
+        $this->removeOption('form-control');
         $this->addOption('btn');
         if ($this->hasStyle()) {
             $this->addOption('btn-' . $this->getStyle());
