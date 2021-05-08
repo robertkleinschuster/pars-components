@@ -37,3 +37,14 @@ $pagination-color: $pagination-active-bg;
 .modal-content {
   z-index: $zindex-modal;
 }
+
+.pars-debug {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: auto;
+  word-wrap: break-word;
+  background: lightblue;
+  border: 1px black solid;
+}
