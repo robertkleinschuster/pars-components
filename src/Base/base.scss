@@ -1,7 +1,7 @@
 .modal .modal-hidden {
   display: none;
 }
-$border-radius: .6rem;
+$border-radius: .25rem;
 @import "~bootstrap/scss/_functions";
 @import "~bootstrap/scss/_variables";
 
@@ -32,4 +32,8 @@ $pagination-color: $pagination-active-bg;
 .collapsable-header.collapsed:hover {
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 5px !important;
   transform: scale(1.001);
+}
+
+.modal-content {
+  z-index: $zindex-modal;
 }
