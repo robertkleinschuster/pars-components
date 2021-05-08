@@ -16,7 +16,6 @@ use Pars\Component\Base\ShadowAwareInterface;
 use Pars\Component\Base\ShadowAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\Event\ViewEvent;
-use Pars\Mvc\View\ViewElement;
 use Pars\Pattern\Exception\AttributeExistsException;
 use Pars\Pattern\Exception\AttributeLockException;
 
@@ -175,12 +174,13 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
 
                 }
                 if ($this->isUseColumns()) {
-
-                $container->push($row);
+                    $container->push($row);
                 }
             }
         }
-        $container->push($rowLast);
+        if ($rowLast->getFieldList()->count() || $rowLast->getElementList()->count()) {
+            $container->push($rowLast);
+        }
         $this->push($container);
     }
 
@@ -578,7 +578,6 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         $this->useColumns = $useColumns;
         return $this;
     }
-
 
 
 }

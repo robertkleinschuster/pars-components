@@ -129,6 +129,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
             $this->getContainer()->push($this->getCollapse());
             if ($this->hasSearch()) {
                 $form = new Form();
+                $form->setUseColumns(false);
                 if ($this->hasSearchAction()) {
                     $form->setAction($this->getSearchAction());
                 }
