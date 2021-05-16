@@ -15,9 +15,7 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "pars/pars-mvc": "@dev",
-    "pars/pars-models": "@dev",
     "pars/pars-helpers": "@dev",
-    "pars/pars-core": "@dev",
     "pars/pars-beans": "@dev",
     "pars/pars-patterns": "@dev"
   },

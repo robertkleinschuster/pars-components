@@ -5,7 +5,6 @@ namespace Pars\Component\Base\Field;
 
 
 use Pars\Component\Base\IconAwareTrait;
-use Pars\Core\Cache\ParsCache;
 use Pars\Mvc\View\AbstractField;
 
 class Icon extends AbstractField
@@ -314,13 +313,7 @@ class Icon extends AbstractField
     protected function initialize()
     {
         if ($this->hasName()) {
-            $cache = new ParsCache('icon');
-            if ($cache->has($this->getName())) {
-                $svg = $cache->get($this->getName());
-            } else {
-                $svg = file_get_contents(__DIR__ . '/icons/' . $this->getName() . '.svg');
-                $cache->set($this->getName(), $svg);
-            }
+            $svg = file_get_contents(__DIR__ . '/icons/' . $this->getName() . '.svg');
             if ($this->hasWidth()) {
                 $this->addInlineStyle('width', $this->getWidth());
             }
