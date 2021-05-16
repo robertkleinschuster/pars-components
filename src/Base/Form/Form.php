@@ -49,6 +49,7 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     public ?string $method = null;
 
     public bool $useColumns = true;
+    public bool $useEvents = true;
 
     /**
      * Form constructor.
@@ -409,7 +410,10 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         if ($this->hasAction()) {
             $path = $this->getAction();
         }
-        $submit->setEvent(ViewEvent::createSubmit($path, $this->generateId()));
+        if ($this->isUseEvents()) {
+            $submit->setEvent(ViewEvent::createSubmit($path, $this->generateId()));
+
+        }
         $submit->addOption('h-100');
         return $this->addInput($submit, $name, $value, $label)->setFloating(false)
             ->setGroup(self::GROUP_LAST)->addOption('h-100');
@@ -446,7 +450,9 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
         $button->addOption('close-modal');
         $button->addOption('w-100');
         $button->addOption('h-100');
-        $button->setEvent(ViewEvent::createLink($path));
+        if ($this->isUseEvents()) {
+            $button->setEvent(ViewEvent::createLink($path));
+        }
         $formGroup = new FormGroup('cancel');
         $formGroup->push($button);
         $formGroup->setFloating(false);
@@ -576,6 +582,24 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
     public function setUseColumns(bool $useColumns): Form
     {
         $this->useColumns = $useColumns;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUseEvents(): bool
+    {
+        return $this->useEvents;
+    }
+
+    /**
+     * @param bool $useEvents
+     * @return Form
+     */
+    public function setUseEvents(bool $useEvents): Form
+    {
+        $this->useEvents = $useEvents;
         return $this;
     }
 
