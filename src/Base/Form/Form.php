@@ -348,7 +348,11 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
      */
     public function addSelect(string $name, array $options, string $value = '', string $label = null)
     {
-        return $this->addInput(new Select($options), $name, $value, $label);
+        $select = new Select($options);
+        if ($this->hasId()) {
+            $select->setEvent(ViewEvent::createRefreshForm($this->getId()));
+        }
+        return $this->addInput($select, $name, $value, $label);
     }
 
 
@@ -411,8 +415,10 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
             $path = $this->getAction();
         }
         if ($this->isUseEvents()) {
-            $submit->setEvent(ViewEvent::createSubmit($path, $this->generateId()));
-
+            if (!$this->hasId()) {
+                $this->setId($this->generateId());
+            }
+            $submit->setEvent(ViewEvent::createSubmit($path, $this->getId()));
         }
         $submit->addOption('h-100');
         return $this->addInput($submit, $name, $value, $label)->setFloating(false)
