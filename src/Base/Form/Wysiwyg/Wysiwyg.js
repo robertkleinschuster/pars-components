@@ -3,6 +3,7 @@ import "pell/dist/pell.min.css"
 import {exec} from "pell/dist/pell";
 import VanillaCaret from "vanilla-caret-js";
 import "./Wysiwyg.css";
+import {HtmlHelper} from "../../../../../pars-mvc/src/View/Event/ViewEvent/Helper/HtmlHelper";
 
 export class Wysiwyg {
 
@@ -72,7 +73,17 @@ export class Wysiwyg {
 
             // <Function>, required
             // Use the output html, triggered by element's `oninput` event
-            onChange: html => textarea.innerHTML = html,
+            onChange: html => {
+                textarea.innerHTML = html
+                content.childNodes.forEach(element => {
+                    let regex = new RegExp('\{.*?\}');
+                    if (regex.exec(element.innerText) && regex.exec(element.innerText).length) {
+                        element.classList.add('wysiwyg-placeholder');
+                    } else {
+                        element.classList.remove('wysiwyg-placeholder');
+                    }
+                });
+            },
 
             // <string>, optional, default = 'div'
             // Instructs the editor which element to inject via the return key
@@ -168,7 +179,15 @@ export class Wysiwyg {
                 });
             }
         });
-        pellEditor.content.innerHTML = textarea.innerText
+        pellEditor.content.innerHTML = textarea.innerText;
+        content.childNodes.forEach(element => {
+            let regex = new RegExp('\{.*?\}');
+            if (regex.exec(element.innerText) && regex.exec(element.innerText).length) {
+                element.classList.add('wysiwyg-placeholder');
+            } else {
+                element.classList.remove('wysiwyg-placeholder');
+            }
+        });
     }
 
 }

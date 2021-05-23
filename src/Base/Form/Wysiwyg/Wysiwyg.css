@@ -1,5 +1,5 @@
 .dropdown-menu-searchable {
-   position: relative;
+    position: relative;
     padding: 0;
 }
 
@@ -11,4 +11,31 @@
     max-height: 30vh;
     overflow: auto;
     padding: .5rem 0;
+}
+
+.wysiwyg-placeholder {
+    position: relative;
+    background: #eee;
+    color: #333;
+    border-radius: 1rem;
+    padding: 2px;
+    margin-bottom: 4px;
+    text-align: center;
+    box-shadow: #ddd 2px 2px 2px;
+}
+
+.wysiwyg-placeholder:hover,
+.wysiwyg-placeholder:focus {
+    font-weight: 500;
+}
+
+.wysiwyg-placeholder:before {
+    content: '{...}';
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    font-size: 12px;
+    padding: 0 5px;
+    color: #555;
+    font-weight: normal;
 }
