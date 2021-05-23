@@ -4,11 +4,14 @@
 namespace Pars\Component\Base\Form\Wysiwyg;
 
 
+use Pars\Bean\Type\Base\AbstractBaseBean;
 use Pars\Component\Base\Form\Textarea;
 use Pars\Mvc\View\ViewElement;
 
 class Wysiwyg extends Textarea
 {
+    protected ActionList $actionList;
+
     protected function initialize()
     {
         $this->addOption('wysiwyg-wrap');
@@ -33,6 +36,34 @@ class Wysiwyg extends Textarea
             $editor->addOption('d-none');
             $this->push($editor);
         }
+        $this->setData('actions', json_encode($this->getActionList()));
+    }
+
+    /**
+     * @return ActionList
+     */
+    public function getActionList(): ActionList
+    {
+        if (!isset($this->actionList)) {
+            $this->actionList = new ActionList();
+        }
+        return $this->actionList;
+    }
+
+    public function addOptionDropdown(string $label, array $options)
+    {
+        $placeholderActionDropdown = new Action();
+        $placeholderActionDropdown->name = $label;
+        $placeholderActionDropdown->icon = $label;
+        foreach ($options as $value => $label) {
+            $placeholderAction = new Action();
+            $placeholderAction->name = $label;
+            $placeholderAction->icon = $label;
+            $placeholderAction->command = 'insertText';
+            $placeholderAction->commandValue = $value;
+            $placeholderActionDropdown->getDropdown()->push($placeholderAction);
+        }
+        $this->getActionList()->push($placeholderActionDropdown);
     }
 
 }
