@@ -50,11 +50,12 @@ class Wysiwyg extends Textarea
         return $this->actionList;
     }
 
-    public function addOptionDropdown(string $label, array $options)
+    public function addOptionDropdown(string $label, array $options, string $title = null)
     {
         $placeholderActionDropdown = new Action();
         $placeholderActionDropdown->name = $label;
         $placeholderActionDropdown->icon = $label;
+        $placeholderActionDropdown->title = $title;
         foreach ($options as $value => $label) {
             $placeholderAction = new Action();
             $placeholderAction->name = $label;
