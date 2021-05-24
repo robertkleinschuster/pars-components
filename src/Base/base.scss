@@ -47,3 +47,30 @@ $pagination-color: $pagination-active-bg;
   background: lightblue;
   border: 1px black solid;
 }
+
+@include media-breakpoint-up(md) {
+  main {
+    display: flex;
+  }
+  .sidebar {
+    flex-shrink: 1;
+    width: auto;
+  }
+  .sidebar .navbar-toggler {
+    display: none;
+  }
+  .sidebar .collapse {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .sidebar .navbar-nav {
+    flex-direction: column;
+  }
+  .sidebar .navbar .container-fluid{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sidebar .navbar .nav-link {
+    padding-left: 0 !important;
+  }
+}

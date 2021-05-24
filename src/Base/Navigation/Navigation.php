@@ -78,7 +78,7 @@ class Navigation extends AbstractComponent implements BreakpointAwareInterface, 
             $this->setExpanded($this->getState()->get('expanded', $this->isExpanded()));
             $this->setTag('nav');
             $this->addOption('navbar');
-            $this->addOption('mb-1');
+            $this->addOption('mb-2');
             $this->addOption('py-1');
             if ($this->hasBackground()) {
                 $this->addOption($this->getBackground());

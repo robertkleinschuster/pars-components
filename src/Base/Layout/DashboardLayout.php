@@ -90,6 +90,7 @@ class DashboardLayout extends BaseLayout
         $this->getContainer()->push($this->getSubNavigation());
    #     $this->getContainer()->setBreakpoint(Container::BREAKPOINT_LARGE);
         $this->getContainer()->setMode(Container::MODE_FLUID);
+        $this->getContainer()->addOption('sidebar');
         $main->unshift($this->getContainer());
     }
 
