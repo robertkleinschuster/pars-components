@@ -5,6 +5,7 @@ namespace Pars\Component\Base\Pagination;
 
 
 use Pars\Mvc\View\AbstractComponent;
+use Pars\Mvc\View\Event\ViewEvent;
 use Pars\Mvc\View\FieldListAwareTrait;
 use Pars\Mvc\View\ViewElement;
 
@@ -63,6 +64,8 @@ class Pagination extends AbstractComponent
     {
         $item = new PaginationItem();
         $item->setActive($active);
+        $event = ViewEvent::createLink($path);
+        $item->setEvent($event);
         $item->push(new PaginationLink($path, $content));
         $this->getFieldList()->push($item);
         return $item;
