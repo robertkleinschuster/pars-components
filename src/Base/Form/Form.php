@@ -12,6 +12,7 @@ use Pars\Component\Base\ColorAwareTrait;
 use Pars\Component\Base\Field\Button;
 use Pars\Component\Base\Form\Wysiwyg\Wysiwyg;
 use Pars\Component\Base\Grid\Container;
+use Pars\Component\Base\Grid\Row;
 use Pars\Component\Base\ShadowAwareInterface;
 use Pars\Component\Base\ShadowAwareTrait;
 use Pars\Mvc\View\AbstractComponent;
@@ -122,9 +123,8 @@ class Form extends AbstractComponent implements BorderAwareInterface, Background
 
         foreach ($arrGroup_Field as $group => $groupFieldList) {
             if ($group) {
-                $title = new FormRow();
+                $title = new Row();
                 $title->addOption('fw-bold');
-                $title->addOption('mt-3');
                 $title->setContent($group . '<hr>');
                 $container->push($title);
                 $row = new FormRow();

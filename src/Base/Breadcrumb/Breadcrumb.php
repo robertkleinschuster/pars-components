@@ -19,6 +19,7 @@ class Breadcrumb extends AbstractComponent
         $this->setTag('nav');
         $this->setAria('label', 'breadcrumb');
         $ol = new ViewElement('ol.breadcrumb');
+        $ol->addOption('mb-2');
         $ol->addOption('bg-transparent');
         $ol->addOption('border-bottom');
         $ol->addOption('py-1');

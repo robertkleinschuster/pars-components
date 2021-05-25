@@ -26,9 +26,9 @@ class Jumbotron extends AbstractComponent
     {
         parent::initBase();
         $this->setTag('div');
-        $this->addOption('py-2');
-        $this->addOption('px-2');
-        $this->addOption('mb-4');
+       # $this->addOption('py-2');
+       # $this->addOption('px-2');
+       # $this->addOption('mb-4');
 
         if ($this->hasLead()) {
             $p = new Paragraph($this->getLead());
@@ -58,10 +58,10 @@ class Jumbotron extends AbstractComponent
             if ($group) {
                 $title = new Row();
                 $title->addOption('fw-bold');
-                $title->addOption('mt-3');
                 $title->setContent($group . '<hr>');
                 $container->push($title);
                 $row = new Row();
+                $row->addOption('mb-2');
                 // intentionally no break to set breakpoints up to the field count
                 $groupFieldCount = count($groupFieldList);
                 $groupFieldCount = $groupFieldCount > 4 ? 4: $groupFieldCount;
