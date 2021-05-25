@@ -52,6 +52,15 @@ $pagination-color: $pagination-active-bg;
   main {
     display: flex;
   }
+
+  .sidebar.container-fluid {
+    padding: 0;
+  }
+
+  .sidebar .navbar {
+    margin-left: var(--#{$variable-prefix}gutter-x, #{$container-padding-x});
+  }
+
   .sidebar {
     flex-shrink: 1;
     width: auto;

@@ -83,6 +83,7 @@ class Overview extends AbstractComponent
         if ($this->hasMoveUpPath()) {
             $button = new MoveUpButton($this->getMoveUpPath());
             $button->setEvent(ViewEvent::createLink($this->getMoveUpPath()));
+            $button->getEvent()->setTargetId($this->generateId());
             $this->unshiftField($button);
         }
 
@@ -93,6 +94,7 @@ class Overview extends AbstractComponent
         if ($this->hasMoveDownPath()) {
             $button = new MoveDownButton($this->getMoveDownPath());
             $button->setEvent(ViewEvent::createLink($this->getMoveDownPath()));
+            $button->getEvent()->setTargetId($this->generateId());
             $this->unshiftField($button);
         }
     }
@@ -200,7 +202,7 @@ class Overview extends AbstractComponent
     {
         return $this->getTableResponsive()->getTable();
     }
-    
+
     /**
      * @return string
      */

@@ -130,12 +130,13 @@ class Collapsable extends AbstractComponent
     }
 
     /**
-     * @return ToggleCollapsableButton
+     * @return ToggleCollapsableButton|null
+     * @throws \Pars\Bean\Type\Base\BeanException
      */
     public function getButton(): ?ToggleCollapsableButton
     {
         if (!isset($this->button)) {
-            $this->button = new ToggleCollapsableButton($this->getComponentGroup()->generateId());
+            $this->button = new ToggleCollapsableButton($this->getComponentGroup());
         }
         return $this->button;
     }
