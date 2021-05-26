@@ -23,6 +23,7 @@ class Thead extends AbstractComponent
             if ($field->hasLabel()) {
                 $span = new Span($field->getLabel());
                 if ($field->hasLabelPath()) {
+                    $span->addOption('hover-link');
                     $span->setPath($field->getLabelPath());
                 }
                 $td->setContent($span);

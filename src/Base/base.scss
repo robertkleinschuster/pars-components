@@ -48,6 +48,11 @@ $pagination-color: $pagination-active-bg;
   border: 1px black solid;
 }
 
+.hover-link:hover {
+  color: $purple-500 !important;
+  text-decoration: underline !important;
+}
+
 @include media-breakpoint-up(md) {
   main {
     display: flex;
@@ -71,6 +76,7 @@ $pagination-color: $pagination-active-bg;
   .sidebar .collapse {
     display: flex;
     flex-direction: column-reverse;
+    align-items: flex-start;
   }
   .sidebar .navbar-nav {
     flex-direction: column;
@@ -82,4 +88,17 @@ $pagination-color: $pagination-active-bg;
   .sidebar .navbar .nav-link {
     padding-left: 0 !important;
   }
+
+  .sidebar input {
+    max-width: 70px;
+    padding: 0 .1rem 0 .1rem;
+    transition: .2s ease-in-out;
+  }
+
+
+  .sidebar input:focus {
+    max-width: 100%;
+    padding: .3rem;
+  }
+
 }
