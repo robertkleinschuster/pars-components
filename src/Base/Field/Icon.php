@@ -5,11 +5,14 @@ namespace Pars\Component\Base\Field;
 
 
 use Pars\Component\Base\IconAwareTrait;
+use Pars\Component\Base\StyleAwareInterface;
+use Pars\Component\Base\StyleAwareTrait;
 use Pars\Mvc\View\AbstractField;
 
-class Icon extends AbstractField
+class Icon extends AbstractField implements StyleAwareInterface
 {
     use IconAwareTrait;
+    use StyleAwareTrait;
 
     public const ICON_ACTIVITY = 'activity';
     public const ICON_AIRPLAY = 'airplay';
@@ -299,6 +302,7 @@ class Icon extends AbstractField
     public ?string $width = null;
     public ?string $height = null;
     private ?string $svg = null;
+
     /**
      * Icon constructor.
      * @param string|null $name
@@ -327,6 +331,9 @@ class Icon extends AbstractField
                 $svg = str_replace('width="24" height="24"', '', $svg);
             }
             $this->setContent($svg);
+        }
+        if ($this->hasStyle()) {
+            $this->addOption('text-' . $this->getStyle());
         }
     }
 
