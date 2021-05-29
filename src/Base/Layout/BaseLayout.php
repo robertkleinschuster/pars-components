@@ -93,8 +93,7 @@ class BaseLayout extends AbstractLayout
     protected function footer(ViewElement $footer)
     {
         $copyright = new ViewElement('span.text-muted');
-        $year = date('Y');
-        $copyright->setContent("PARS " . PARS_VERSION . " &copy; {$year}  <a href=\"https://kleinschuster.de\">Robert Kleinschuster</a>");
+        $copyright->setContent("PARS " . PARS_VERSION);
         $container = new Container();
         $container->push($copyright);
         $footer->addOption('py-3');

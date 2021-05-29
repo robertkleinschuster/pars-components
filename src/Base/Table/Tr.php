@@ -13,7 +13,6 @@ use Pars\Mvc\View\FieldListAwareTrait;
 
 class Tr extends AbstractComponent
 {
-    use FieldListAwareTrait;
 
     protected function initialize()
     {

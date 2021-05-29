@@ -317,7 +317,11 @@ class Icon extends AbstractField implements StyleAwareInterface
     protected function initialize()
     {
         if ($this->hasName()) {
-            $svg = file_get_contents(__DIR__ . '/icons/' . $this->getName() . '.svg');
+            static $svgArr = [];
+            if (!isset($svgArr[$this->getName()])) {
+                $svgArr[$this->getName()] = file_get_contents(__DIR__ . '/icons/' . $this->getName() . '.svg');
+            }
+            $svg = $svgArr[$this->getName()];
             if ($this->hasWidth()) {
                 $this->addInlineStyle('width', $this->getWidth());
             }
