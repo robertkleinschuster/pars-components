@@ -307,10 +307,13 @@ class Icon extends AbstractField implements StyleAwareInterface
      * Icon constructor.
      * @param string|null $name
      */
-    public function __construct(?string $name = null)
+    public function __construct(?string $name = null, ?string $style = null)
     {
         parent::__construct();
         $this->name = $name;
+        if ($style) {
+            $this->setStyle($style);
+        }
     }
 
 
@@ -422,5 +425,113 @@ class Icon extends AbstractField implements StyleAwareInterface
         return isset($this->height);
     }
 
+    public static function eye(bool $state = true): self
+    {
+        if ($state) {
+            return new static(self::ICON_EYE, self::STYLE_SUCCESS);
+        } else {
+            return new static(self::ICON_EYE_OFF, self::STYLE_SECONDARY);
+        }
+    }
 
+    public static function layout()
+    {
+        return new static(self::ICON_LAYOUT);
+    }
+
+    public static function inbox()
+    {
+        return new static(self::ICON_INBOX);
+    }
+
+    public static function folder()
+    {
+        return new static(self::ICON_FOLDER);
+    }
+
+    public static function tool()
+    {
+        return new static(self::ICON_TOOL);
+    }
+
+    public static function menu()
+    {
+        return new static (self::ICON_MENU);
+    }
+
+    public static function mail()
+    {
+        return new static (self::ICON_MAIL);
+    }
+
+    public static function image()
+    {
+        return new static (self::ICON_IMAGE);
+    }
+
+    public static function file()
+    {
+        return new static(self::ICON_FILE);
+    }
+
+    public static function square()
+    {
+        return new static(self::ICON_SQUARE);
+    }
+
+    public static function settings()
+    {
+        return new static(self::ICON_SETTINGS);
+    }
+
+    public static function filter()
+    {
+        return new static(self::ICON_FILTER);
+    }
+
+    public static function users()
+    {
+        return new static(self::ICON_USERS);
+    }
+
+    public static function user()
+    {
+        return new static(self::ICON_USER);
+    }
+
+    public static function unlock()
+    {
+        return new static(self::ICON_UNLOCK);
+    }
+
+    public static function globe()
+    {
+        return new static(self::ICON_GLOBE);
+    }
+
+    public static function key()
+    {
+        return new static(self::ICON_KEY);
+    }
+
+    public static function list()
+    {
+        return new static(self::ICON_LIST);
+    }
+
+    public static function arrowDownCircle()
+    {
+        return new static(self::ICON_ARROW_DOWN_CIRCLE);
+    }
+
+    public static function downloadCloud()
+    {
+        return new static(self::ICON_DOWNLOAD_CLOUD);
+
+    }
+
+    public function inline()
+    {
+        return $this->addOption('d-inline');
+    }
 }

@@ -70,6 +70,11 @@ $pagination-color: $pagination-active-bg;
     flex-shrink: 1;
     width: auto;
   }
+
+  .sidebar .navbar-brand {
+    margin-bottom: 1rem;
+  }
+
   .sidebar .navbar-toggler {
     display: none;
   }
@@ -90,8 +95,9 @@ $pagination-color: $pagination-active-bg;
   }
 
   .sidebar input {
-    max-width: 70px;
-    padding: 0 .1rem 0 .1rem;
+    margin-bottom: 1rem;
+    max-width: 100px;
+    padding: .1rem .2rem 0 .2rem;
     transition: .2s ease-in-out;
   }
 

@@ -24,6 +24,7 @@ class Tr extends AbstractComponent
                 || $field instanceof Button
                 || $field instanceof Badge
                 || $field instanceof Input
+                || $field->isIconField()
             ) {
                 $td->setAttribute('style', 'width: 1%;');
             }
