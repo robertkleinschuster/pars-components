@@ -148,6 +148,7 @@ class BaseLayout extends AbstractLayout
             foreach ($this->getView()->getJavascript() as $file) {
                 $script = new ViewElement('script');
                 $script->setAttribute('src', $file);
+                $script->setAttribute('defer', null);
                 $body->push($script);
             }
         }
