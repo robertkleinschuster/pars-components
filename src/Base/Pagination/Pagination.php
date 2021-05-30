@@ -11,8 +11,6 @@ use Pars\Mvc\View\ViewElement;
 
 class Pagination extends AbstractComponent
 {
-    use FieldListAwareTrait;
-
     protected function initialize()
     {
         $this->setTag('nav');
@@ -64,7 +62,7 @@ class Pagination extends AbstractComponent
     {
         $item = new PaginationItem();
         $item->setActive($active);
-        $event = ViewEvent::createLink($path);
+        $event = ViewEvent::createLink($path, false);
         $item->setEvent($event);
         $item->push(new PaginationLink($path, $content));
         $this->getFieldList()->push($item);
