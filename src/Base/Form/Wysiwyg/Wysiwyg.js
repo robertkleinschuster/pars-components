@@ -189,7 +189,9 @@ export class Wysiwyg {
                     //element.classList.add('wysiwyg-placeholder-small');
                 }
             } else {
-                element.classList.remove('wysiwyg-placeholder');
+                if (element.classList) {
+                    element.classList.remove('wysiwyg-placeholder');
+                }
             }
         });
     }
