@@ -39,3 +39,10 @@
     color: #555;
     font-weight: normal;
 }
+
+.wysiwyg-placeholder-small {
+    background: #eee;
+    color: #333;
+    border-radius: 1rem;
+    padding: 2px;
+}

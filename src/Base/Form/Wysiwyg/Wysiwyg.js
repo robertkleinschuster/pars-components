@@ -75,14 +75,7 @@ export class Wysiwyg {
             // Use the output html, triggered by element's `oninput` event
             onChange: html => {
                 textarea.innerHTML = html
-                content.childNodes.forEach(element => {
-                    let regex = new RegExp('\{.*?\}');
-                    if (regex.exec(element.innerText) && regex.exec(element.innerText).length) {
-                        element.classList.add('wysiwyg-placeholder');
-                    } else {
-                        element.classList.remove('wysiwyg-placeholder');
-                    }
-                });
+                Wysiwyg.formatPlaceholder(content);
             },
 
             // <string>, optional, default = 'div'
@@ -180,10 +173,21 @@ export class Wysiwyg {
             }
         });
         pellEditor.content.innerHTML = textarea.innerText;
+        Wysiwyg.formatPlaceholder(content);
+    }
+
+    static formatPlaceholder(content)
+    {
         content.childNodes.forEach(element => {
             let regex = new RegExp('\{.*?\}');
-            if (regex.exec(element.innerText) && regex.exec(element.innerText).length) {
-                element.classList.add('wysiwyg-placeholder');
+            let match = regex.exec(element.innerText);
+            if (match && match.length) {
+                let placeholder = match.pop();
+                if (placeholder.includes('block') || placeholder.includes('form') || placeholder.includes('lipsum')) {
+                    element.classList.add('wysiwyg-placeholder');
+                } else {
+                    //element.classList.add('wysiwyg-placeholder-small');
+                }
             } else {
                 element.classList.remove('wysiwyg-placeholder');
             }
