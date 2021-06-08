@@ -3,7 +3,9 @@
 [![Build Status](https://travis-ci.com/pars-framework/pars-components.svg?branch=master)](https://travis-ci.com/pars-framework/pars-components)
 [![Coverage Status](https://coveralls.io/repos/github/pars-framework/pars-components/badge.svg?branch=master)](https://coveralls.io/github/pars-framework/pars-components?branch=master)
 
-This library provides …
+This library provides UI components for PARS-MVC.
+
+Objected oriented HTML UI Builder.
 
 ## Installation
 
