@@ -38,6 +38,10 @@ $pagination-color: $pagination-active-bg;
   z-index: $zindex-modal;
 }
 
+.page-item.active .page-link {
+  z-index: initial;
+}
+
 .pars-debug {
   z-index: 9999;
   position: fixed;

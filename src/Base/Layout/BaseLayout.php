@@ -50,19 +50,7 @@ class BaseLayout extends AbstractLayout
         $this->footer($footer);
         $body->push($footer);
         $this->scripts($body);
-        $body->push(new ConfirmModal());
-        $body->push(new FileSelectModal());
-        $body->push(new AjaxModal());
         $this->push($body);
-        $inputTemplate = new ViewElement('div');
-        $inputTemplate->setId('dynamic-field-template');
-        $inputTemplate->addOption('d-none');
-        $formGroup = new FormGroup('{name}');
-        $formGroup->setLabel('{label}');
-        $input = new Input(Input::TYPE_TEXT);
-        $formGroup->setInput($input);
-        $inputTemplate->getElementList()->push($formGroup);
-        $body->push($inputTemplate);
     }
 
     protected function header(ViewElement $header)
