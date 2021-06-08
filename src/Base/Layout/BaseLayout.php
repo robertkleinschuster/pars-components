@@ -81,7 +81,7 @@ class BaseLayout extends AbstractLayout
     protected function footer(ViewElement $footer)
     {
         $copyright = new ViewElement('span.text-muted');
-        $copyright->setContent("PARS " . PARS_VERSION);
+        $copyright->setContent("PARS " . PARS_VERSION . ' - ' . PARS_BRANCH);
         $container = new Container();
         $container->push($copyright);
         $footer->addOption('py-3');
