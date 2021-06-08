@@ -5,7 +5,6 @@ namespace Pars\Component\Base\Modal;
 
 use Pars\Mvc\View\AbstractComponent;
 use Pars\Mvc\View\ViewElement;
-use PHPUnit\TextUI\XmlConfiguration\Logging\TestDox\Html;
 
 class AjaxModal extends AbstractComponent
 {

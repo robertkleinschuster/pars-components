@@ -19,7 +19,6 @@ class BaseLayout extends AbstractLayout
     {
         $this->setTag('html');
         $this->addOption('h-100');
-        $this->addOption('reload');
         $this->setAttribute('lang', '{language}');
         $head = new ViewElement('head');
         $this->meta($head);
@@ -60,7 +59,9 @@ class BaseLayout extends AbstractLayout
 
     protected function main(ViewElement $main)
     {
-        $components = new Container('div.components');
+        $components = new Container('div');
+        $components->addOption('components');
+        $components->setId('components');
         if ($this->isWide()) {
             $components->setMode(Container::MODE_FLUID);
         } else {

@@ -21,60 +21,8 @@ class DashboardLayout extends BaseLayout
     protected function header(ViewElement $body)
     {
         parent::header($body);
-        #$this->getNavigation()->setBackground(Navigation::BACKGROUND_DARK);
         $this->getNavigation()->setBreakpoint(Navigation::BREAKPOINT_MEDIUM);
         $body->push($this->getNavigation());
-    }
-
-    protected function components(ViewElement $components)
-    {
-        $row = new Row();
-        $column = new Column();
-        $maincolumn = new Column();
-   #     $maincolumn->setSize(12);
-   #     $maincolumn->setBreakpoint(Column::BREAKPOINT_EXTRA_LARGE);
-        $components->addOption('ajax');
-        $components->addOption('history');
-        $components->setData('component', 'components');
-        $components->setId('components');
-        parent::components($components);
-        $row->push($maincolumn);
-        if ($this->exists('actionIdAfter')) {
-            $tabs = new Tabs();
-            $tabs->setId($this->get('actionIdAfter'));
-            $tabs->setActive($this->get('actionActiveAfter'));
-            foreach ($this->getComponentListSubAction() as $component) {
-                $tabs->append($component);
-            }
-            $column->addOption('col-xl-7');
-            $column->addOption('col-lg-6');
-            $column->addOption('col-md-4');
-            $column->addOption('col-12');
-            $maincolumn->addOption('col-12');
-            $maincolumn->addOption('col-xl-5');
-            $maincolumn->addOption('col-lg-6');
-            $maincolumn->addOption('col-md-8');
-            foreach ($this->getComponentListAfter() as $component) {
-                $components->push($component);
-            }
-            $components->push($tabs);
-
-            $row->push($column);
-        } elseif($this->getComponentListAfter()->count()) {
-            foreach ($this->getComponentListAfter() as $component) {
-                $components->push($component);
-            }
-            $column->addOption('col-xl-4');
-            $column->addOption('col-lg-6');
-            $column->addOption('col-md-12');
-            $column->addOption('col-12');
-            $maincolumn->addOption('col-xl-8');
-            $maincolumn->addOption('col-lg-6');
-            $maincolumn->addOption('col-md-12');
-            $maincolumn->addOption('col-12');
-            $row->push($column);
-        }
-        #$components->push($row);
     }
 
 
@@ -88,7 +36,6 @@ class DashboardLayout extends BaseLayout
         $this->getSubNavigation()->setBackground(Navigation::BACKGROUND_LIGHT);
         $this->getSubNavigation()->setBreakpoint(Navigation::BREAKPOINT_LARGE);
         $this->getContainer()->push($this->getSubNavigation());
-   #     $this->getContainer()->setBreakpoint(Container::BREAKPOINT_LARGE);
         $this->getContainer()->setMode(Container::MODE_FLUID);
         $this->getContainer()->addOption('sidebar');
         $main->unshift($this->getContainer());
