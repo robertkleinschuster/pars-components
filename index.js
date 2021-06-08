@@ -16,6 +16,7 @@ function initComponents(root, event = null) {
 
 function initTooltips(root)
 {
+    document.querySelectorAll('.tooltip').forEach(element => element.parentElement.removeChild(element));
     let tooltipTriggerList = [].slice.call(root.querySelectorAll('[data-bs-toggle="tooltip"]'))
     tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
